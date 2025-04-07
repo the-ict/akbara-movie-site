@@ -1,0 +1,47 @@
+.navigation {
+    padding:10px;
+
+    box-shadow: 0px 0px 17px 0px rgba(255,255,255,0.75);
+    -webkit-box-shadow: 0px 0px 17px 0px rgba(255,255,255,0.75);
+    -moz-box-shadow: 0px 0px 17px 0px rgba(255,255,255,0.75);
+}
+
+.navigation-item {
+    padding: 5px 10px;
+}
+
+.navbar {
+    margin-top: 10px;
+}
+
+.header {
+    margin-top: 30px;
+}
+
+.play-button {
+    padding: 8px 10px;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.button {
+    padding: 10px;
+}
+
+.too {
+    margin-top: 50px;
+}
+
+.slider {
+    padding: 10px;
+}
+
+.cart {
+    padding: 20px 10px;
+}
+
+.xlmargin {
+    margin-top: 200px;
+}
