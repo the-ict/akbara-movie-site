@@ -32,7 +32,11 @@ const responsive = {
 export default function Header() {
   return (
     <div className='header w-full'>
-        <Carousel responsive={responsive} autoPlay showDots autoPlaySpeed={1555}>
+        <Carousel 
+          responsive={responsive} 
+          infinite
+          autoPlay
+          showDots autoPlaySpeed={1555}>
           {
             [1,2,3].map(item => {
               return (
