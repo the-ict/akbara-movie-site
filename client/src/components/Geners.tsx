@@ -9,13 +9,13 @@ export default function Geners() {
   return (
       <div>
         <div className="too">
-            <div className='w-max font-bold cursor-pointer bg-[#E50000] play-button rounded text-2xl'>
+            <div className='w-max font-bold cursor-pointer bg-[#E50000] max-lg:hidden play-button rounded text-2xl'>
                 <span>Movies</span>
             </div>
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Our Genres</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -46,7 +46,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Popular Top 10 In Genres</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -76,7 +76,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Trending Now</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -107,7 +107,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">New Releases</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -137,7 +137,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Must - Watch Movies</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -170,13 +170,13 @@ export default function Geners() {
           {/* series */}
 
           <div className="too">
-            <div className='w-max font-bold cursor-pointer bg-[#E50000] play-button rounded text-2xl'>
+            <div className='w-max font-bold max-lg:hidden cursor-pointer bg-[#E50000] play-button rounded text-2xl'>
                 <span>Series</span>
             </div>
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Our Genres</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -207,7 +207,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Popular Top 10 In Genres</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -237,7 +237,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Trending Now</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -268,7 +268,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">New Releases</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
@@ -298,7 +298,7 @@ export default function Geners() {
 
             <div className="flex items-center w-full justify-between header">
               <h1 className="text-3xl font-bold tracking-wide">Must - Watch Movies</h1>
-              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
+              <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
                 <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
                 <div className="flex items-center gap-2">
                   <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>

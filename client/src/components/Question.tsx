@@ -16,7 +16,7 @@ export default function Questions({id, question, answer}: Props) {
     };      
       
   return (
-    <div className="flex items-center justify-between cart relative flex-1/2" key={id}>
+    <div className="flex items-center justify-between cart relative flex-1/2 max-lg:w-[calc(100vw-10vw)]" key={id}>
         <div className="flex items-center gap-5">
             <div className="button rounded bg-[#262626] font-bold">
                 {id}

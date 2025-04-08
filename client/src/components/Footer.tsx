@@ -6,40 +6,40 @@ import Linkedin from "../assets/icons/linkedin.png"
 export default function Footer() {
   return (
     <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin">
-      <div className="w-[1597px] footer">
+      <div className="w-[1597px] footer max-lg:w-screen arrow-padding">
 
-        <div className="flex justify-between footer-nav">
-          <ul>
+        <div className="flex justify-between footer-nav flex-wrap gap-5">
+          <ul className="max-lg:w-[45%]">
             <li className="footer-item">Home</li>
             <li>Categories</li>
             <li>Devices</li>
             <li>Pricing</li>
             <li>FAQ</li>
           </ul>
-          <ul>
+          <ul className="max-lg:w-[45%]">
             <li className="footer-item">Movies</li>
             <li>Gernes</li>
             <li>Trending</li>
             <li>New Release</li>
             <li>Popular</li>
           </ul>
-          <ul>
+          <ul className="max-lg:w-[45%]">
             <li className="footer-item">Shows</li>
             <li>Gernes</li>
             <li>Trending</li>
             <li>New Release</li>
             <li>Popular</li>
           </ul>
-          <ul>
+          <ul className="max-lg:w-[45%]">
             <li className="footer-item">Support</li>
             <li>Contact Us</li>
           </ul>
-          <ul>
+          <ul className="max-lg:w-[45%]">
             <li className="footer-item">Subscription</li>
             <li>Plans</li>
             <li>Features</li>
           </ul>
-          <div>
+          <div className="max-lg:w-[45%]">
             <p className="footer-item text-white font-bold">Contact with us</p>
             <div className="flex items-center gap-5">
               <img src={Facebook} alt="facebook" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000]"/>
@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between header text-[#999999]">
+        <div className="flex items-center justify-between header text-[#999999] max-lg:flex-col max-lg:items-start">
           <span>@2023 streamvib, All Rights Reserved</span>
           <div className="flex items-center gap-10">
             <span className="cursor-pointer hover:underline">Terms of Use</span>

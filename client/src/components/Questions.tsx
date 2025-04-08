@@ -51,7 +51,7 @@ export default function Questions() {
       
   return (
     <div className="header">
-        <div className="flex items-center justify-between gap-10">
+        <div className="flex items-center justify-between gap-10 max-lg:flex-col max-lg:items-start">
             <div>
                 <h1 className="text-3xl font-bold">Frequently Asked Questions</h1>
                 <p className="text-[#999999] navbar">Got questions? We've got answers! Check out our FAQ section to find answers to the most common questions about StreamVibe.</p>
@@ -59,11 +59,11 @@ export default function Questions() {
             <button className="button bg-[#e90000] rounded cursor-pointer">Ask a Question</button>
         </div>
 
-        <div className="flex flex-wrap header">
+        <div className="flex flex-wrap header max-lg:flex-col">
             {
                 questions.map((item, index) => {
                     return (
-                        <Question id={index < 10 ? Number("0" + (index+1)) : index} question={item.question} answer={item.answer}/>
+                        <Question id={index < 10 ? Number("0" + (index+1)) : index} question={item.question} answer={item.answer} key={index}/>
                     )
                 })
             }

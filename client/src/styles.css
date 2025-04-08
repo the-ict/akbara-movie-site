@@ -82,3 +82,33 @@
 .single-cart-review {
     padding: 30px;
 }
+
+.arrow-padding {
+    padding: 20px;
+}
+
+.info label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #999999;
+}
+
+.info label>img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.info-lang-cart {
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.star-container img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}

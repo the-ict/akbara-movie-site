@@ -23,7 +23,7 @@ const responsive = {
     items: 1
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 500, min: 0 },
     items: 1
   }
 };
@@ -49,26 +49,28 @@ export default function Header() {
                   {/* container titles */}
                   <div className='absolute bottom-20 flex items-center justify-center w-full'>
                     <div className='w-[70%] text-center'> 
-                      <h3 className='text-3xl font-bold'>Avengers : Endgame</h3>  
-                      <p className='text-[#999999]'>
+                      <h3 className='text-3xl font-bold max-lg:text-2xl'>Avengers : Endgame</h3>  
+                      <p className='text-[#999999] max-lg:hidden'>
                         With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos's actions and undo the chaos to the universe, no matter what consequences may be in store, and no matter who they face... Avenge the fallen.
                       </p>
 
 
-                      <div className='flex items-center gap-5 justify-center navbar'>
-                        <button className='flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded'>
+                      <div className='flex items-center max-lg:flex-col gap-5 justify-center navbar'>
+                        <button className='flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] max-lg:w-[60%] max-lg:justify-center play-button rounded'>
                           <img src={Play} alt="play icon" className='w-[20px] h-[20px] object-contain'/>
                           <span>Play now</span>
                         </button>
-                        <button className='cursor-pointer bg-[#0F0F0F] button'>
-                          <img src={Add} alt="add icon" className='w-[20px] h-[20px] object-contain'/>
-                        </button>
-                        <button className='cursor-pointer bg-[#0F0F0F] button'>
-                          <img src={Like} alt="like icon" className='w-[20px] h-[20px] object-contain'/>
-                        </button>
-                        <button className='cursor-pointer bg-[#0F0F0F] button'>
-                          <img src={Sound} alt="sound icon" className='w-[20px] h-[20px] object-contain' />
-                        </button>
+                        <div className="flex gap-2">
+                          <button className='cursor-pointer bg-[#0F0F0F] button'>
+                            <img src={Add} alt="add icon" className='w-[20px] h-[20px] object-contain'/>
+                          </button>
+                          <button className='cursor-pointer bg-[#0F0F0F] button'>
+                            <img src={Like} alt="like icon" className='w-[20px] h-[20px] object-contain'/>
+                          </button>
+                          <button className='cursor-pointer bg-[#0F0F0F] button'>
+                            <img src={Sound} alt="sound icon" className='w-[20px] h-[20px] object-contain' />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -9,22 +9,22 @@ export default function GenerSection() {
         <div className="flex items-center w-full justify-between header">
             <div>
                 <h1 className="text-3xl font-bold text-white">Explore our wide variety of categories</h1>
-                <span className="text-[#999999]">Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new</span>
+                <span className="text-[#999999] navbar">Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn something new</span>
             </div>
-            <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F]">
-            <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
-            <div className="flex items-center gap-2">
-                <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
-                <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
-                <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
-                <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
-            </div>
-            <img src={ArrowRight} alt="arrowright icon"  className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider"/>
+            <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
+                <img src={ArrowLeft} alt="arrowleft icon" className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider" />
+                <div className="flex items-center gap-2">
+                    <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
+                    <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
+                    <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
+                    <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
+                </div>
+                <img src={ArrowRight} alt="arrowright icon"  className="w-[50px] h-[50px] object-contain cursor-pointer bg-[#1F1F1F] slider"/>
             </div>
         </div>
 
         {/* category items */}
-        <div className="header flex items-center gap-10">
+        <div className="header flex items-center gap-10 overflow-hidden">
             {
             [1,2,3,4,].map(item => (
                 <div className="bg-[#1A1A1A] cart w-[300px] h-max" key={item}>

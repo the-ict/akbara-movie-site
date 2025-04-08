@@ -13,6 +13,9 @@ import GapStar from "../assets/icons/gapstar.png"
 import Genres from "../assets/icons/genres.png"
 import AuthorProfile from "../assets/icons/authorprofile.png"
 import Plus from "../assets/icons/plus.png"
+import ArrowLeft from "../assets/icons/arrowleft.png"
+import ArrowRight from "../assets/icons/arrowright.png"
+import Marketing from "../components/Marketing";
 
 export default function SingleMedia() {
   return (
@@ -54,7 +57,7 @@ export default function SingleMedia() {
 
 
       {/*informations */}
-      <div className="header flex gap-5 justify-between">
+      <div className="header flex gap-5 justify-between max-lg:flex-col">
         <div className="flex-7 flex flex-col gap-5">
 
           <div className="single-cart bg-[#262626] rounded">
@@ -64,7 +67,7 @@ export default function SingleMedia() {
           </div>
 
           {/* Reviews */}
-          <div className="single-cart bg-[#262626]">
+          <div className="single-cart bg-[#262626] max-lg:hidden">
             <div className="flex items-center w-full justify-between">
               <h1 className="text-[#999999]">Reviews</h1>
               <button className="flex items-center justify-center gap-5 button bg-[#141414] cursor-pointer rounded">
@@ -73,41 +76,79 @@ export default function SingleMedia() {
               </button>
             </div>
             
-            <div className="header">
-              <div className="single-cart-review rounded bg-[#141414]">
-                <div>
-                  <h1 className="text-white font-bold">Aniket Roy</h1>
-                  <p className="text-[#999999]">From India</p>
-                </div>
+            <div className="header flex items-center gap-10">
+              <div className="single-cart-review rounded bg-[#141414] flex-1/2">
+                <div className="flex items-center gap-10">
+                  <div>
+                    <h1 className="text-white font-bold">Aniket Roy</h1>
+                    <p className="text-[#999999]">From India</p>
+                  </div>
 
-                <div className="flex items-center rounded-full bg-[#262626] button gap-3">
-                  <img src={Star} alt="star" className="w-[30px] h-[30px] object-contain" />
-                  <img src={Star} alt="star"  className="w-[30px] h-[30px] object-contain"/>
-                  <img src={Star} alt="star" className="w-[30px] h-[30px] object-contain" />
-                  <img src={Star} alt="star"  className="w-[30px] h-[30px] object-contain"/>
-                  <img src={HalfStar} alt="half-star" className="w-[30px] h-[30px] object-contain"/>
-                  <span>4.5</span>
+                  <div className="flex items-center rounded-full bg-[#262626] button gap-3">
+                    <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
+                    <img src={Star} alt="star"  className="w-[20px] h-[20px] object-contain"/>
+                    <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
+                    <img src={Star} alt="star"  className="w-[20px] h-[20px] object-contain"/>
+                    <img src={HalfStar} alt="half-star" className="w-[20px] h-[20px] object-contain"/>
+                    <span>4.5</span>
+                  </div>
                 </div>
-                <p>This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.</p>
+                <p className="text-[#999999] navbar">This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.</p>
               </div>
-            </div>
+
+              <div className="single-cart-review rounded bg-[#141414] flex-1/2">
+                <div className="flex items-center gap-10">
+                  <div>
+                    <h1 className="text-white font-bold">Aniket Roy</h1>
+                    <p className="text-[#999999]">From India</p>
+                  </div>
+
+                  <div className="flex items-center rounded-full bg-[#262626] button gap-3">
+                    <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
+                    <img src={Star} alt="star"  className="w-[20px] h-[20px] object-contain"/>
+                    <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
+                    <img src={Star} alt="star"  className="w-[20px] h-[20px] object-contain"/>
+                    <img src={HalfStar} alt="half-star" className="w-[20px] h-[20px] object-contain"/>
+                    <span>4.5</span>
+                  </div>
+                </div>
+                  <p className="text-[#999999] navbar">This movie was recommended to me by a very dear friend who went for the movie by herself. I went to the cinemas to watch but had a houseful board so couldn’t watch it.</p>
+                </div>
+              </div>
+
+            <div>
+
+
+            <div className="flex items-center w-full gap-4 justify-center header">
+              {/* Image */}
+                <img src={ArrowLeft} alt="arrowleft" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
+                    <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
+                    <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
+                    <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
+                  </div>
+                  <img src={ArrowRight} alt="arrowright" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
+                </div>
+              </div>
           </div>
 
         </div>
 
 
-
-        <div className="flex-3">
+      {/* full informations */}
+        <div className="flex-3 info flex flex-col gap-5 bg-[#262626] rounded single-cart-review">
           <label>
             <img src={Date} alt="date"/>
             <span>Released Year</span>
           </label>
+          <h1>2024</h1>
           <label>
             <img src={Language} alt="langauge" />
             <span>Available Languages</span>
           </label>
           <div>
-            <span>Uzbek</span>
+            <span className="bg-[#141414] info-lang-cart">Uzbek</span>
           </div>
           
           <label >
@@ -115,28 +156,28 @@ export default function SingleMedia() {
             <span>Ratings</span>
           </label>
           
-          <div>
-            <div>
+          <div className="flex items-center gap-5">
+            <div className="font-bold button bg-[#141414] flex-1/2">
               <p>IMDB</p>
-              <div>
-                <img src={Star} alt="star" />
-                <img src={Star} alt="star" />
-                <img src={Star} alt="star" />
-                <img src={Star} alt="star" />
-                <img src={HalfStar} alt="half-star"/>
+              <div className="flex items-center gap-1 star-container">
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={HalfStar} alt="half-star" className="max-lg:w-[10px] max-lg:h-[10px]"/>
                 <span>4.5</span>
               </div>
             </div>
 
-            <div>
+            <div className="font-bold button bg-[#141414] flex-1/2">
               <p>StreamVibe</p>
-              <div>
-                <img src={Star} alt="star" />
-                <img src={Star} alt="star" />
-                <img src={Star} alt="star" />
-                <img src={Star} alt="star" />
-                <img src={GapStar} alt="gap star" />
-                <span>4</span>
+              <div className="flex items-center gap-1 star-container">
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <img src={HalfStar} alt="half-star" className="max-lg:w-[10px] max-lg:h-[10px]"/>
+                <span>4.5</span>
               </div>
             </div>
           </div>
@@ -153,10 +194,10 @@ export default function SingleMedia() {
           <label>
             Director
           </label>
-          <div>
-            <img src={AuthorProfile} alt="authorprofile" />
+          <div className="flex items-center gap-5 button bg-[#141414] rounded">
+            <img src={AuthorProfile} alt="authorprofile" className="h-full w-[20%] object-contain"/>
             <div>
-              <h1>Rishab Shetty</h1>
+              <h1 className="font-bold">Rishab Shetty</h1>
               <p>From India</p>
             </div>
           </div>
@@ -164,15 +205,17 @@ export default function SingleMedia() {
           <label>
             Music
           </label>
-          <div>
-            <img src={AuthorProfile} alt="authorprofile" />
+          <div className="flex items-center gap-5 button bg-[#141414] rounded">
+            <img src={AuthorProfile} alt="authorprofile" className="h-full w-[20%] object-contain"/>
             <div>
-              <h1>Rishab Shetty</h1>
+              <h1 className="font-bold">Rishab Shetty</h1>
               <p>From India</p>
             </div>
           </div>
         </div>
       </div>
+
+      <Marketing />
     </div>
   )
 }
