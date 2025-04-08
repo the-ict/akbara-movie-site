@@ -70,3 +70,15 @@
     padding: 10px;
     cursor: pointer;
 }
+
+.prove-cart {
+    padding: 50px 30px;
+}
+
+.single-cart {
+    padding: 30px 50px;
+}
+
+.single-cart-review {
+    padding: 30px;
+}
