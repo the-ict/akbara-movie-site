@@ -45,3 +45,28 @@
 .xlmargin {
     margin-top: 200px;
 }
+
+.footer {
+    padding: 70px 0px;
+}
+
+.footer-item {
+    margin-bottom: 10px;
+    color: white !important;
+}
+
+.footer-nav li {
+    color: #999999;
+    font-weight: bold;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.footer-nav li:hover {
+    text-decoration: underline;    
+}
+
+.icon {
+    padding: 10px;
+    cursor: pointer;
+}

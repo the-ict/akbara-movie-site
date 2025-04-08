@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import Geners from "../components/Geners";
+import GenerSection from "../components/GenerSection";
 import Header from "../components/Header";
 import Marketing from "../components/Marketing";
 import Navbar from "../components/Navbar";
@@ -10,9 +11,7 @@ export default function Home() {
     <div className="min-h-screen">
       <Navbar />
       <Header />
-      <Geners />
-      <Marketing />
-      <Footer />
+      <GenerSection />
     </div>
   )
 }
