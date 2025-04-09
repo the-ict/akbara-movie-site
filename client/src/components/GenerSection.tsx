@@ -32,15 +32,38 @@ interface Props {
 
 
 export default function GenerSection({isSwiper, title, description}: Props) {
+  const [totalSlides, setTotalSlides] = useState<number[]>([])
+  const [currentSlide, setCurrentSlide] = useState<number>(0)
   const carouselRef = useRef<Carousel | null>(null);
+
+  useEffect(() => {
+    if(carouselRef.current) {
+      const total: number = carouselRef.current.props.children.length
+
+      const array: number[] = []
+      
+      for(let i = 1; i<=total; i++) {
+        array.push(i)
+      }
+      setTotalSlides(array)
+    }
+  })
 
 
   const goToPrevious = () => {
     carouselRef.current?.previous(1);
+    if(currentSlide !== 0 ) {
+      setCurrentSlide(prev => prev - 1)
+    } 
   };
 
   const goToNext = () => {
     carouselRef.current?.next(1);
+
+    if(currentSlide < (totalSlides.length - 4)) {
+      setCurrentSlide(prev => prev + 1)
+    }
+
   };
 
 
@@ -76,11 +99,11 @@ export default function GenerSection({isSwiper, title, description}: Props) {
           <div className="flex items-center gap-2">
             {/* <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
             <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div> */}
-            {/* {
+            {
               totalSlides.map(item => (
                 <div className={`w-4 ${(currentSlide + 1) == item ? 'bg-[#e90000]' :'bg-[#333333]'} h-1 cursor-pointer`} key={item}></div>
               ))
-            } */}
+            }
           </div>
           <img
             src={ArrowRight}
