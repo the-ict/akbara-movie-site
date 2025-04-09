@@ -7,7 +7,7 @@ import "../styles.css"
 
 export default function Navbar() {
   return (
-      <div className="flex items-center justify-between navbar">
+      <div className="flex items-center justify-between navbar-padding">
         <a href="/">
           <img src={Logo} alt="logo" className="w-[200px] max-lg:w-[150px] h-full object-contain cursor-pointer"/>
         </a>

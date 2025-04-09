@@ -36,7 +36,9 @@ export default function Header() {
           responsive={responsive} 
           infinite
           autoPlay
-          showDots autoPlaySpeed={1555}>
+          autoPlaySpeed={1555}
+          pauseOnHover
+          >
           {
             [1,2,3].map(item => {
               return (
