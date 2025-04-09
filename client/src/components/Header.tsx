@@ -7,6 +7,10 @@ import Play from "../assets/icons/play.png"
 import Add from "../assets/icons/add.png"
 import Like from "../assets/icons/like.png"
 import Sound from "../assets/icons/sound.png"
+import ArrowLeft from "../assets/icons/arrowleft.png"
+import ArrowRight from "../assets/icons/arrowright.png"
+import { useRef } from "react";
+
 
 
 const responsive = {
@@ -30,19 +34,58 @@ const responsive = {
 
 
 export default function Header() {
+    const carouselRef = useRef<Carousel | null>(null); // Refni yaratish
+  
+    // Custom arrow functions to control the carousel
+    const goToPrevious = () => {
+      carouselRef.current?.previous(1);
+    };
+  
+    const goToNext = () => {
+      carouselRef.current?.next(1);
+    };
   return (
     <div className='header w-full'>
-        <Carousel 
-          responsive={responsive} 
-          infinite
-          autoPlay
-          autoPlaySpeed={1555}
-          pauseOnHover
-          >
+      
+      <Carousel 
+        responsive={responsive} 
+        infinite
+        autoPlay
+        autoPlaySpeed={1555}
+        pauseOnHover
+        ref={carouselRef}
+        >
           {
             [1,2,3].map(item => {
               return (
                 <div className='w-full relative' key={item}>
+
+                  <div className="flex absolute w-full justify-between bottom-5 z-1 items-center gap-4 slider rounded max-lg:hidden">
+                    <img
+                      src={ArrowLeft}
+                      alt="arrowleft icon"
+                      className="w-[50px] h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
+                      onClick={goToPrevious} 
+                    />
+                    <div className="flex items-center gap-2">
+                      {/* <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
+                      <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div> */}
+                      {/* {
+                        totalSlides.map(item => (
+                          <div className={`w-4 ${(currentSlide + 1) == item ? 'bg-[#e90000]' :'bg-[#333333]'} h-1 cursor-pointer`} key={item}></div>
+                        ))
+                      } */}
+                    </div>
+                    <img
+                      src={ArrowRight}
+                      alt="arrowright icon"
+                      className="w-[50px] h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
+                      onClick={goToNext}  
+                    />
+                  </div>
+
+
+
                   <img 
                   src="https://s3-alpha-sig.figma.com/img/db21/254b/02aad8dff901b2ed9af793040b85b0dd?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=siSncvca7L9p3l-byg76BOJrmIxtCbcEqRdQpa5vtKN68SklNY0Ceeo~R2deDCTKWnGSUeIBx~D~IicrdO~n9NuXT30ealP7naCfvK0zG1W0mE~wBqDPhV-upbZ0utIKwMrnGrt7CXUTvoj~bXNu0kexZQ7hMyH4gcmdj659f1nuwdQw-Yq-CMXK9D523i6G8E5N47eF7TLal8tCbka5bXdv1Bw9MzhetvghLZs-V7MDkF5bXGSOi7xwmYD7LCIeWcMuu-3fkaRxjdRRBHuXHXmV-uW9Hr4mTEJEgGHWsWYQmmeIPI68Q~J2hEfeKpMiUQIlIBYmfLJYjKQZ7tuoMQ__"
                   alt="comment of movie1"

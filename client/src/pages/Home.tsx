@@ -13,7 +13,8 @@ export default function Home() {
     <div className="min-h-screen">
       <Navbar />
       <Header />
-      <GenerSection />
+      <GenerSection isSwiper={false} title="Explore our wide variety of categories" description="Whether you're looking for a comedy to make you laugh, a drama to
+                  make you think, or a documentary to learn something new"/>
       <ProvideCart />
       <Questions />
       <Marketing />

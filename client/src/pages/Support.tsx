@@ -10,7 +10,7 @@ export default function Support() {
       <Navbar />
       <SupportForm />
       <Questions />
-      <Marketing />
+      {/* <Marketing /> */}
     </div>
   )
 }

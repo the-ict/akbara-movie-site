@@ -1,12 +1,12 @@
+import Linkedin from "../assets/icons/linkedin.png"
 import Facebook from "../assets/icons/facebook.png"
 import Twitter from "../assets/icons/twitter.png"
-import Linkedin from "../assets/icons/linkedin.png"
 
 
 export default function Footer() {
   return (
-    <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin">
-      <div className="w-[1597px] footer max-lg:w-screen arrow-padding">
+    <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin footer">
+      <div className="w-[1597px] footer max-lg:w-screen arrow-padding ">
 
         <div className="flex justify-between footer-nav flex-wrap gap-5">
           <ul className="max-lg:w-[45%]">
@@ -49,7 +49,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between header text-[#999999] max-lg:flex-col max-lg:items-start">
+        <div className="flex navbar items-center justify-between header text-[#999999] max-lg:flex-col max-lg:items-start">
           <span>@2023 streamvib, All Rights Reserved</span>
           <div className="flex items-center gap-10">
             <span className="cursor-pointer hover:underline">Terms of Use</span>

@@ -51,7 +51,7 @@
 }
 
 .footer {
-    padding: 70px 0px;
+    padding: 50px 0px;
 }
 
 .footer-item {
@@ -116,3 +116,16 @@
     height: 20px;
     object-fit: contain;
 }
+
+.cart-geners {
+    margin-right: 30px;
+}
+
+
+/* react-multi-carousel default arrowsni yashirish */
+.react-multi-carousel-list .react-multiple-carousel__arrow {
+    display: none !important;
+  }
+
+
+  /* Carousel containerni gorizontal qilish */
