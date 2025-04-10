@@ -41,13 +41,19 @@ export default function GenerSection({isSwiper, title, description}: Props) {
       const total: number = carouselRef.current.props.children.length
 
       const array: number[] = []
-      
-      for(let i = 1; i<=total; i++) {
+
+      for(let i = 0; i<= total - 4; i++) {
         array.push(i)
       }
+
       setTotalSlides(array)
+      
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    console.log(totalSlides)
+  }, [totalSlides])
 
 
   const goToPrevious = () => {
@@ -60,13 +66,10 @@ export default function GenerSection({isSwiper, title, description}: Props) {
   const goToNext = () => {
     carouselRef.current?.next(1);
 
-    if(currentSlide < (totalSlides.length - 4)) {
+    if(currentSlide < totalSlides.length - 1) {
       setCurrentSlide(prev => prev + 1)
     }
-
   };
-
-
 
   return (
     <div>
@@ -101,7 +104,7 @@ export default function GenerSection({isSwiper, title, description}: Props) {
             <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div> */}
             {
               totalSlides.map(item => (
-                <div className={`w-4 ${(currentSlide + 1) == item ? 'bg-[#e90000]' :'bg-[#333333]'} h-1 cursor-pointer`} key={item}></div>
+                <div className={`w-4 ${(currentSlide) == item ? 'bg-[#e90000]' :'bg-[#333333]'} h-1 cursor-pointer`} key={item}></div>
               ))
             }
           </div>

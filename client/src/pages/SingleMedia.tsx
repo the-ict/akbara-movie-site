@@ -18,6 +18,7 @@ import ArrowRight from "../assets/icons/arrowright.png"
 import Marketing from "../components/Marketing";
 import Carousel from "react-multi-carousel";
 import { useRef } from "react";
+import Review from "../components/Review";
 
 
 
@@ -69,8 +70,8 @@ export default function SingleMedia() {
             {/* Title and Play/Action Buttons */}
             <div className="absolute bottom-20 w-full flex items-center justify-center">
                 <div className="w-[70%] text-center">
-                    <h3 className="text-3xl font-bold">Avengers: Endgame</h3>
-                    <p className="text-[#999999]">
+                    <h3 className="text-3xl font-bold max-lg:text-2xl">Avengers: Endgame</h3>
+                    <p className="text-[#999999] max-lg:text-[15px]">
                         With the help of remaining allies, the Avengers must assemble once more to undo Thanos's actions and restore peace to the universe, no matter the cost.
                     </p>
 
@@ -115,59 +116,15 @@ export default function SingleMedia() {
                     </div>
 
                     {/* Review Cards */}
-                    <div className="header w-full">
-                        <Carousel responsive={responsive} ref={carouselRef}>
-                          <div className="single-cart-review rounded bg-[#141414] w-[90%]">
-                              <div className="flex items-center gap-10">
-                                  <div>
-                                      <h1 className="text-white font-bold">Aniket Roy</h1>
-                                      <p className="text-[#999999]">From India</p>
-                                  </div>
-                                  <div className="flex items-center rounded-full bg-[#262626] button gap-3">
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={HalfStar} alt="half-star" className="w-[20px] h-[20px] object-contain" />
-                                      <span>4.5</span>
-                                  </div>
-                              </div>
-                              <p className="text-[#999999] navbar">This movie was recommended to me by a very dear friend. Had a houseful board and couldn't watch it.</p>
-                          </div>
-
-                          
-                          <div className="single-cart-review rounded bg-[#141414] w-[90%]">
-                              <div className="flex items-center gap-10">
-                                  <div>
-                                      <h1 className="text-white font-bold">Aniket Roy</h1>
-                                      <p className="text-[#999999]">From India</p>
-                                  </div>
-                                  <div className="flex items-center rounded-full bg-[#262626] button gap-3">
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={Star} alt="star" className="w-[20px] h-[20px] object-contain" />
-                                      <img src={HalfStar} alt="half-star" className="w-[20px] h-[20px] object-contain" />
-                                      <span>4.5</span>
-                                  </div>
-                              </div>
-                              <p className="text-[#999999] navbar">This movie was recommended to me by a very dear friend. Had a houseful board and couldn't watch it.</p>
-                          </div>
-                        </Carousel>
+                    <div className="header">
+                      
+                      <Review />
+                        
                     </div>
                 </div>
 
                 {/* Pagination */}
-                <div className="flex items-center w-full gap-4 justify-center header max-lg:hidden">
-                    <img onClick={previouse} src={ArrowLeft} alt="arrowleft" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
-                    {/* <div className="flex items-center gap-2">
-                        <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
-                        <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
-                        <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
-                        <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div>
-                    </div> */}
-                    <img onClick={next} src={ArrowRight} alt="arrowright" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
-                </div>
+                
             </div>
 
             {/* Right Section: Media Details */}
@@ -246,6 +203,23 @@ export default function SingleMedia() {
                   <p>From India</p>
                 </div>
               </div>
+            </div>
+
+            <div className="arrow-padding bg-[#262626] lg:hidden">
+                <div className="flex items-center justify-between">
+                    <h1 className="text-[#999999]">Reviews</h1>
+                    <button className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded">
+                        <img src={Plus} alt="plus" className="w-[30px] h-[30px] object-contain" />
+                        <span>Add Your Review</span>
+                    </button>
+                </div>
+
+                {/* Review Cards */}
+                <div className="header">
+                  
+                  <Review />
+                    
+                </div>
             </div>
         </div>
         <Marketing />
