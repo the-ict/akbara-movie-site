@@ -8,6 +8,7 @@ import ProvideCart from "../components/ProvideCart";
 import Questions from "../components/Questions";
 import "../styles.css"
 
+
 export default function Home() {
   return (
     <div className="min-h-screen">
