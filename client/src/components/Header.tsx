@@ -51,7 +51,7 @@ export default function Header() {
         responsive={responsive} 
         infinite
         autoPlay
-        autoPlaySpeed={1555}
+        autoPlaySpeed={3000}
         pauseOnHover
         ref={carouselRef}
         >

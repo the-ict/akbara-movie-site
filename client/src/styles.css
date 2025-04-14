@@ -129,3 +129,60 @@
 
 
   /* Carousel containerni gorizontal qilish */
+
+.notification {
+    padding: 50px 100px;
+}
+
+
+.notification-item {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: all 500ms ease-in-out;
+    font-weight: bold;
+    height: 50px;
+}
+
+.notification-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%; /* <-- BU MUHIM */
+    height: 100%;
+    background: red;
+    border-radius: 5px;
+    transition: width 500ms ease-in-out; /* <-- BU YERDA faqat width transition qilinadi */
+    z-index: -1;
+}
+
+.notification-item:hover::before {
+    width: 100%;
+}
+
+
+.search {
+    padding: 5px 10px;
+    border-bottom: 2px solid lightgray;
+    outline: none;
+    width: 200px;
+
+    animation-name: searchAnimation;
+    animation-delay: 200ms;
+    animation-duration: 1s; /* <-- BU YER QO‘SHILDI */
+    animation-fill-mode: forwards; /* animatsiyadan keyin oxirgi holatda qolsin */
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes searchAnimation {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 200px; /* yoki 100% emas, sababi .search ichida width: 300px */
+    }
+}
