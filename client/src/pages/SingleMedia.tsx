@@ -17,8 +17,14 @@ import ArrowLeft from "../assets/icons/arrowleft.png"
 import ArrowRight from "../assets/icons/arrowright.png"
 import Marketing from "../components/Marketing";
 import Carousel from "react-multi-carousel";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Review from "../components/Review";
+
+
+import {useParams} from "react-router-dom"
+import axios from "axios";
+import { IMovie } from "../types/Movie";
+import { getRatingValue } from "../functions/rating";
 
 
 
@@ -38,22 +44,25 @@ const responsive = {
 };
 
 export default function SingleMedia() {
+  const [movie, setMovie] = useState<IMovie>()
   const carouselRef = useRef<Carousel | null>(null)
 
+  const params = useParams()
+  
 
-  const next = () => {
-    if(carouselRef.current) {
-      carouselRef.current.next(1)
+  useEffect(() => {
+    const getSingleMedia = async() => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/movie/${params.id}`)
+        console.log(response.data)
+        setMovie(response.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
 
-  const previouse = () =>{
-    if(carouselRef.current) {
-      carouselRef.current.previous(1)
-    }
-  }
-
-
+    getSingleMedia()
+  }, [])
   return (
     <div>
         <Navbar />
@@ -61,7 +70,7 @@ export default function SingleMedia() {
         {/* Header Section */}
         <div className="relative w-full header">
             <img 
-                src="https://s3-alpha-sig.figma.com/img/db21/254b/02aad8dff901b2ed9af793040b85b0dd?Expires=1745193600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=siSncvca7L9p3l-byg76BOJrmIxtCbcEqRdQpa5vtKN68SklNY0Ceeo~R2deDCTKWnGSUeIBx~D~IicrdO~n9NuXT30ealP7naCfvK0zG1W0mE~wBqDPhV-upbZ0utIKwMrnGrt7CXUTvoj~bXNu0kexZQ7hMyH4gcmdj659f1nuwdQw-Yq-CMXK9D523i6G8E5N47eF7TLal8tCbka5bXdv1Bw9MzhetvghLZs-V7MDkF5bXGSOi7xwmYD7LCIeWcMuu-3fkaRxjdRRBHuXHXmV-uW9Hr4mTEJEgGHWsWYQmmeIPI68Q~J2hEfeKpMiUQIlIBYmfLJYjKQZ7tuoMQ__"
+                src={movie?.thumbnail}
                 alt="movie cover"
                 className="w-full h-[calc(100vh-25vh)] object-cover"
             />
@@ -70,12 +79,9 @@ export default function SingleMedia() {
             {/* Title and Play/Action Buttons */}
             <div className="absolute bottom-20 w-full flex items-center justify-center">
                 <div className="w-[70%] text-center">
-                    <h3 className="text-3xl font-bold max-lg:text-2xl">Avengers: Endgame</h3>
-                    <p className="text-[#999999] max-lg:text-[15px]">
-                        With the help of remaining allies, the Avengers must assemble once more to undo Thanos's actions and restore peace to the universe, no matter the cost.
-                    </p>
+                    <h3 className="text-3xl font-bold max-lg:text-2xl">{movie?.name}</h3>
 
-                    <div className="flex items-center gap-5 justify-center navbar max-lg:flex-col">
+                    <div className="flex items-center gap-5 header justify-center navbar max-lg:flex-col">
                         <button className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded">
                             <img src={Play} alt="play icon" className="w-[20px] h-[20px] object-contain" />
                             <span>Play now</span>
@@ -102,7 +108,7 @@ export default function SingleMedia() {
             <div className="flex-7 flex flex-col gap-5">
                 <div className="single-cart bg-[#262626] rounded">
                     <p className="text-[#999999]">Description</p>
-                    <p className="navbar">A fiery young man clashes with a forest officer in a spiritual, fate-driven South Indian village.</p>
+                    <p className="navbar">{movie?.description}</p>
                 </div>
 
                 {/* Reviews Section */}
@@ -131,12 +137,12 @@ export default function SingleMedia() {
             <div className="flex-3 info flex flex-col gap-5 bg-[#262626] rounded single-cart-review">
               <label>
                 <img src={Date} alt="date"/>
-                <span>Released Year</span>
+                <span>Kino chiqgan vaqt</span>
               </label>
-              <h1>2024</h1>
+              <h1>{movie?.created_time}</h1>
               <label>
                 <img src={Language} alt="langauge" />
-                <span>Available Languages</span>
+                <span>Ko'rish mumkin bo'lgan tillar</span>
               </label>
               <div>
                 <span className="bg-[#141414] info-lang-cart">Uzbek</span>
@@ -148,29 +154,29 @@ export default function SingleMedia() {
               </label>
               
               <div className="flex items-center gap-5">
-                <div className="font-bold button bg-[#141414] flex-1/2">
+                <div className="font-bold button bg-[#141414] flex-1/2" onClick={() => {
+                  window.location.replace(String(movie?.ratings[0].link))
+                }}>
                   <p>IMDB</p>
-                  <div className="flex items-center gap-1 star-container">
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={HalfStar} alt="half-star" className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <span>4.5</span>
+                  <div className="flex items-center gap-1 star-container cursor-pointer">
+                    {
+                      movie?.ratings[0].rating && (
+                        getRatingValue(Number(movie?.ratings[0].rating)).map((item) => {
+                          if(item == 1) {
+                            return (
+                              <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]" key={item + Math.random()}/>
+                            )
+                          }
+                          return (
+                              <img src={HalfStar} alt="half-star" className="max-lg:w-[10px] max-lg:h-[10px]" key={item + Math.random()}/>
+                          )
+                      })
+                      )
+                    }
+                    <span>{movie?.ratings[0].rating}</span>
                   </div>
                 </div>
 
-                <div className="font-bold button bg-[#141414] flex-1/2">
-                  <p>StreamVibe</p>
-                  <div className="flex items-center gap-1 star-container">
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={Star} alt="star"  className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <img src={HalfStar} alt="half-star" className="max-lg:w-[10px] max-lg:h-[10px]"/>
-                    <span>4.5</span>
-                  </div>
-                </div>
               </div>
 
               <label>
@@ -178,8 +184,16 @@ export default function SingleMedia() {
                 <span>Gernes</span>
               </label>
               <div>
-                <span>Action</span>
-                <span>Adventure</span>
+                {
+                  movie?.Genres && (
+                    movie.Genres.map((genre, index) => {
+                      console.log(genre)
+                      return (
+                        <span key={index}>{genre}</span>
+                      );
+                    })
+                  )
+                }
               </div>
 
               <label>
@@ -188,8 +202,8 @@ export default function SingleMedia() {
               <div className="flex items-center gap-5 button bg-[#141414] rounded">
                 <img src={AuthorProfile} alt="authorprofile" className="h-full w-[20%] object-contain"/>
                 <div>
-                  <h1 className="font-bold">Rishab Shetty</h1>
-                  <p>From India</p>
+                  <h1 className="font-bold">{movie?.Director[0].name}</h1>
+                  <p>From {movie?.Director[0].country}</p>
                 </div>
               </div>
 
@@ -199,8 +213,8 @@ export default function SingleMedia() {
               <div className="flex items-center gap-5 button bg-[#141414] rounded">
                 <img src={AuthorProfile} alt="authorprofile" className="h-full w-[20%] object-contain"/>
                 <div>
-                  <h1 className="font-bold">Rishab Shetty</h1>
-                  <p>From India</p>
+                  <h1 className="font-bold">{movie?.Music[0].name}</h1>
+                  <p>From {movie?.Music[0].country}</p>
                 </div>
               </div>
             </div>

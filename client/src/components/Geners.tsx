@@ -2,7 +2,7 @@ import Carousel from "react-multi-carousel"
 
 import ArrowLeft from "../assets/icons/arrowleft.png"
 import ArrowRight from "../assets/icons/arrowright.png"
-import Action from "../assets/images/action.png"
+import Horror from "../assets/images/horror.png"
 
 import "../styles.css"
 import GenerSection from "./GenerSection"
@@ -77,10 +77,10 @@ const defaultSeries = (
           {
             [1,2,3,4,].map(item => (
               <div className="bg-[#1A1A1A] cart w-[300px] h-max" key={item}>
-                <img src={Action} alt="action image" />
+                <img src={Horror} alt="Horror image" />
                 
                 <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                  <p>Action</p>
+                  <p>Horror</p>
                   <img src={ArrowRight} alt="arrowright icon" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
                 </div>
               </div>
@@ -108,10 +108,10 @@ const defaultSeries = (
           {
             [1,2,3,4,].map(item => (
               <div className="bg-[#1A1A1A] cart w-[300px] h-max" key={item}>
-                <img src={Action} alt="action image" />
+                <img src={Horror} alt="Horror image" />
                 
                 <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                  <p>Action</p>
+                  <p>Horror</p>
                   <img src={ArrowRight} alt="arrowright icon" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
                 </div>
               </div>
@@ -138,10 +138,10 @@ const defaultSeries = (
           {
             [1,2,3,4,].map(item => (
               <div className="bg-[#1A1A1A] cart w-[300px] h-max" key={item}>
-                <img src={Action} alt="action image" />
+                <img src={Horror} alt="Horror image" />
                 
                 <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                  <p>Action</p>
+                  <p>Horror</p>
                   <img src={ArrowRight} alt="arrowright icon" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
                 </div>
               </div>
@@ -169,10 +169,10 @@ const defaultSeries = (
           {
             [1,2,3,4,].map(item => (
               <div className="bg-[#1A1A1A] cart w-[300px] h-max" key={item}>
-                <img src={Action} alt="action image" />
+                <img src={Horror} alt="Horror image" />
                 
                 <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                  <p>Action</p>
+                  <p>Horror</p>
                   <img src={ArrowRight} alt="arrowright icon" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
                 </div>
               </div>
@@ -199,10 +199,10 @@ const defaultSeries = (
           {
             [1,2,3,4,].map(item => (
               <div className="bg-[#1A1A1A] cart w-[300px] h-max" key={item}>
-                <img src={Action} alt="action image" />
+                <img src={Horror} alt="Horror image" />
                 
                 <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                  <p>Action</p>
+                  <p>Horror</p>
                   <img src={ArrowRight} alt="arrowright icon" className="w-[30px] h-[30px] object-contain cursor-pointer"/>
                 </div>
               </div>

@@ -1,7 +1,10 @@
 import Carousel from "react-multi-carousel";
 import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
-import Action from "../assets/images/action.png";
+import Adventure from "../assets/images/adventure.png";
+import Dramma from "../assets/images/dramma.png";
+import Horror from "../assets/images/horror.png";
+import Comedy from "../assets/images/comedy.png";
 import React, { useEffect, useRef, useState } from "react";
 
 
@@ -29,6 +32,32 @@ interface Props {
   title: string,
   description?: string
 }
+
+interface IGenres {
+  name: string,
+  imgSrc: string
+}
+
+const genres:IGenres[] = [
+  {
+    name: "Drama",
+    imgSrc: Dramma, // Drama janrining rasmi
+  },
+  {
+    name: "Comedy",
+    imgSrc: Comedy, // Comedy janrining rasmi
+  },
+  {
+    name: "Horror",
+    imgSrc: Horror, // Horror janrining rasmi
+  },
+  {
+    name: "Adventure",
+    imgSrc: Adventure // Sci-Fi janrining rasmi
+  },
+];
+
+
 
 
 export default function GenerSection({isSwiper, title, description}: Props) {
@@ -123,15 +152,15 @@ export default function GenerSection({isSwiper, title, description}: Props) {
           ref={carouselRef}  
           responsive={responsive}
         >
-          {[1, 2, 3, 4, 5, 6].map((item) => (
+          {genres.map((item) => (
             <div
-              className="bg-[#1A1A1A] cart w-[300px] max-sm:w-[180px] h-max"
-              key={item}
+              className="bg-[#1A1A1A] cursor-pointer cart w-[300px] max-sm:w-[180px] h-max"
+              key={item.name} 
             >
-              <img src={Action} alt="action image" />
+              <img src={item.imgSrc} alt="action image" />
 
               <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                <p>Action</p>
+                <p>{item.name}</p>
                 <img
                   src={ArrowRight}
                   alt="arrowright icon"

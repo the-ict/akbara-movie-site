@@ -24,21 +24,10 @@ export default function Navbar() {
         </ul>
         <div className="flex items-center gap-7 max-lg:hidden">
         <div className="flex items-center gap-2">
-
-            {
-                  search && (
-                    <input type="text" placeholder="Searching...." className="search" />
-                  )
-                }
-                  <img src={Search} onClick={() => setSearch(!search)} alt="search icon" className="w-[30px] h-[30px] object-contain cursor-pointer" />
-
+            <input type="text" placeholder="Searching...." className="search" />
+            <img src={Search} onClick={() => setSearch(!search)} alt="search icon" className="w-[30px] h-[30px] object-contain cursor-pointer" />
         </div>
-          <img onClick={() => setNotifications(!notifications)} src={NotificationsImg} alt="notificatiosn icon" className="w-[30px] h-[30px] object-contain cursor-pointer" />
-          {
-            notifications && (
-              <Notifications />
-            ) 
-          }
+         
         </div>
         <img src={Menu} alt="" className="navigation rounded w-[50px] h-[50px] cursor-pointer lg:hidden" />
       </div>
