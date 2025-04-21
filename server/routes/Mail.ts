@@ -1,5 +1,8 @@
 import express, {Router, Request, Response } from "express";
 import { Resend } from "resend";
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const router: Router = express.Router();
 const resend = new Resend(process.env.RESEND_API_KEY)
