@@ -40,7 +40,6 @@ const UserSchema = new mongoose_1.Schema({
     email: { type: String, required: true },
     phone: { type: Number, required: true },
     password: { type: String, required: true },
-    terms_agreed: { type: Boolean, required: true },
 }, { timestamps: true });
 const UserModel = mongoose_1.default.model("User", UserSchema);
 exports.default = UserModel;

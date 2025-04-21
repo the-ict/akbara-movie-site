@@ -17,7 +17,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = __importDefault(require("../models/User"));
 const router = express_1.default.Router();
 router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password, phone, terms_agreed, lastname } = req.body;
+    const { name, email, password, phone, lastname } = req.body;
     if (req.body.name.trim() === "")
         return;
     try {
@@ -28,7 +28,6 @@ router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, functio
             password: hashedPassword,
             lastname,
             phone,
-            terms_agreed
         });
         res.status(200).json({
             message: "Foydalanuvchi muvaffaqiyatli ro'yxatdan o'tdi!",
@@ -41,6 +40,7 @@ router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, functio
 }));
 router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
+    console.log(email, password);
     try {
         const user = yield User_1.default.findOne({ email });
         if (!user) {

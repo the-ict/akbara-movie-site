@@ -6,6 +6,7 @@ import SingleMedia from "./pages/SingleMedia";
 import Support from "./pages/Support";
 
 import "./index.css";
+import Search from "./pages/Search";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
 
             {/* Support page */}
             <Route path="/support" element={<Support />} />
+            <Route path="/search" element={<Search />} />
 
           </Routes>
         </div>

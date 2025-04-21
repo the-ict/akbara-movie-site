@@ -42,9 +42,9 @@ export default function Footer() {
           <div className="max-lg:w-[45%]">
             <p className="footer-item text-white font-bold">Contact with us</p>
             <div className="flex items-center gap-5">
-              <img src={Facebook} alt="facebook" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000]"/>
-              <img src={Twitter} alt="twitter" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000]"/>
-              <img src={Linkedin} alt="linkedin" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000]"/>
+              <img src={Facebook} alt="facebook" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[30px] max-sm:h-[30px]"/>
+              <img src={Twitter} alt="twitter" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[30px] max-sm:h-[30px]"/>
+              <img src={Linkedin} alt="linkedin" className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[30px] max-sm:h-[30px]"/>
             </div>
           </div>
         </div>

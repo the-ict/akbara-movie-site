@@ -5,6 +5,7 @@ import Menu from "../assets/icons/menu.png"
 import Notifications from "./Notifications"
 import "../styles.css"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 
 export default function Navbar() {
@@ -17,10 +18,9 @@ export default function Navbar() {
           <img src={Logo} alt="logo" className="w-[200px] max-lg:w-[150px] h-full object-contain cursor-pointer"/>
         </a>
         <ul className="flex items-center gap-5 bg-[#0F0F0F] navigation rounded max-lg:hidden">
-          <li className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]">Home</li>
-          <li className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]">Movies & Shows</li>
-          <li className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]">Support</li>
-          <li className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]">Subscriptions</li>
+          <Link className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]" to={`/`}>Home</Link>
+          <Link className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]" to={`/shows`}>Movies & Shows</Link>
+          <Link className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]" to={`/support`}>Support</Link>
         </ul>
         <div className="flex items-center gap-7 max-lg:hidden">
         <div className="flex items-center gap-2">

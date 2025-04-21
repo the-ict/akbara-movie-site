@@ -177,6 +177,16 @@
     animation-timing-function: ease-in-out;
 }
 
+
+.movie-item { 
+    padding: 20px;
+}
+
+.movie-genre {
+    padding: 5px 10px;
+}
+
+
 @keyframes searchAnimation {
     0% {
         width: 0%;

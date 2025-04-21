@@ -37,7 +37,7 @@ const responsive = {
 export default function Header() {
     const [movies, setMovies] = useState<IMovie[]>([])
     const carouselRef = useRef<Carousel | null>(null); 
-  
+
     const goToPrevious = () => {
       carouselRef.current?.previous(1);
     };
@@ -74,7 +74,7 @@ export default function Header() {
           {
             movies.map(item => {
               return (
-                <div className='w-full relative' key={item._id}>
+                <div className='w-full relative cursor-pointer' key={item._id}>
 
                   <div className="flex absolute w-full justify-between bottom-5 z-1 items-center gap-4 slider rounded max-lg:hidden">
                     <img
@@ -113,9 +113,10 @@ export default function Header() {
                         {item?.description}
                       </p>
 
-
                       <div className='flex items-center max-lg:flex-col gap-5 justify-center navbar'>
-                        <button className='flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] max-lg:w-[60%] max-lg:justify-center play-button rounded'>
+                        <button 
+                        onClick={() =>window.location.replace(`/single-media/${item._id}`)}
+                        className='flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] max-lg:w-[60%] max-lg:justify-center play-button rounded'>
                           <img src={Play} alt="play icon" className='w-[20px] h-[20px] object-contain'/>
                           <span>Play now</span>
                         </button>
@@ -137,7 +138,7 @@ export default function Header() {
               )
             })
           }
-        </Carousel>;
+        </Carousel>
     </div>
   )
 }

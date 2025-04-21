@@ -5,8 +5,9 @@ import User from "../models/User";
 const router: Router = express.Router();
 
 router.post("/register",async (req: Request, res: Response) => {
-    const { name, email, password, phone, terms_agreed, lastname } = req.body;
+    const { name, email, password, phone, lastname } = req.body
 
+ 
     if(req.body.name.trim() === "") return;
     
     try {
@@ -18,7 +19,6 @@ router.post("/register",async (req: Request, res: Response) => {
         password: hashedPassword,
         lastname,
         phone,
-        terms_agreed
       });
 
       res.status(200).json({
@@ -35,6 +35,8 @@ router.post("/register",async (req: Request, res: Response) => {
 
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
+
+  console.log(email,password)
 
   try {
       const user = await User.findOne({ email });
