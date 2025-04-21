@@ -20,6 +20,7 @@ const cors_1 = __importDefault(require("cors"));
 const Auth_1 = __importDefault(require("./routes/Auth"));
 const Movie_1 = __importDefault(require("./routes/Movie"));
 const Review_1 = __importDefault(require("./routes/Review"));
+const Mail_1 = __importDefault(require("./routes/Mail"));
 dotenv_1.default.config();
 const port = process.env.PORT || 5000;
 const app = (0, express_1.default)();
@@ -40,6 +41,7 @@ app.use((0, cors_1.default)());
 app.use("/api/auth", Auth_1.default);
 app.use("/api/movie", Movie_1.default);
 app.use("/api/review", Review_1.default);
+app.use("/api/mail", Mail_1.default);
 app.listen(port, () => {
     console.log(`Server ishga tushdi ${port}`);
     connect();

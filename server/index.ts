@@ -7,6 +7,7 @@ import cors from "cors"
 import authRoutes from "./routes/Auth";
 import movieRoutes from "./routes/Movie";
 import reviewRoutes from "./routes/Review";
+import mailRoutes from "./routes/Mail"
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use(cors())
 app.use("/api/auth", authRoutes);
 app.use("/api/movie", movieRoutes);
 app.use("/api/review", reviewRoutes);
+app.use("/api/mail", mailRoutes);
 
 app.listen(port, () => {
   console.log(`Server ishga tushdi ${port}`);
