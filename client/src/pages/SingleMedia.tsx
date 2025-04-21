@@ -22,6 +22,7 @@ import axios from "axios";
 import { IMovie } from "../types/Movie";
 import { getRatingValue } from "../functions/rating";
 import WriteReview from "../components/WriteReview";
+import PlayVideo from "../components/PlayVideo";
 
 const responsive = {
   superLargeDesktop: {
@@ -41,6 +42,7 @@ const responsive = {
 export default function SingleMedia() {
   const [movie, setMovie] = useState<IMovie>();
   const [reviewForm, setReviewForm] = useState<boolean>(false);
+  const [video, setVideo] = useState<boolean>(false)
   const carouselRef = useRef<Carousel | null>(null);
 
   const params = useParams();
@@ -63,6 +65,12 @@ export default function SingleMedia() {
   return (
     <div>
       <Navbar />
+      
+     {
+      video && (
+        <PlayVideo url={String(movie?.video_link)} setVideo={setVideo}/>
+      )
+     }
 
       {/* Header Section */}
       <div className="relative w-full header">
@@ -81,7 +89,10 @@ export default function SingleMedia() {
             </h3>
 
             <div className="flex items-center gap-5 header justify-center navbar max-lg:flex-col">
-              <button className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded">
+              <button 
+              onClick={() => setVideo(true)
+              }
+              className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded">
                 <img
                   src={Play}
                   alt="play icon"
