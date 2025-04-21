@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import SupportBack from "../assets/images/supportback.png";
+import {loginStart, loginFailure, loginSuccess} from "../redux/userSlice"
+import {useSelector, useDispatch} from "react-redux"
 import axios from "axios";
 
 interface ISupport {
@@ -13,7 +15,12 @@ interface ISupport {
 type TAuthState = "LOGIN" | "REGISTER" | "UPDATE"
 
 export default function SupportForm() {
-  const [authState, setAuthState] = useState<TAuthState>("REGISTER")
+  const store = useSelector(state => state)
+  const [authState, setAuthState] = useState<TAuthState>(store?.user?.user?.user ? "UPDATE" : "REGISTER")
+
+
+
+
   return (
     <div className="too flex justify-between w-full gap-10 max-lg:flex-col">
       <div className="flex-4 flex flex-col gap-5">
@@ -81,31 +88,33 @@ const Register = () => {
     password: ""
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    console.log(checked);
-    console.log(name);
-    console.log(type);
+  
+  const dispatch = useDispatch()
 
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value} = e.target;
+    
     setForm({
       ...form,
       [name]: value,
     });
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
+    dispatch(loginStart())
     e.preventDefault();
-
-    console.log(form)
 
     try {
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
         form
       );
+      dispatch(loginSuccess(response.data.user))
       alert("Sizning malumotlaringiz muvaffaqiyatli saqlandi!");
-      console.log(response.data); // To'liq ma'lumot
+      console.log(response.data.user); // To'liq ma'lumot
     } catch (error) {
+      dispatch(loginFailure())
       alert("There was an error sending your message.");
       console.log(error);
     }
@@ -205,6 +214,8 @@ const Login = () => {
     password: ""
   });
 
+  const dispatch = useDispatch()
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -215,6 +226,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    dispatch(loginStart())
     e.preventDefault();
 
     try {
@@ -222,9 +234,11 @@ const Login = () => {
         "http://localhost:5000/api/auth/login",
         form
       );
+      dispatch(loginSuccess(response.data.user))
       alert("Your message has been sent successfully.");
       console.log(response.data); // To'liq ma'lumot
     } catch (error) {
+      dispatch(loginFailure())
       alert("There was an error sending your message.");
       console.log(error);
     }
@@ -292,6 +306,8 @@ const Update = () => {
     password: ""
   });
 
+  const store = useSelector(store => store)
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     console.log(checked);
@@ -324,21 +340,21 @@ const Update = () => {
   return (
     <div className="flex-6 bg-[#0f0f0f] flex gap-3 justify-between flex-wrap single-cart-review">
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>First Name</label>
+        <label>Ism</label>
         <input
           type="text"
           value={form.name}
           name="name"
           onChange={handleInputChange}
-          placeholder="Enter First Name"
+          placeholder={store.user.user.user.name}
           className="cart w-full bg-[#262626] rounded"
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>Last Name</label>
+        <label>Familiya</label>
         <input
           type="text"
-          placeholder="Enter Last Name"
+          placeholder={store.user.user.user.lastname}
           value={form.lastname}
           name="lastname"
           onChange={handleInputChange}
@@ -346,11 +362,11 @@ const Update = () => {
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>Phone Number</label>
+        <label>Telefon raqam</label>
         <input
           type="number"
-          placeholder="Enter Your Phone"
-          value={form.phone}
+          placeholder={store.user.user.user.phone}
+          value={store.user.user.user.phone}
           onChange={handleInputChange}
           name="phone"
           className="cart w-full bg-[#262626] rounded"
@@ -360,7 +376,7 @@ const Update = () => {
         <label>Email</label>
         <input
           type="email"
-          placeholder="Enter Your Email"
+          placeholder={store.user.user.user.email}
           className="cart w-full bg-[#262626] rounded"
           value={form.email}
           name="email"

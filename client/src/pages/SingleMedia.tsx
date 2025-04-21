@@ -24,26 +24,12 @@ import { getRatingValue } from "../functions/rating";
 import WriteReview from "../components/WriteReview";
 import PlayVideo from "../components/PlayVideo";
 
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 2,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 2,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-};
+
 
 export default function SingleMedia() {
   const [movie, setMovie] = useState<IMovie>();
   const [reviewForm, setReviewForm] = useState<boolean>(false);
   const [video, setVideo] = useState<boolean>(false)
-  const carouselRef = useRef<Carousel | null>(null);
 
   const params = useParams();
 
