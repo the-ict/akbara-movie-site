@@ -28,23 +28,23 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 // ✅ Kinolarni olish va filterlash
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { limit = 10, genre, type } = req.query; // querydan limit, genre, type olish
-        console.log(type);
-        // limitni son sifatida olish
+        const { limit = 10, genre, type, name } = req.query;
         const parsedLimit = parseInt(limit);
-        // Filter uchun queryni tayyorlash
-        let query = {}; // bo'sh query ob'ekti
-        // Agar genre berilgan bo'lsa, so'rovga qo'shamiz
+        let query = {};
         if (genre) {
             query.genre = genre;
         }
-        // Agar type 'latest' bo'lsa, so'rovga createdAt bo'yicha sort qo'shamiz
-        if (type === "latest") {
-            query = Object.assign(Object.assign({}, query), { createdAt: -1 }); // Yangi kinolarni olish uchun
+        if (name) {
+            query.name = { $regex: name, $options: "i" };
         }
-        // Kinolarni so'rovga mos keladigan tarzda olish
-        const movies = yield Movie_1.default.find(query).limit(parsedLimit); // Limitni qo'llash
-        res.status(200).json(movies); // Kinolarni qaytarish
+        let sortOptions = {};
+        if (type === "latest") {
+            sortOptions = { createdAt: -1 };
+        }
+        const movies = yield Movie_1.default.find(query)
+            .sort(sortOptions)
+            .limit(parsedLimit);
+        res.status(200).json(movies);
     }
     catch (error) {
         console.error("Kinolarni olishda xatolik:", error);

@@ -186,6 +186,14 @@
     padding: 5px 10px;
 }
 
+.ask-input {
+    padding: 5px 10px;
+}
+
+.ask {
+    padding: 30px;
+}
+
 
 @keyframes searchAnimation {
     0% {

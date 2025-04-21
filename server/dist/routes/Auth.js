@@ -40,7 +40,10 @@ router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, functio
 }));
 router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
-    console.log(email, password);
+    if (email.trim() === "") {
+        res.status(404).json({ message: "Iltimos malumotlarni to'g'ri kiriting!" });
+        return;
+    }
     try {
         const user = yield User_1.default.findOne({ email });
         if (!user) {

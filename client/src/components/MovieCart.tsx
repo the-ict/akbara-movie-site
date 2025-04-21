@@ -1,19 +1,32 @@
-import React from "react"
-import Horror from "../assets/images/horror.png"
+import { Link } from "react-router-dom";
+import { IMovie } from "../types/Movie";
 
+type Props = {
+  movie: IMovie;
+};
 
-export default function () {
-    return (
-        <div className="movie-item relative rounded w-[300px] flex flex-col gap-3 cursor-pointer h-[400px] bg-[#1A1A1A]">
-            <img src={Horror} alt="Horror movie item" />
-            <span className="bg-[#E50000] movie-genre rounded font-bold absolute right-2 top-2">2019</span>
-            
-            <h3 className="font-bold line-clamp-1">Movie name something i dont know</h3>
-            <div className="flex items-center gap-[1rem]">
-                <span className="bg-[#E50000] movie-genre rounded font-bold">Horror</span>
-                <span className="bg-[#E50000] movie-genre rounded font-bold">Dramma</span>
-                <span className="bg-[#E50000] movie-genre rounded font-bold">Hind</span>
-            </div>
+export default function ({ movie }: Props) {
+  return (
+    <Link to={`/single-media/${movie._id}`}>
+      <div className="movie-item relative rounded w-[285px] flex flex-col gap-3 cursor-pointer h-[400px] bg-[#1A1A1A]">
+        <img
+          src={movie.cart_img}
+          alt="Horror movie item"
+          className="w-full h-[70%] object-cover"
+        />
+        <p className="bg-[#E50000] movie-genre rounded font-bold absolute right-2 top-2 ">
+          {movie.created_time}
+        </p>
+
+        <h3 className="font-bold line-clamp-2">{movie.name}</h3>
+        <div className="flex items-center gap-[1rem]">
+          {movie.Genres.map((item, index) => (
+            <span key={index} className="bg-[#E50000] movie-genre rounded font-bold">
+              {item}
+            </span>
+          ))}
         </div>
-    )
+      </div>
+    </Link>
+  );
 }

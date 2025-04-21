@@ -16,34 +16,38 @@ router.post("/", async (req: Request, res: Response) => {
 // ✅ Kinolarni olish va filterlash
 router.get("/", async (req: Request, res: Response) => {
     try {
-        const { limit = 10, genre, type } = req.query;  // querydan limit, genre, type olish
-        console.log(type)
+        const { limit = 10, genre, type, name } = req.query;  
+        
 
-        // limitni son sifatida olish
         const parsedLimit = parseInt(limit as string);
+        let query: any = {};
 
-        // Filter uchun queryni tayyorlash
-        let query: any = {};  // bo'sh query ob'ekti
-
-        // Agar genre berilgan bo'lsa, so'rovga qo'shamiz
         if (genre) {
             query.genre = genre;
         }
 
-        // Agar type 'latest' bo'lsa, so'rovga createdAt bo'yicha sort qo'shamiz
-        if (type === "latest") {
-            query = { ...query, createdAt: -1 };  // Yangi kinolarni olish uchun
+       
+        if (name) {
+            query.name = { $regex: name, $options: "i" };
         }
 
-        // Kinolarni so'rovga mos keladigan tarzda olish
-        const movies = await Movie.find(query).limit(parsedLimit);  // Limitni qo'llash
+      
+        let sortOptions = {};
+        if (type === "latest") {
+            sortOptions = { createdAt: -1 };
+        }
 
-        res.status(200).json(movies);  // Kinolarni qaytarish
+        const movies = await Movie.find(query)
+            .sort(sortOptions)
+            .limit(parsedLimit);
+
+        res.status(200).json(movies);
     } catch (error) {
         console.error("Kinolarni olishda xatolik:", error);
         res.status(500).json({ message: "Kinolarni olishda xatolik yuz berdi" });
     }
 });
+
 // READ single movie
 router.get("/:id", async (req: Request, res: Response) => {
     try {

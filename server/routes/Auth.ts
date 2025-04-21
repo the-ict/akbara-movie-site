@@ -35,8 +35,11 @@ router.post("/register",async (req: Request, res: Response) => {
 
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
-
-  console.log(email,password)
+  
+  if(email.trim() === "") {
+    res.status(404).json({ message: "Iltimos malumotlarni to'g'ri kiriting!" });
+    return
+  }
 
   try {
       const user = await User.findOne({ email });

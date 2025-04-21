@@ -37,8 +37,8 @@ export default function ProvideCart() {
         
         <div className="header flex items-center gap-10 max-lg:flex-col">
             {
-              proveCarts.map(item => (
-                <div className="w-[500px] max-lg:w-screen prove-cart bg-[#0F0F0F] roudned bg-gradient-to-tr from-black to-[#e50000]/10 ">
+              proveCarts.map((item,_) => (
+                <div key={_} className="w-[500px] max-lg:w-screen prove-cart bg-[#0F0F0F] roudned bg-gradient-to-tr from-black to-[#e50000]/10 ">
                     <div className="flex items-center gap-5">
                         <img 
                           className="w-[50px] h-[50px] slider bg-[#1F1F1F] cursor-pointer object-contain"

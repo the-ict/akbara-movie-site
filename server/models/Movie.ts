@@ -18,6 +18,13 @@ interface IMusic {
     about_link: string
 }
 
+interface IReview {
+  name: string;
+  country: string;
+  rating: number;
+  message: string
+}
+
 interface IMovie extends mongoose.Document {
     name: string,
     description: string,
@@ -25,13 +32,13 @@ interface IMovie extends mongoose.Document {
     language: string[],
     ratings: IRating[],
     Genres: string[],
-    Director: IDirector[],
-    Music: IMusic[],
+    Director: IDirector,
+    Music: IMusic,
     thumbnail: string,
     cart_img: string,
     video_link:string,
     likes: string[],
-    reviews: string[]
+    reviews: IReview[]
 }
 
 

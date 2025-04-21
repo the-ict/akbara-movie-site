@@ -9,12 +9,9 @@ import Language from "../assets/icons/language.png"
 import Rating from "../assets/icons/ratings.png"
 import Star from "../assets/icons/star.png"
 import HalfStar from "../assets/icons/halfstar.png"
-import GapStar from "../assets/icons/gapstar.png"
 import Genres from "../assets/icons/genres.png"
 import AuthorProfile from "../assets/icons/authorprofile.png"
 import Plus from "../assets/icons/plus.png"
-import ArrowLeft from "../assets/icons/arrowleft.png"
-import ArrowRight from "../assets/icons/arrowright.png"
 import Marketing from "../components/Marketing";
 import Carousel from "react-multi-carousel";
 import { useEffect, useRef, useState } from "react";
@@ -202,8 +199,8 @@ export default function SingleMedia() {
               <div className="flex items-center gap-5 button bg-[#141414] rounded">
                 <img src={AuthorProfile} alt="authorprofile" className="h-full w-[20%] object-contain"/>
                 <div>
-                  <h1 className="font-bold">{movie?.Director[0].name}</h1>
-                  <p>From {movie?.Director[0].country}</p>
+                  <h1 className="font-bold">{movie?.Director[0]?.name}</h1>
+                  <p>From {movie?.Director[0]?.country}</p>
                 </div>
               </div>
 
@@ -213,8 +210,8 @@ export default function SingleMedia() {
               <div className="flex items-center gap-5 button bg-[#141414] rounded">
                 <img src={AuthorProfile} alt="authorprofile" className="h-full w-[20%] object-contain"/>
                 <div>
-                  <h1 className="font-bold">{movie?.Music[0].name}</h1>
-                  <p>From {movie?.Music[0].country}</p>
+                  <h1 className="font-bold">{movie?.Music[0]?.name}</h1>
+                  <p>From {movie?.Music[0]?.country}</p>
                 </div>
               </div>
             </div>

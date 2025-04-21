@@ -7,7 +7,6 @@ import Horror from "../assets/images/horror.png";
 import Comedy from "../assets/images/comedy.png";
 import React, { useEffect, useRef, useState } from "react";
 
-
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -41,19 +40,19 @@ interface IGenres {
 const genres:IGenres[] = [
   {
     name: "Drama",
-    imgSrc: Dramma, // Drama janrining rasmi
+    imgSrc: Dramma, 
   },
   {
     name: "Comedy",
-    imgSrc: Comedy, // Comedy janrining rasmi
+    imgSrc: Comedy, 
   },
   {
     name: "Horror",
-    imgSrc: Horror, // Horror janrining rasmi
+    imgSrc: Horror, 
   },
   {
     name: "Adventure",
-    imgSrc: Adventure // Sci-Fi janrining rasmi
+    imgSrc: Adventure 
   },
 ];
 
@@ -79,10 +78,6 @@ export default function GenerSection({isSwiper, title, description}: Props) {
       
     }
   }, [])
-
-  useEffect(() => {
-    console.log(totalSlides)
-  }, [totalSlides])
 
 
   const goToPrevious = () => {
@@ -156,6 +151,9 @@ export default function GenerSection({isSwiper, title, description}: Props) {
             <div
               className="bg-[#1A1A1A] cursor-pointer cart w-[300px] max-sm:w-[180px] h-max"
               key={item.name} 
+              onClick={() =>{
+                window.location.replace(`/search?genre=${item.name}`)
+              }}
             >
               <img src={item.imgSrc} alt="action image" />
 
