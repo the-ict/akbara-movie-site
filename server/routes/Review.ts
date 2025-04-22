@@ -6,8 +6,13 @@ const router: Router = express.Router();
 // ✅ Yangi review qo‘shish
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const { name, country, message } = req.body;
-    const review = await ReviewsModel.create({ name, country, message });
+    const { name, country, message, rating } = req.body;
+    const review = await ReviewsModel.create({
+      name,
+      country,
+      message,
+      rating,
+    });
     res.status(201).json(review);
   } catch (error) {
     res.status(500).json({ error: "Review qo'shishda xatolik yuz berdi" });
@@ -30,8 +35,8 @@ router.get("/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const review = await ReviewsModel.findById(id);
     if (!review) {
-        res.status(404).json({ error: "Review topilmadi" });
-        return;
+      res.status(404).json({ error: "Review topilmadi" });
+      return;
     }
     res.status(200).json(review);
   } catch (error) {
@@ -50,8 +55,8 @@ router.put("/:id", async (req: Request, res: Response) => {
       { new: true, runValidators: true }
     );
     if (!review) {
-        res.status(404).json({ error: "Review topilmadi" });
-        return;
+      res.status(404).json({ error: "Review topilmadi" });
+      return;
     }
     res.status(200).json(review);
   } catch (error) {
@@ -65,8 +70,8 @@ router.delete("/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const review = await ReviewsModel.findByIdAndDelete(id);
     if (!review) {
-        res.status(404).json({ error: "Review topilmadi" });
-        return;
+      res.status(404).json({ error: "Review topilmadi" });
+      return;
     }
     res.status(200).json({ message: "Review o‘chirildi" });
   } catch (error) {

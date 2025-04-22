@@ -13,30 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const resend_1 = require("resend");
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+const User_1 = __importDefault(require("../models/User")); // pathni moslashtiring
 const router = express_1.default.Router();
-const resend = new resend_1.Resend(process.env.RESEND_API_KEY);
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// UPDATE USER
+router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, message } = req.body;
-        yield resend.emails.send({
-            from: "Acme avlatjon <davlatjonsoqqamode@gmail.com>",
-            to: "dvltinv@gmail.com",
-            subject: "Noname",
-            html: `<p>${message} -- from ${email}</p>`
-        });
-        res.status(200).json({
-            message: "Xabar jo'natildi",
-            status: 200
-        });
+        const updatedUser = yield User_1.default.findByIdAndUpdate(req.params.id, {
+            $set: req.body,
+        }, { new: true });
+        if (!updatedUser) {
+            res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json(updatedUser);
     }
-    catch (error) {
-        res.status(500).json({
-            message: "Serverda xatolik mavjud",
-            error,
-        });
+    catch (err) {
+        res.status(500).json({ message: "Failed to update user", error: err });
     }
 }));
 exports.default = router;

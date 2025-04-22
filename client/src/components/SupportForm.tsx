@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import SupportBack from "../assets/images/supportback.png";
-import {loginStart, loginFailure, loginSuccess} from "../redux/userSlice"
-import {useSelector, useDispatch} from "react-redux"
+import {
+  loginStart,
+  loginFailure,
+  loginSuccess,
+  logout,
+} from "../redux/userSlice";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 interface ISupport {
@@ -12,14 +17,16 @@ interface ISupport {
   password: string;
 }
 
-type TAuthState = "LOGIN" | "REGISTER" | "UPDATE"
+type TAuthState = "LOGIN" | "REGISTER" | "UPDATE";
 
 export default function SupportForm() {
-  const store = useSelector(state => state)
-  const [authState, setAuthState] = useState<TAuthState>(store?.user?.user?.user ? "UPDATE" : "REGISTER")
+  const store = useSelector((state) => state);
 
+  const isUser = store.user.user ? true : false;
 
-
+  const [authState, setAuthState] = useState<TAuthState>(
+    isUser ? "UPDATE" : "REGISTER"
+  );
 
   return (
     <div className="too flex justify-between w-full gap-10 max-lg:flex-col">
@@ -29,51 +36,43 @@ export default function SupportForm() {
         </h1>
         <p className="text-[18px] text-[#999999]">
           We're here to help you with any problems you may be having with our
-          product. Agar sizda {
-            authState === "REGISTER" && (
-              <span>hisob bo'lsa 
-                <button className="border-b border-red-400 px-2 font-bold cursor-pointer" style={{
-                  marginLeft: 10
+          product. Agar sizda{" "}
+          {authState === "REGISTER" && (
+            <span>
+              hisob bo'lsa
+              <button
+                className="border-b border-red-400 px-2 font-bold cursor-pointer"
+                style={{
+                  marginLeft: 10,
                 }}
                 onClick={() => setAuthState("LOGIN")}
-                >Kiring!</button>
-              </span>
-            )
-          
-          }
-          {
-            authState === "LOGIN" && (
-                <span>
-                  hisob bo'lmasa
-                  <button className="border-b border-red-400 px-2 font-bold cursor-pointer"
-                  style={{
-                    marginLeft: 10
-                  }}
-                  onClick={() => setAuthState("REGISTER")}
-                  >Ro'yhatdan o'ting</button>
-                </span>
-            )
-          }
+              >
+                Kiring!
+              </button>
+            </span>
+          )}
+          {authState === "LOGIN" && (
+            <span>
+              hisob bo'lmasa
+              <button
+                className="border-b border-red-400 px-2 font-bold cursor-pointer"
+                style={{
+                  marginLeft: 10,
+                }}
+                onClick={() => setAuthState("REGISTER")}
+              >
+                Ro'yhatdan o'ting
+              </button>
+            </span>
+          )}
         </p>
         <img src={SupportBack} alt="support" />
       </div>
-     {
-      authState === "REGISTER" && (
-        <Register />
-      )
-     }
+      {authState === "REGISTER" && <Register />}
 
-     {
-      authState === "LOGIN" && (
-        <Login />
-      )
-     }
+      {authState === "LOGIN" && <Login />}
 
-     {
-      authState === "UPDATE"  && (
-        <Update />
-      )     
-    }
+      {authState === "UPDATE" && <Update />}
     </div>
   );
 }
@@ -85,36 +84,41 @@ const Register = () => {
     lastname: "",
     email: "",
     phone: 0,
-    password: ""
+    password: "",
   });
 
-  
-  const dispatch = useDispatch()
+  const [confirmPass, setConfirmPass] = useState<string>("");
 
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value} = e.target;
-    
+    const { name, value } = e.target;
+
     setForm({
       ...form,
       [name]: value,
     });
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
-    dispatch(loginStart())
+    dispatch(loginStart());
     e.preventDefault();
+
+    if (confirmPass !== form.password) {
+      alert("Parol va Tasdiq uchun kiritilga parol teng emas!");
+      return;
+    }
 
     try {
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
         form
       );
-      dispatch(loginSuccess(response.data.user))
+      dispatch(loginSuccess(response.data.user));
       alert("Sizning malumotlaringiz muvaffaqiyatli saqlandi!");
-      console.log(response.data.user); // To'liq ma'lumot
+      window.location.reload();
     } catch (error) {
-      dispatch(loginFailure())
+      dispatch(loginFailure());
       alert("There was an error sending your message.");
       console.log(error);
     }
@@ -122,7 +126,7 @@ const Register = () => {
   return (
     <div className="flex-6 bg-[#0f0f0f] flex gap-3 justify-between flex-wrap single-cart-review">
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>First Name</label>
+        <label>Ism</label>
         <input
           type="text"
           value={form.name}
@@ -133,7 +137,7 @@ const Register = () => {
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>Last Name</label>
+        <label>Familiya</label>
         <input
           type="text"
           placeholder="Enter Last Name"
@@ -144,15 +148,18 @@ const Register = () => {
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>Phone Number</label>
-        <input
-          type="number"
-          placeholder="Enter Your Phone"
-          value={form.phone}
-          onChange={handleInputChange}
-          name="phone"
-          className="cart w-full bg-[#262626] rounded"
-        />
+        <label>Telefon raqam</label>
+        <div className="bg-[#262626] rounded flex items-center gap-3 cart ">
+          <p>+998</p>
+          <input
+            type="text"
+            placeholder="Enter Your Phone"
+            value={form.phone}
+            onChange={handleInputChange}
+            name="phone"
+            className="flex-1 h-full outline-none border-none"
+          />
+        </div>
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Email</label>
@@ -176,7 +183,20 @@ const Register = () => {
           onChange={handleInputChange}
         />
       </div>
-      
+
+      <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
+        <label>Parolni tasdiqlang!</label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          className="cart w-full bg-[#262626] rounded"
+          value={confirmPass}
+          name="password"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setConfirmPass(e.target.value)
+          }
+        />
+      </div>
 
       <div className="w-[100%] flex flex-col gap-5 font-bold">
         <label>Message</label>
@@ -202,8 +222,6 @@ const Register = () => {
   );
 };
 
-
-
 const Login = () => {
   const [message, setMessage] = useState<string>("");
   const [form, setForm] = useState<ISupport>({
@@ -211,10 +229,10 @@ const Login = () => {
     lastname: "",
     email: "",
     phone: 0,
-    password: ""
+    password: "",
   });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -226,7 +244,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    dispatch(loginStart())
+    dispatch(loginStart());
     e.preventDefault();
 
     try {
@@ -234,11 +252,11 @@ const Login = () => {
         "http://localhost:5000/api/auth/login",
         form
       );
-      dispatch(loginSuccess(response.data.user))
+      dispatch(loginSuccess(response.data.user));
       alert("Your message has been sent successfully.");
-      console.log(response.data); // To'liq ma'lumot
+      window.location.reload();
     } catch (error) {
-      dispatch(loginFailure())
+      dispatch(loginFailure());
       alert("There was an error sending your message.");
       console.log(error);
     }
@@ -279,7 +297,6 @@ const Login = () => {
           className="cart w-full h-[200px] bg-[#262626] rounded"
         />
       </div>
-      
 
       <div className="w-[100%] flex items-center justify-between font-bold max-lg:flex-col max-lg:items-start max-lg:gap-5">
         <button
@@ -293,26 +310,22 @@ const Login = () => {
   );
 };
 
-
-
-
 const Update = () => {
-  const [message, setMessage] = useState<string>("");
   const [form, setForm] = useState<ISupport>({
     name: "",
     lastname: "",
     email: "",
     phone: 0,
-    password: ""
+    password: "",
   });
 
-  const store = useSelector(store => store)
+  const [confirmPass, setConfirmPass] = useState<string>("");
+
+  const store = useSelector((store) => store);
+  const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    console.log(checked);
-    console.log(name);
-    console.log(type);
+    const { name, value } = e.target;
 
     setForm({
       ...form,
@@ -323,15 +336,15 @@ const Update = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(form)
+    console.log(form);
+    if(confirmPass == form.password) {
+      alert("Yangi parol eskisi bilan birxil bo'lmasligi lozim.")
+    }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        form
-      );
+      await axios.put(`http://localhost:5000/api/user/${store.user.user._id}`, form);
       alert("Sizning malumotlaringiz muvaffaqiyatli saqlandi!");
-      console.log(response.data); // To'liq ma'lumot
+      window.location.reload();
     } catch (error) {
       alert("There was an error sending your message.");
       console.log(error);
@@ -346,7 +359,7 @@ const Update = () => {
           value={form.name}
           name="name"
           onChange={handleInputChange}
-          placeholder={store.user.user.user.name}
+          placeholder={store.user.user.name}
           className="cart w-full bg-[#262626] rounded"
         />
       </div>
@@ -354,7 +367,7 @@ const Update = () => {
         <label>Familiya</label>
         <input
           type="text"
-          placeholder={store.user.user.user.lastname}
+          placeholder={store.user.user.lastname}
           value={form.lastname}
           name="lastname"
           onChange={handleInputChange}
@@ -363,20 +376,22 @@ const Update = () => {
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Telefon raqam</label>
-        <input
-          type="number"
-          placeholder={store.user.user.user.phone}
-          value={store.user.user.user.phone}
-          onChange={handleInputChange}
-          name="phone"
-          className="cart w-full bg-[#262626] rounded"
-        />
+        <div className="bg-[#262626] rounded flex items-center gap-3 cart ">
+          <p>+998</p>
+          <input
+            type="message"
+            placeholder={store.user.user.phone}
+            onChange={handleInputChange}
+            name="phone"
+            className="flex-1 h-full outline-none border-none"
+          />
+        </div>
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Email</label>
         <input
           type="email"
-          placeholder={store.user.user.user.email}
+          placeholder={store.user.user.email}
           className="cart w-full bg-[#262626] rounded"
           value={form.email}
           name="email"
@@ -384,7 +399,7 @@ const Update = () => {
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>Parol</label>
+        <label>Eski parol</label>
         <input
           type="password"
           placeholder="Enter Password"
@@ -394,17 +409,17 @@ const Update = () => {
           onChange={handleInputChange}
         />
       </div>
-      
-
-      <div className="w-[100%] flex flex-col gap-5 font-bold">
-        <label>Message</label>
-        <textarea
-          value={message}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setMessage(e.target.value);
-          }}
-          placeholder="Enter Your Message"
-          className="cart w-full h-[200px] bg-[#262626] rounded"
+      <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
+        <label>Yangi parol</label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          className="cart w-full bg-[#262626] rounded"
+          value={confirmPass}
+          name="password"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setConfirmPass(e.target.value)
+          }
         />
       </div>
 
@@ -413,7 +428,16 @@ const Update = () => {
           className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
           onClick={handleSubmit}
         >
-          Ro'yhatdan o'tish
+          O'zgartirish
+        </button>
+        <button
+          className="button rounded cursor-pointer max-lg:w-full underline"
+          onClick={() => {
+            dispatch(logout());
+            window.location.reload();
+          }}
+        >
+          Hisobdan chiqish
         </button>
       </div>
     </div>

@@ -194,6 +194,42 @@
     padding: 30px;
 }
 
+.phone-form {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .phone-input-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    transition: border-color 0.3s;
+  }
+  
+  .phone-input-container:focus-within {
+    border-color: #2563eb; /* blue-600 */
+  }
+  
+  .country-select {
+    background: transparent;
+    border: none;
+    padding: 0 0.5rem;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+  }
+  
+  .phone-input {
+    flex: 1;
+    padding: 0.7rem 0.5rem;
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: #333;
+  }
+  
+
 
 @keyframes searchAnimation {
     0% {

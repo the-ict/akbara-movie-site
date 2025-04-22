@@ -11,10 +11,15 @@ router.post("/", async(req: Request, res: Response) => {
   try {
     const { email, message } = req.body;
     await resend.emails.send({
-        from: "Acme davlatjon",
-        to: "dvltinv@gmail.com",
-        subject: "Noname",
-        html: `<p>${message} -- from ${email}</p>`
+      from: "Acme avlatjon <davlatjonsoqqamode@gmail.com>",
+      to: "dvltinv@gmail.com", 
+      subject: "Noname",
+      html: `<p>${message} -- from ${email}</p>`
+    });
+
+    res.status(200).json({
+      message: "Xabar jo'natildi",
+      status: 200
     })
   } catch (error) {
     res.status(500).json({

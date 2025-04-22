@@ -12,9 +12,9 @@ import HalfStar from "../assets/icons/halfstar.png";
 import Genres from "../assets/icons/genres.png";
 import AuthorProfile from "../assets/icons/authorprofile.png";
 import Plus from "../assets/icons/plus.png";
+import Liked from "../assets/icons/liked.png";
 import Marketing from "../components/Marketing";
-import Carousel from "react-multi-carousel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Review from "../components/Review";
 
 import { useParams } from "react-router-dom";
@@ -23,13 +23,14 @@ import { IMovie } from "../types/Movie";
 import { getRatingValue } from "../functions/rating";
 import WriteReview from "../components/WriteReview";
 import PlayVideo from "../components/PlayVideo";
-
-
+import { useSelector } from "react-redux";
 
 export default function SingleMedia() {
   const [movie, setMovie] = useState<IMovie>();
   const [reviewForm, setReviewForm] = useState<boolean>(false);
-  const [video, setVideo] = useState<boolean>(false)
+  const [video, setVideo] = useState<boolean>(false);
+
+  const store = useSelector((store) => store);
 
   const params = useParams();
 
@@ -48,15 +49,48 @@ export default function SingleMedia() {
 
     getSingleMedia();
   }, []);
+
+  async function handleLike() {
+    if (store.user.user._id) {
+      if (movie?.likes.includes(store.user.user._id)) {
+        try {
+          const result = await axios.put(
+            `http://localhost:5000/api/movie/unlike/${movie?._id}`,
+            {
+              userId: store.user.user._id,
+            }
+          );
+          window.location.reload()
+        } catch (error) {
+          alert("There is an error, please try later.");
+        }
+        return;
+      }
+
+      try {
+        const result = await axios.put(
+          `http://localhost:5000/api/movie/like/${movie?._id}`,
+          {
+            userId: store.user.user._id,
+          }
+        );
+        window.location.reload()
+        console.log(result.data);
+      } catch (error) {
+        alert("There is an error, please try later.");
+      }
+    } else {
+      alert("Siz like bosish uchun ro'yhatdan o'tishingiz kerak!");
+      window.location.replace("/support");
+    }
+  }
   return (
     <div>
       <Navbar />
-      
-     {
-      video && (
-        <PlayVideo url={String(movie?.video_link)} setVideo={setVideo}/>
-      )
-     }
+
+      {video && (
+        <PlayVideo url={String(movie?.video_link)} setVideo={setVideo} />
+      )}
 
       {/* Header Section */}
       <div className="relative w-full header">
@@ -75,10 +109,10 @@ export default function SingleMedia() {
             </h3>
 
             <div className="flex items-center gap-5 header justify-center navbar max-lg:flex-col">
-              <button 
-              onClick={() => setVideo(true)
-              }
-              className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded">
+              <button
+                onClick={() => setVideo(true)}
+                className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded"
+              >
                 <img
                   src={Play}
                   alt="play icon"
@@ -87,27 +121,30 @@ export default function SingleMedia() {
                 <span>Play now</span>
               </button>
               <div className="flex items-center gap-4">
-                <button className="cursor-pointer bg-[#0F0F0F] button">
+                {/* <button className="cursor-pointer bg-[#0F0F0F] button">
                   <img
                     src={Add}
                     alt="add icon"
                     className="w-[20px] h-[20px] object-contain"
                   />
-                </button>
+                </button> */}
                 <button className="cursor-pointer bg-[#0F0F0F] button">
                   <img
-                    src={Like}
+                    src={
+                      movie?.likes.includes(store.user.user._id) ? Liked : Like
+                    }
                     alt="like icon"
+                    onClick={handleLike}
                     className="w-[20px] h-[20px] object-contain"
                   />
                 </button>
-                <button className="cursor-pointer bg-[#0F0F0F] button">
+                {/* <button className="cursor-pointer bg-[#0F0F0F] button">
                   <img
                     src={Sound}
                     alt="sound icon"
                     className="w-[20px] h-[20px] object-contain"
                   />
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -127,7 +164,10 @@ export default function SingleMedia() {
           <div className="single-cart bg-[#262626] max-lg:hidden">
             <div className="flex items-center justify-between">
               <h1 className="text-[#999999]">Reviews</h1>
-              <button className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded">
+              <button
+                className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
+                onClick={() => setReviewForm(true)}
+              >
                 <img
                   src={Plus}
                   alt="plus"
@@ -244,12 +284,12 @@ export default function SingleMedia() {
 
         {reviewForm && <WriteReview setReviewForm={setReviewForm} />}
         <div className="arrow-padding bg-[#262626] lg:hidden">
-
           <div className="flex items-center justify-between">
             <h1 className="text-[#999999]">Reviews</h1>
-            <button 
+            <button
               onClick={() => setReviewForm(true)}
-              className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded">
+              className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
+            >
               <img
                 src={Plus}
                 alt="plus"

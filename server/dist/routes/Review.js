@@ -18,8 +18,13 @@ const router = express_1.default.Router();
 // ✅ Yangi review qo‘shish
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, country, message } = req.body;
-        const review = yield Reviews_1.default.create({ name, country, message });
+        const { name, country, message, rating } = req.body;
+        const review = yield Reviews_1.default.create({
+            name,
+            country,
+            message,
+            rating,
+        });
         res.status(201).json(review);
     }
     catch (error) {

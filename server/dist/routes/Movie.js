@@ -107,6 +107,28 @@ router.put("/like/:id", (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).json({ message: "Xatolik", error: err });
     }
 }));
+// UNLIKE movie
+router.put("/unlike/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.body.userId;
+    try {
+        const movie = yield Movie_1.default.findById(req.params.id);
+        if (!movie) {
+            res.status(404).json({ message: "Movie topilmadi" });
+            return;
+        }
+        if (movie.likes.includes(userId)) {
+            movie.likes = movie.likes.filter((id) => id !== userId);
+            yield movie.save();
+            res.status(200).json({ message: "Like olib tashlandi" });
+        }
+        else {
+            res.status(400).json({ message: "Siz hali like bosmagansiz" });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ message: "Xatolik", error: err });
+    }
+}));
 // ADD REVIEW
 router.put("/review/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const reviewId = req.body.reviewId;
