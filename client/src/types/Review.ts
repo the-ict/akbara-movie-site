@@ -1,5 +1,6 @@
 export interface IReview {
-    name: string,
-    country: string,
-    message: string 
+  name: string;
+  country: string;
+  rating: number;
+  message: string
 }

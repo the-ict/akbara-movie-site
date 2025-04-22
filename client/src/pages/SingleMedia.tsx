@@ -51,16 +51,16 @@ export default function SingleMedia() {
   }, []);
 
   async function handleLike() {
-    if (store.user.user._id) {
-      if (movie?.likes.includes(store.user.user._id)) {
+    if (store?.user?.user?._id) {
+      if (movie?.likes.includes(store?.user?.user?._id)) {
         try {
           const result = await axios.put(
             `http://localhost:5000/api/movie/unlike/${movie?._id}`,
             {
-              userId: store.user.user._id,
+              userId: store?.user?.user?._id,
             }
           );
-          window.location.reload()
+          window.location.reload();
         } catch (error) {
           alert("There is an error, please try later.");
         }
@@ -71,10 +71,10 @@ export default function SingleMedia() {
         const result = await axios.put(
           `http://localhost:5000/api/movie/like/${movie?._id}`,
           {
-            userId: store.user.user._id,
+            userId: store?.user?.user?._id,
           }
         );
-        window.location.reload()
+        window.location.reload();
         console.log(result.data);
       } catch (error) {
         alert("There is an error, please try later.");
@@ -131,7 +131,9 @@ export default function SingleMedia() {
                 <button className="cursor-pointer bg-[#0F0F0F] button">
                   <img
                     src={
-                      movie?.likes.includes(store.user.user._id) ? Liked : Like
+                      movie?.likes.includes(store?.user?.user?._id)
+                        ? Liked
+                        : Like
                     }
                     alt="like icon"
                     onClick={handleLike}
@@ -179,7 +181,9 @@ export default function SingleMedia() {
 
             {/* Review Cards */}
             <div className="header">
-              <Review />
+              {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 && (
+                <Review reviews={movie.reviews} />
+              )}
             </div>
           </div>
 
@@ -263,8 +267,8 @@ export default function SingleMedia() {
               className="h-full w-[20%] object-contain"
             />
             <div>
-              <h1 className="font-bold">{movie?.Director[0]?.name}</h1>
-              <p>From {movie?.Director[0]?.country}</p>
+              <h1 className="font-bold">{movie?.Director.name}</h1>
+              <p>From {movie?.Director.country}</p>
             </div>
           </div>
 
@@ -276,8 +280,8 @@ export default function SingleMedia() {
               className="h-full w-[20%] object-contain"
             />
             <div>
-              <h1 className="font-bold">{movie?.Music[0]?.name}</h1>
-              <p>From {movie?.Music[0]?.country}</p>
+              <h1 className="font-bold">{movie?.Music.name}</h1>
+              <p>From {movie?.Music.country}</p>
             </div>
           </div>
         </div>
@@ -301,7 +305,9 @@ export default function SingleMedia() {
 
           {/* Review Cards */}
           <div className="header">
-            <Review />
+            {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 && (
+              <Review reviews={movie.reviews} />
+            )}
           </div>
         </div>
       </div>

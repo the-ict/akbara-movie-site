@@ -5,29 +5,13 @@ import Star from "../assets/icons/star.png";
 import HalfStar from "../assets/icons/halfstar.png";
 import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
+import { IReview } from "../types/Review";
 
-const reviews = [
-  {
-    name: "Aniket Roy",
-    country: "India",
-    rating: 4.5,
-    text: "This movie was recommended to me by a very dear friend. Had a houseful board and couldn't watch it."
-  },
-  {
-    name: "John Doe",
-    country: "USA",
-    rating: 4.5,
-    text: "Amazing storytelling and visuals. Really enjoyed it!"
-  },
-  {
-    name: "Jane Smith",
-    country: "UK",
-    rating: 4.5,
-    text: "A must-watch movie with a strong emotional punch."
-  }
-];
+interface Props {
+  reviews: IReview[];
+}
 
-const Review = () => {
+const Review = ({ reviews }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSwipe = useSwipeable({
@@ -42,7 +26,6 @@ const Review = () => {
 
   const previous = () => {
     setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-
   };
 
   const currentReview = reviews[currentIndex];
@@ -55,18 +38,31 @@ const Review = () => {
       >
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-white font-bold max-lg:text-[17px]">{currentReview.name}</h1>
-            <p className="text-[#999999] text-[15px]">From {currentReview.country}</p>
+            <h1 className="text-white font-bold max-lg:text-[17px]">
+              {currentReview.name}
+            </h1>
+            <p className="text-[#999999] text-[15px]">
+              From {currentReview.country}
+            </p>
           </div>
           <div className="flex items-center bg-[#262626] rounded-full icon gap-2 text-white text-sm">
             {[...Array(4)].map((_, i) => (
-              <img key={i} src={Star} alt="star" className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain" />
+              <img
+                key={i}
+                src={Star}
+                alt="star"
+                className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain"
+              />
             ))}
-            <img src={HalfStar} alt="half-star" className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain" />
+            <img
+              src={HalfStar}
+              alt="half-star"
+              className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain"
+            />
             <span>{currentReview.rating}</span>
           </div>
         </div>
-        <p className="text-[#999999] text-sm navbar">{currentReview.text}</p>
+        <p className="text-[#999999] text-sm navbar">{currentReview.message}</p>
       </div>
 
       <div className="flex items-center header gap-5">
@@ -77,11 +73,14 @@ const Review = () => {
           className="w-10 h-10 cursor-pointer bg-[#5d5353] rounded-full icon"
         />
 
-      {
-        reviews.map((_,index) => (
-          <div className={`w-4 ${currentIndex == index ? 'bg-[#e90000]' :'bg-[#333333]'} h-1 cursor-pointer`} key={index}></div>
-        ))
-      }
+        {reviews.map((_, index) => (
+          <div
+            className={`w-4 ${
+              currentIndex == index ? "bg-[#e90000]" : "bg-[#333333]"
+            } h-1 cursor-pointer`}
+            key={index}
+          ></div>
+        ))}
 
         <img
           onClick={next}
