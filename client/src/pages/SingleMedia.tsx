@@ -13,11 +13,15 @@ import Genres from "../assets/icons/genres.png";
 import AuthorProfile from "../assets/icons/authorprofile.png";
 import Plus from "../assets/icons/plus.png";
 import Liked from "../assets/icons/liked.png";
+import { AiFillLike } from "react-icons/ai";
+
+import { AiOutlineLike } from "react-icons/ai";
+
 import Marketing from "../components/Marketing";
 import { useEffect, useState } from "react";
 import Review from "../components/Review";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { IMovie } from "../types/Movie";
 import { getRatingValue } from "../functions/rating";
@@ -31,6 +35,8 @@ export default function SingleMedia() {
   const [video, setVideo] = useState<boolean>(false);
 
   const store = useSelector((store) => store);
+
+  console.log(store)
 
   const params = useParams();
 
@@ -54,7 +60,7 @@ export default function SingleMedia() {
     if (store?.user?.user?._id) {
       if (movie?.likes.includes(store?.user?.user?._id)) {
         try {
-          const result = await axios.put(
+          await axios.put(
             `http://localhost:5000/api/movie/unlike/${movie?._id}`,
             {
               userId: store?.user?.user?._id,
@@ -129,16 +135,23 @@ export default function SingleMedia() {
                   />
                 </button> */}
                 <button className="cursor-pointer bg-[#0F0F0F] button">
-                  <img
-                    src={
-                      movie?.likes.includes(store?.user?.user?._id)
-                        ? Liked
-                        : Like
-                    }
+                  {movie?.likes.includes(store?.user?.user?._id) ? (
+                    <AiFillLike
+                      onClick={handleLike}
+                      className="w-[20px] h-[20px] object-contain"
+                    />
+                  ) : (
+                    <AiOutlineLike
+                      onClick={handleLike}
+                      className="w-[20px] h-[20px] object-contain"
+                    />
+                  )}
+                  {/* <img
+                    
                     alt="like icon"
                     onClick={handleLike}
                     className="w-[20px] h-[20px] object-contain"
-                  />
+                  /> */}
                 </button>
                 {/* <button className="cursor-pointer bg-[#0F0F0F] button">
                   <img
@@ -169,11 +182,11 @@ export default function SingleMedia() {
               <button
                 className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
                 onClick={() => {
-                  if(store?.user.user._id) {
-                    setReviewForm(true)
-                  }else {
-                    alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!")
-                    window.location.replace("/support")
+                  if (store?.user.user._id) {
+                    setReviewForm(true);
+                  } else {
+                    alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!");
+                    window.location.replace("/support");
                   }
                 }}
               >
@@ -190,7 +203,7 @@ export default function SingleMedia() {
             <div className="header">
               {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 ? (
                 <Review reviews={movie.reviews} />
-              ): (
+              ) : (
                 <h1>Hozircha izohlar mavjud emas.</h1>
               )}
             </div>
@@ -264,7 +277,15 @@ export default function SingleMedia() {
             {movie?.Genres &&
               movie.Genres.map((genre, index) => {
                 console.log(genre);
-                return <span key={index} className="button bg-[#141414] rounded">{genre}</span>;
+                return (
+                  <Link
+                    to={`http://localhost:5173/search?genre=${genre}`}
+                    key={index}
+                    className="cursor-pointer button bg-[#141414] rounded"
+                  >
+                    {genre}
+                  </Link>
+                );
               })}
           </div>
 
@@ -295,17 +316,22 @@ export default function SingleMedia() {
           </div>
         </div>
 
-        {reviewForm && <WriteReview setReviewForm={setReviewForm} movie_id={String(movie?._id)}/>}
+        {reviewForm && (
+          <WriteReview
+            setReviewForm={setReviewForm}
+            movie_id={String(movie?._id)}
+          />
+        )}
         <div className="arrow-padding bg-[#262626] lg:hidden">
           <div className="flex items-center justify-between">
             <h1 className="text-[#999999]">Reviews</h1>
             <button
               onClick={() => {
-                if(store?.user.user._id) {
-                  setReviewForm(true)
-                }else {
-                  alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!")
-                  window.location.replace("/support")
+                if (store?.user.user._id) {
+                  setReviewForm(true);
+                } else {
+                  alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!");
+                  window.location.replace("/support");
                 }
               }}
               className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
@@ -323,7 +349,7 @@ export default function SingleMedia() {
           <div className="header">
             {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 ? (
               <Review reviews={movie.reviews} />
-            ): (
+            ) : (
               <h1>Hozircha izohlar mavjud emas.</h1>
             )}
           </div>

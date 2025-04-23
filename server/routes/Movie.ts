@@ -82,6 +82,7 @@ router.delete("/:id", async (req: Request, res: Response) => {
 // LIKE movie
 router.put("/like/:id", async (req: Request, res: Response) => {
   const userId = req.body.userId;
+
   try {
     const movie = await Movie.findById(req.params.id);
     if (!movie) {
