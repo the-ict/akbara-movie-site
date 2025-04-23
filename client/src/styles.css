@@ -1,242 +1,238 @@
 .navigation {
-    padding:10px;
-
-    box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
-    -webkit-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
-    -moz-box-shadow: 0px 0px 7px 0px rgba(255,255,255,0.75);
+  padding: 5px;
+  box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 0.75);
 }
 
 .navigation-item {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .navbar {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .navbar-padding {
-    padding: 10px 0px;
+  padding: 10px 0px;
 }
 
 .header {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .play-button {
-    padding: 8px 10px;
+  padding: 8px 10px;
 }
 
 .buttons {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .button {
-    padding: 10px;
+  padding: 10px;
 }
 
 .too {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .slider {
-    padding: 10px;
+  padding: 10px;
 }
 
 .cart {
-    padding: 20px 10px;
+  padding: 20px 10px;
 }
 
 .xlmargin {
-    margin-top: 100px;
+  margin-top: 100px;
 }
 
 .footer {
-    padding: 50px 0px;
+  padding: 50px 0px;
 }
 
 .footer-item {
-    margin-bottom: 10px;
-    color: white !important;
+  margin-bottom: 10px;
+  color: white !important;
 }
 
 .footer-nav li {
-    color: #999999;
-    font-weight: bold;
-    margin-top: 5px;
-    cursor: pointer;
+  color: #999999;
+  font-weight: bold;
+  margin-top: 5px;
+  cursor: pointer;
 }
 
 .footer-nav li:hover {
-    text-decoration: underline;    
+  text-decoration: underline;
 }
 
 .icon {
-    padding: 10px;
-    cursor: pointer;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .prove-cart {
-    padding: 50px 30px;
+  padding: 50px 30px;
 }
 
 .single-cart {
-    padding: 30px 50px;
+  padding: 30px 50px;
 }
 
 .single-cart-review {
-    padding: 30px;
+  padding: 30px;
 }
 
 .arrow-padding {
-    padding: 20px;
+  padding: 20px;
 }
 
 .info label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #999999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #999999;
 }
 
-.info label>img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+.info label > img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .info-lang-cart {
-    padding: 5px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .star-container img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .cart-geners {
-    margin-right: 30px;
+  margin-right: 30px;
 }
-
 
 /* react-multi-carousel default arrowsni yashirish */
 .react-multi-carousel-list .react-multiple-carousel__arrow {
-    display: none !important;
-  }
-
-
-  /* Carousel containerni gorizontal qilish */
-
-.notification {
-    padding: 50px 100px;
+  display: none !important;
 }
 
+/* Carousel containerni gorizontal qilish */
+
+.notification {
+  padding: 50px 100px;
+}
 
 .notification-item {
-    padding: 10px;
-    margin: 10px;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    transition: all 500ms ease-in-out;
-    font-weight: bold;
-    height: 50px;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  transition: all 500ms ease-in-out;
+  font-weight: bold;
+  height: 50px;
 }
 
 .notification-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%; /* <-- BU MUHIM */
-    height: 100%;
-    background: red;
-    border-radius: 5px;
-    transition: width 500ms ease-in-out; /* <-- BU YERDA faqat width transition qilinadi */
-    z-index: -1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%; /* <-- BU MUHIM */
+  height: 100%;
+  background: red;
+  border-radius: 5px;
+  transition: width 500ms ease-in-out; /* <-- BU YERDA faqat width transition qilinadi */
+  z-index: -1;
 }
 
 .notification-item:hover::before {
-    width: 100%;
+  width: 100%;
 }
-
 
 .search {
-    padding: 5px 10px;
-    border-bottom: 2px solid lightgray;
-    outline: none;
-    width: 200px;
+  padding: 5px 10px;
+  border-bottom: 2px solid lightgray;
+  outline: none;
+  width: 200px;
 
-    animation-name: searchAnimation;
-    animation-delay: 200ms;
-    animation-duration: 1s; /* <-- BU YER QO‘SHILDI */
-    animation-fill-mode: forwards; /* animatsiyadan keyin oxirgi holatda qolsin */
-    animation-timing-function: ease-in-out;
+  animation-name: searchAnimation;
+  animation-delay: 200ms;
+  animation-duration: 1s; /* <-- BU YER QO‘SHILDI */
+  animation-fill-mode: forwards; /* animatsiyadan keyin oxirgi holatda qolsin */
+  animation-timing-function: ease-in-out;
 }
 
-
-.movie-item { 
-    padding: 20px;
+.movie-item {
+  padding: 20px;
 }
 
 .movie-genre {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .ask-input {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .ask {
-    padding: 30px;
+  padding: 30px;
 }
 
 .phone-form {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  
-  .phone-input-container {
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #ccc;
-    transition: border-color 0.3s;
-  }
-  
-  .phone-input-container:focus-within {
-    border-color: #2563eb; /* blue-600 */
-  }
-  
-  .country-select {
-    background: transparent;
-    border: none;
-    padding: 0 0.5rem;
-    font-size: 14px;
-    color: #333;
-    outline: none;
-  }
-  
-  .phone-input {
-    flex: 1;
-    padding: 0.7rem 0.5rem;
-    font-size: 14px;
-    border: none;
-    background: transparent;
-    outline: none;
-    color: #333;
-  }
-  
+  max-width: 300px;
+  margin: 0 auto;
+}
 
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+  transition: border-color 0.3s;
+}
+
+.phone-input-container:focus-within {
+  border-color: #2563eb; /* blue-600 */
+}
+
+.country-select {
+  background: transparent;
+  border: none;
+  padding: 0 0.5rem;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+}
+
+.phone-input {
+  flex: 1;
+  padding: 0.7rem 0.5rem;
+  font-size: 14px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #333;
+}
+
+.navbar-hidden-menu {
+  padding: 30px;
+}
 
 @keyframes searchAnimation {
-    0% {
-        width: 0%;
-    }
+  0% {
+    width: 0%;
+  }
 
-    100% {
-        width: 200px; /* yoki 100% emas, sababi .search ichida width: 300px */
-    }
+  100% {
+    width: 200px;
+  }
 }

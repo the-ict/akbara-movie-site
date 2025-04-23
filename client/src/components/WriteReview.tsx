@@ -5,14 +5,21 @@ import Star from "../assets/icons/star.png";
 
 import { getRatingValue } from "../functions/rating";
 import axios from "axios";
-import { IReview } from "../types/Review";
+
 import { useSelector } from "react-redux";
 
 type Props = {
   setReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
+  movie_id: string
 };
 
-export default function ({ setReviewForm }: Props) {
+interface IReview {
+  country: "Uzbekistan";
+  message: string;
+  name: string
+}
+
+export default function ({ setReviewForm,movie_id }: Props) {
   const [starred, setStarred] = useState<number>(0);
 
   const store = useSelector((store) => store);
@@ -39,23 +46,33 @@ export default function ({ setReviewForm }: Props) {
 
     if (starred === 0) return;
 
-    if (!store.user.user._id) {
+    if (!store?.user?.user?._id) {
       alert("Izoh yozishdan oldin ro'yhatdan o'ting");
       return;
     }
 
     setForm((prev) => ({
       ...prev,
-      name: store.user.user.name,
+      name: store?.user?.user?.name,
     }));
 
     try {
-      const result = await axios.post(`http://localhost:5000/api/review`, {
+
+      console.log({
+        ...form,
+        rating: starred
+      }, "this is from review")
+
+      const result = await axios.put(`http://localhost:5000/api/movie/review/${movie_id}`, {
         ...form,
         rating: starred,
       });
 
       console.log(result)
+
+      if(result.data){
+        window.location.reload()
+      }
     } catch (error) {
       alert("There is something wrong!");
     }

@@ -14,6 +14,8 @@ interface Props {
 const Review = ({ reviews }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  console.log(reviews, "from review");
+
   const handleSwipe = useSwipeable({
     onSwipedLeft: () => next(),
     onSwipedRight: () => previous(),
@@ -42,7 +44,7 @@ const Review = ({ reviews }: Props) => {
               {currentReview.name}
             </h1>
             <p className="text-[#999999] text-[15px]">
-              From {currentReview.country}
+              {currentReview.country}
             </p>
           </div>
           <div className="flex items-center bg-[#262626] rounded-full icon gap-2 text-white text-sm">

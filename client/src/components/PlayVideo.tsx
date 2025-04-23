@@ -1,5 +1,6 @@
 import React from "react";
-import ReactPlayer from "react-player";
+import Plyr from "plyr-react";
+import "plyr-react/plyr.css";
 import X from "../assets/icons/xred.png";
 
 type Props = {
@@ -16,7 +17,26 @@ export default function ({ url, setVideo }: Props) {
         alt=""
         className="w-[30px] h-[30px] object-contain cursor-pointer absolute top-5 right-5"
       />
-      <ReactPlayer url={url} controls height="80%" width="80%"/>
+      <div className="w-[80%] h-[80%] aspect-video">
+        <Plyr
+          source={{
+            type: "video",
+            sources: [{ src: url }],
+          }}
+          options={{
+            controls: [
+              "play",
+              "progress",
+              "current-time",
+              "mute",
+              "volume",
+              "settings",
+              "fullscreen",
+              "download"
+            ],
+          }}
+        />
+      </div>
     </div>
   );
 }

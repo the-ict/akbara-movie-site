@@ -41,9 +41,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (type === "latest") {
             sortOptions = { createdAt: -1 };
         }
-        const movies = yield Movie_1.default.find(query)
-            .sort(sortOptions)
-            .limit(parsedLimit);
+        const movies = yield Movie_1.default.find(query).sort(sortOptions).limit(parsedLimit);
         res.status(200).json(movies);
     }
     catch (error) {
@@ -68,7 +66,9 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 // UPDATE movie
 router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const updated = yield Movie_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updated = yield Movie_1.default.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+        });
         res.status(200).json(updated);
     }
     catch (err) {
@@ -129,23 +129,22 @@ router.put("/unlike/:id", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ message: "Xatolik", error: err });
     }
 }));
-// ADD REVIEW
 router.put("/review/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const reviewId = req.body.reviewId;
+    const reviewData = req.body;
     try {
         const movie = yield Movie_1.default.findById(req.params.id);
         if (!movie) {
             res.status(404).json({ message: "Movie topilmadi" });
             return;
         }
-        if (!movie.reviews.includes(reviewId)) {
-            movie.reviews.push(reviewId);
-            yield movie.save();
-            res.status(200).json({ message: "Review qo‘shildi" });
-        }
-        else {
+        const alreadyReviewed = movie.reviews.some((r) => r.name === reviewData.name);
+        if (alreadyReviewed) {
             res.status(400).json({ message: "Siz allaqachon review bergansiz" });
+            return;
         }
+        // faqat reviewsni yangilaymiz
+        yield Movie_1.default.updateOne({ _id: req.params.id }, { $push: { reviews: reviewData } });
+        res.status(200).json({ message: "Review qo‘shildi" });
     }
     catch (err) {
         res.status(500).json({ message: "Xatolik", error: err });

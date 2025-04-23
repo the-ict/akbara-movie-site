@@ -118,7 +118,7 @@ export default function SingleMedia() {
                   alt="play icon"
                   className="w-[20px] h-[20px] object-contain"
                 />
-                <span>Play now</span>
+                <span>Hoziroq ko'rish</span>
               </button>
               <div className="flex items-center gap-4">
                 {/* <button className="cursor-pointer bg-[#0F0F0F] button">
@@ -158,31 +158,40 @@ export default function SingleMedia() {
         {/* Left Section: Description & Reviews */}
         <div className="flex-7 flex flex-col gap-5">
           <div className="single-cart bg-[#262626] rounded">
-            <p className="text-[#999999]">Description</p>
+            <p className="text-[#999999]">Malumot</p>
             <p className="navbar">{movie?.description}</p>
           </div>
 
           {/* Reviews Section */}
           <div className="single-cart bg-[#262626] max-lg:hidden">
             <div className="flex items-center justify-between">
-              <h1 className="text-[#999999]">Reviews</h1>
+              <h1 className="text-[#999999]">Fikrlar</h1>
               <button
                 className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
-                onClick={() => setReviewForm(true)}
+                onClick={() => {
+                  if(store?.user.user._id) {
+                    setReviewForm(true)
+                  }else {
+                    alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!")
+                    window.location.replace("/support")
+                  }
+                }}
               >
                 <img
                   src={Plus}
                   alt="plus"
                   className="w-[30px] h-[30px] object-contain"
                 />
-                <span>Add Your Review</span>
+                <span>Izoh qo'shish</span>
               </button>
             </div>
 
             {/* Review Cards */}
             <div className="header">
-              {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 && (
+              {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 ? (
                 <Review reviews={movie.reviews} />
+              ): (
+                <h1>Hozircha izohlar mavjud emas.</h1>
               )}
             </div>
           </div>
@@ -207,7 +216,7 @@ export default function SingleMedia() {
 
           <label>
             <img src={Rating} alt="rating" />
-            <span>Ratings</span>
+            <span>Reyting</span>
           </label>
 
           <div className="flex items-center gap-5">
@@ -249,49 +258,56 @@ export default function SingleMedia() {
 
           <label>
             <img src={Genres} alt="" />
-            <span>Gernes</span>
+            <span>Janrlar</span>
           </label>
-          <div>
+          <div className="flex items-center flex-wrap gap-3">
             {movie?.Genres &&
               movie.Genres.map((genre, index) => {
                 console.log(genre);
-                return <span key={index}>{genre}</span>;
+                return <span key={index} className="button bg-[#141414] rounded">{genre}</span>;
               })}
           </div>
 
-          <label>Director</label>
+          <label>Produser</label>
           <div className="flex items-center gap-5 button bg-[#141414] rounded">
             <img
-              src={AuthorProfile}
+              src={movie?.Director.about_link}
               alt="authorprofile"
               className="h-full w-[20%] object-contain"
             />
             <div>
               <h1 className="font-bold">{movie?.Director.name}</h1>
-              <p>From {movie?.Director.country}</p>
+              <p>{movie?.Director.country}dan</p>
             </div>
           </div>
 
-          <label>Music</label>
+          <label>Musiqasi</label>
           <div className="flex items-center gap-5 button bg-[#141414] rounded">
             <img
-              src={AuthorProfile}
+              src={movie?.Music.about_link}
               alt="authorprofile"
               className="h-full w-[20%] object-contain"
             />
             <div>
               <h1 className="font-bold">{movie?.Music.name}</h1>
-              <p>From {movie?.Music.country}</p>
+              <p>{movie?.Music.country}dan</p>
             </div>
           </div>
         </div>
 
-        {reviewForm && <WriteReview setReviewForm={setReviewForm} />}
+        {reviewForm && <WriteReview setReviewForm={setReviewForm} movie_id={String(movie?._id)}/>}
         <div className="arrow-padding bg-[#262626] lg:hidden">
           <div className="flex items-center justify-between">
             <h1 className="text-[#999999]">Reviews</h1>
             <button
-              onClick={() => setReviewForm(true)}
+              onClick={() => {
+                if(store?.user.user._id) {
+                  setReviewForm(true)
+                }else {
+                  alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!")
+                  window.location.replace("/support")
+                }
+              }}
               className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
             >
               <img
@@ -305,8 +321,10 @@ export default function SingleMedia() {
 
           {/* Review Cards */}
           <div className="header">
-            {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 && (
+            {Array.isArray(movie?.reviews) && movie?.reviews.length > 0 ? (
               <Review reviews={movie.reviews} />
+            ): (
+              <h1>Hozircha izohlar mavjud emas.</h1>
             )}
           </div>
         </div>

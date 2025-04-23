@@ -36,5 +36,6 @@ export interface IMovie {
     cart_img: string,
     video_link:string,
     likes: string[],
-    reviews: IReview[]
+    reviews: IReview[],
+    _id: string
 }

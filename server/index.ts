@@ -6,7 +6,6 @@ import cors from "cors"
 // Route fayllarini import qilish
 import authRoutes from "./routes/Auth";
 import movieRoutes from "./routes/Movie";
-import reviewRoutes from "./routes/Review";
 import mailRoutes from "./routes/Mail"
 import userRoutes from "./routes/User"
 
@@ -32,7 +31,6 @@ app.use(cors())
 // Route'larni ulash
 app.use("/api/auth", authRoutes);
 app.use("/api/movie", movieRoutes);
-app.use("/api/review", reviewRoutes);
 app.use("/api/mail", mailRoutes);
 app.use("/api/user", userRoutes)
 

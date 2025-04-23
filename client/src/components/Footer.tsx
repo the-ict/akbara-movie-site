@@ -6,7 +6,7 @@ import Twitter from "../assets/icons/twitter.png"
 export default function Footer() {
   return (
     <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin footer">
-      <div className="w-[1597px] footer max-lg:w-screen arrow-padding ">
+      <div className="2xl:w-[1597px] footer max-lg:w-screen arrow-padding w-[1200px]">
 
         <div className="flex justify-between footer-nav flex-wrap gap-5">
           <ul className="max-lg:w-[45%]">
