@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors"
 
-// Route fayllarini import qilish
+
 import authRoutes from "./routes/Auth";
 import movieRoutes from "./routes/Movie";
 import mailRoutes from "./routes/Mail"
@@ -14,7 +14,7 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app: Express = express();
 
-// MongoDB bilan ulanish
+
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL as string);
@@ -24,8 +24,8 @@ const connect = async () => {
   }
 };
 
-// Middlewares
-app.use(express.json()); // JSON request'lar uchun
+
+app.use(express.json()); 
 app.use(cors())
 
 // Route'larni ulash

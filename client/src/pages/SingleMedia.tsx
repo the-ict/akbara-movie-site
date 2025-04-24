@@ -36,7 +36,7 @@ export default function SingleMedia() {
 
   const store = useSelector((store) => store);
 
-  console.log(store)
+  console.log(store);
 
   const params = useParams();
 

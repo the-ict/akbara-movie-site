@@ -6,6 +6,7 @@ import X from "../assets/icons/xred.png";
 import "../styles.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaArrowAltCircleDown } from "react-icons/fa";
 
 export default function Navbar() {
   const [search, setSearch] = useState<boolean>(false);
@@ -13,7 +14,7 @@ export default function Navbar() {
   const [hiddenMenu, setHiddenMenu] = useState<boolean>(false);
 
   return (
-    <div className="flex items-center justify-between navbar-padding">
+    <div className="flex items-center justify-between navbar-padding relative">
       <a href="/">
         {/* <img
           src={Logo}
@@ -21,26 +22,64 @@ export default function Navbar() {
           className="w-[50px] max-lg:w-[50px] h-full object-contain cursor-pointer"
         /> */}
 
-        <span className="text-2xl font-bold">ATV<span className="text-green-600">.</span>uz</span>
+        <span className="text-2xl font-bold">
+          ATV<span className="text-green-600">.</span>uz
+        </span>
       </a>
       <ul className="flex items-center gap-5 bg-[#0F0F0F] navigation rounded max-lg:hidden">
         <Link
           className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
           to={`/`}
         >
-          Home
+          Bosh sahifa
         </Link>
-        <Link
-          className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
-          to={`/shows`}
-        >
-          Movies & Shows
-        </Link>
+        <div className="relative group flex items-center gap-2 cursor-pointer hover:bg-[#1A1A1A] navigation-item">
+          <p className="cursor-pointer relative rounded">
+            Kategoriyalar
+          </p>
+          <FaArrowAltCircleDown />
+          {/* hidden category menu */}
+          <div className="absolute top-full left-0 z-10 hidden w-full bg-[#1A1A1A] group-hover:block">
+            <div className="footer arrow-padding w-full">
+              <div className="flex justify-between footer-nav flex-wrap gap-5">
+                <ul className="max-lg:w-[45%]">
+                  <li className="footer-item">Drama</li>
+                  <li>Komediya</li>
+                  <li>Triller</li>
+                  <li>Dahshat</li>
+                  <li>Fantastika</li>
+                </ul>
+                <ul className="max-lg:w-[45%]">
+                  <li className="footer-item">Fantaziya</li>
+                  <li>Jangari</li>
+                  <li>Sarguzasht</li>
+                  <li>Detektiv</li>
+                  <li>Romantik</li>
+                </ul>
+                <ul className="max-lg:w-[45%]">
+                  <li className="footer-item">Tarixiy</li>
+                  <li>Melodrama</li>
+                  <li>Urush</li>
+                  <li>Vestern</li>
+                  <li>Noir</li>
+                </ul>
+                <ul className="max-lg:w-[45%]">
+                  <li className="footer-item">Kriminal</li>
+                  <li>Musobaqali</li>
+                  <li>Oilaviy</li>
+                  <li>Musiqiy</li>
+                  <li>Psixologik drama</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <Link
           className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
           to={`/support`}
         >
-          Support
+          Qo'llab quvatlash
         </Link>
       </ul>
       <div className="flex items-center gap-7 max-lg:hidden">
