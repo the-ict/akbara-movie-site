@@ -227,6 +227,23 @@
   padding: 30px;
 }
 
+.navbar-padding {
+  padding: 15px;
+}
+
+/* Hover menularini ko'rsatishda silliq o'tish */
+.group:hover .menu-content {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.group .menu-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
 @keyframes searchAnimation {
   0% {
     width: 0%;
