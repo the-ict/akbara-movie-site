@@ -9,21 +9,24 @@ import { IMovie } from "../types/Movie"
 
 export default function () {
     const [movies, setMovies] = useState<IMovie[] | null>(null)
-
     const location = useLocation()
 
     useEffect(() => {
         const getFilteredMovies = async () => {
             try {
-                console.log("Hello world.")
-                const result = await axios.get(`http://localhost:5000/api/movie${location.search}`)
-
-                setMovies(result.data)
+                console.log("Hello world.", location.search.split("?")[1].includes("genre"))
+                if(location.search.split("?")[1].includes("genre") || location.search.split("?")[1].includes("country") || location.search.split("?")[1].includes("year")) {
+                    const result = await axios.get(`http://localhost:5000/api/movie/categories${location.search}`)
+                    console.log(result.data, "from categroy search")
+                    setMovies(result.data)
+                }else {
+                    const result = await axios.get(`http://localhost:5000/api/movie${location.search}`)
+                    setMovies(result.data)
+                }
             } catch (error) {
                 console.log(error)
             }
         }
-        
         getFilteredMovies()
     }, [location])
 

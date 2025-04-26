@@ -50,7 +50,7 @@
 }
 
 .footer {
-  padding: 50px 0px;
+  padding: 20px 0px;
 }
 
 .footer-item {
@@ -244,6 +244,13 @@
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
+.animationPopup {
+  animation-name: popUp;
+  animation-duration: 300ms;
+  animation-delay: unset;
+}
+
+
 @keyframes searchAnimation {
   0% {
     width: 0%;
@@ -252,4 +259,32 @@
   100% {
     width: 200px;
   }
+}
+
+
+@keyframes popUp {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes border-glow {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #ff0000;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.animate-border-glow {
+  animation: border-glow 2s infinite;
 }

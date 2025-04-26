@@ -8,6 +8,7 @@ import Menu from "../assets/icons/menu.png";
 import X from "../assets/icons/xred.png";
 
 import "../styles.css";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -21,6 +22,8 @@ export default function Navbar() {
   const yearRef = useRef<HTMLDivElement | null>(null);
   const genreRef = useRef<HTMLDivElement | null>(null);
   const countryRef = useRef<HTMLDivElement | null>(null);
+
+  const store = useSelector((store) => store);
 
   // Close menus on outside click
   useEffect(() => {
@@ -115,24 +118,36 @@ export default function Navbar() {
               </p>
               {/* Year hidden menu */}
               {hiddenYear && (
-                <div className="absolute left-full z-10 bg-[#1A1A1A] navbar-padding">
-                  <div className="flex flex-col gap-5">
+                <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
+                  <div className="flex flex-wrap gap-5 min-w-[300px]">
                     {[
                       2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
                       2020, 2021, 2022, 2023, 2024, 2025,
                     ].map((item, _) => (
-                      <span key={_}>{item}</span>
+                      <Link
+                        key={_}
+                        className="hover:underline"
+                        to={`/search?year=${item}`}
+                      >
+                        {item}
+                      </Link>
                     ))}
                   </div>
                 </div>
               )}
               {/* Country hidden menu */}
               {hiddenCountry && (
-                <div className="absolute left-full z-10 bg-[#1A1A1A] navbar-padding">
-                  <div className="flex flex-col gap-3">
+                <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
+                  <div className="flex flex-wrap gap-3 min-w-[300px]">
                     {["Uzbekistan", "Aqsh", "Arab", "Tojik", "Hind"].map(
                       (item, _) => (
-                        <span key={_}>{item}</span>
+                        <Link
+                          key={_}
+                          className="hover:underline"
+                          to={`/search?country=${item}`}
+                        >
+                          {item}
+                        </Link>
                       )
                     )}
                   </div>
@@ -140,8 +155,8 @@ export default function Navbar() {
               )}
               {/* Genre hidden menu */}
               {hiddenGenre && (
-                <div className="absolute left-full z-10 bg-[#1A1A1A] navbar-padding">
-                  <div className="flex flex-col gap-5">
+                <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
+                  <div className="flex flex-wrap gap-5 min-w-[300px]">
                     {[
                       "Drama",
                       "Komediya",
@@ -183,7 +198,7 @@ export default function Navbar() {
           className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
           to={`/support`}
         >
-          Qo'llab quvatlash
+          {store?.user.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
         </Link>
       </ul>
 
@@ -234,13 +249,10 @@ export default function Navbar() {
           </a>
           <ul className="flex items-center gap-10 navigation flex-col justify-between">
             <Link className="cursor-pointer hover:underline " to={`/`}>
-              Home
-            </Link>
-            <Link className="cursor-pointer hover:underline " to={`/shows`}>
-              Movies & Shows
+              Bosh sahifani
             </Link>
             <Link className="cursor-pointer hover:underline " to={`/support`}>
-              Support
+              {store?.user.user._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
             </Link>
           </ul>
           <div className="flex items-center gap-2">

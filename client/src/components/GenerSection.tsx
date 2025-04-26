@@ -6,6 +6,8 @@ import Dramma from "../assets/images/dramma.png";
 import Horror from "../assets/images/horror.png";
 import Comedy from "../assets/images/comedy.png";
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { IMovie } from "../types/Movie";
 
 const responsive = {
   superLargeDesktop: {
@@ -27,147 +29,60 @@ const responsive = {
 };
 
 interface Props {
-  isSwiper?: boolean,
-  title: string,
-  description?: string
+  title: string;
+  description?: string;
 }
 
 interface IGenres {
-  name: string,
-  imgSrc: string
+  name: string;
+  imgSrc: string;
 }
 
-const genres:IGenres[] = [
-  {
-    name: "Drama",
-    imgSrc: Dramma, 
-  },
-  {
-    name: "Comedy",
-    imgSrc: Comedy, 
-  },
-  {
-    name: "Horror",
-    imgSrc: Horror, 
-  },
-  {
-    name: "Adventure",
-    imgSrc: Adventure 
-  },
+const genres: IGenres[] = [
+  { name: "Amerika", imgSrc: Dramma },
+  { name: "Hindiston", imgSrc: Comedy },
+  { name: "Korea", imgSrc: Horror },
+  { name: "Xitoy", imgSrc: Adventure },
 ];
 
-
-
-
-export default function GenerSection({isSwiper, title, description}: Props) {
-  const [totalSlides, setTotalSlides] = useState<number[]>([])
-  const [currentSlide, setCurrentSlide] = useState<number>(0)
-  const carouselRef = useRef<Carousel | null>(null);
-
+export default function GenerSection({ title, description }: Props) {
+  const [movies, setMovies] = useState<IMovie[]>();
   useEffect(() => {
-    if(carouselRef.current) {
-      const total: number = carouselRef.current.props.children.length
+    const getMovie = async () => {
+      const res = await axios.get(
+        "http://localhost:5000/api/movie?limit=4&type=latest"
+      );
+      console.log(res.data);
+      setMovies(res.data);
+    };
 
-      const array: number[] = []
-
-      for(let i = 0; i<= total - 4; i++) {
-        array.push(i)
-      }
-
-      setTotalSlides(array)
-      
-    }
-  }, [])
-
-
-  const goToPrevious = () => {
-    carouselRef.current?.previous(1);
-    if(currentSlide !== 0 ) {
-      setCurrentSlide(prev => prev - 1)
-    } 
-  };
-
-  const goToNext = () => {
-    carouselRef.current?.next(1);
-
-    if(currentSlide < totalSlides.length - 1) {
-      setCurrentSlide(prev => prev + 1)
-    }
-  };
+    getMovie();
+  }, []);
 
   return (
     <div>
-      <div className="flex items-center w-full justify-between header">
-        <div>
-
-          {
-            isSwiper ? (
-              <h1>True</h1>
-            ) : (
-              <div>
-                <h1 className="text-3xl font-bold text-white">
-                  {title}
-                </h1>
-                <span className="text-[#999999] navbar">
-                  {description}
-                </span>
-              </div>
-            )
-          }
-          
-        </div>
-        <div className="flex items-center gap-4 slider rounded bg-[#0F0F0F] max-lg:hidden">
-          <img
-            src={ArrowLeft}
-            alt="arrowleft icon"
-            className="w-[50px] h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
-            onClick={goToPrevious} 
-          />
-          <div className="flex items-center gap-2">
-            {/* <div className="w-4 bg-[#E50000] h-1 cursor-pointer"></div>
-            <div className="w-4 bg-[#333333] h-1 cursor-pointer"></div> */}
-            {
-              totalSlides.map(item => (
-                <div className={`w-4 ${(currentSlide) == item ? 'bg-[#e90000]' :'bg-[#333333]'} h-1 cursor-pointer`} key={item}></div>
-              ))
-            }
-          </div>
-          <img
-            src={ArrowRight}
-            alt="arrowright icon"
-            className="w-[50px] h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
-            onClick={goToNext}  
-          />
-        </div>
+      <div className="header">
+        <h1 className="text-3xl font-bold text-white">{title}</h1>
+        <span className="text-[#999999] navbar">{description}</span>
       </div>
 
       {/* category items */}
-      <div className="header w-full">
-        <Carousel
-          ref={carouselRef}  
-          responsive={responsive}
-        >
-          {genres.map((item) => (
+      <div className="header w-full flex justify-between">
+        {movies &&
+          movies.map((item, _) => (
             <div
-              className="bg-[#1A1A1A] cursor-pointer cart w-[300px] max-sm:w-[180px] h-max"
-              key={item.name} 
-              onClick={() =>{
-                window.location.replace(`/search?genre=${item.name}`)
+              className="bg-[#1A1A1A] cart border-[1px] border-transparent overflow-hidden w-[300px] max-sm:w-[180px] cursor-pointer transition-transform hover:scale-105 animate-border-glow"
+              key={_}
+              onClick={() => {
+                window.location.replace(`/single-media/${item._id}`)
               }}
             >
-              <img src={item.imgSrc} alt="action image" />
-
-              <div className="flex items-center justify-between gap-2 line-clamp-1 text-[20px] font-bold">
-                <p>{item.name}</p>
-                <img
-                  src={ArrowRight}
-                  alt="arrowright icon"
-                  className="w-[30px] h-[30px] object-contain cursor-pointer"
-                />
+              <img src={item.cart_img} className="w-full h-[300px] object-contain" alt="genre image" />
+              <div className="flex items-center navbar justify-center gap-2 line-clamp-1 text-[20px] font-bold p-2">
+                <p>{item.country}</p>
               </div>
             </div>
           ))}
-        </Carousel>
       </div>
     </div>
   );

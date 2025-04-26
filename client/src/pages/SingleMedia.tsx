@@ -28,6 +28,8 @@ import { getRatingValue } from "../functions/rating";
 import WriteReview from "../components/WriteReview";
 import PlayVideo from "../components/PlayVideo";
 import { useSelector } from "react-redux";
+import { FaRegFlag } from "react-icons/fa";
+
 
 export default function SingleMedia() {
   const [movie, setMovie] = useState<IMovie>();
@@ -228,46 +230,11 @@ export default function SingleMedia() {
           </div>
 
           <label>
-            <img src={Rating} alt="rating" />
-            <span>Reyting</span>
+            <FaRegFlag />
+            <span>Davlati</span>
           </label>
-
-          <div className="flex items-center gap-5">
-            <div
-              className="font-bold button bg-[#141414] flex-1/2"
-              onClick={() => {
-                window.location.replace(String(movie?.ratings[0].link));
-              }}
-            >
-              <p>IMDB</p>
-              <div className="flex items-center gap-1 star-container cursor-pointer">
-                {movie?.ratings[0].rating &&
-                  getRatingValue(Number(movie?.ratings[0].rating)).map(
-                    (item) => {
-                      if (item == 1) {
-                        return (
-                          <img
-                            src={Star}
-                            alt="star"
-                            className="max-lg:w-[10px] max-lg:h-[10px]"
-                            key={item + Math.random()}
-                          />
-                        );
-                      }
-                      return (
-                        <img
-                          src={HalfStar}
-                          alt="half-star"
-                          className="max-lg:w-[10px] max-lg:h-[10px]"
-                          key={item + Math.random()}
-                        />
-                      );
-                    }
-                  )}
-                <span>{movie?.ratings[0].rating}</span>
-              </div>
-            </div>
-          </div>
+          <span className="bg-[#141414] info-lang-cart w-max">{movie && movie?.country}</span>
+          
 
           <label>
             <img src={Genres} alt="" />
@@ -288,32 +255,7 @@ export default function SingleMedia() {
                 );
               })}
           </div>
-
-          <label>Produser</label>
-          <div className="flex items-center gap-5 button bg-[#141414] rounded">
-            <img
-              src={movie?.Director.about_link}
-              alt="authorprofile"
-              className="h-full w-[20%] object-contain"
-            />
-            <div>
-              <h1 className="font-bold">{movie?.Director.name}</h1>
-              <p>{movie?.Director.country}dan</p>
-            </div>
-          </div>
-
-          <label>Musiqasi</label>
-          <div className="flex items-center gap-5 button bg-[#141414] rounded">
-            <img
-              src={movie?.Music.about_link}
-              alt="authorprofile"
-              className="h-full w-[20%] object-contain"
-            />
-            <div>
-              <h1 className="font-bold">{movie?.Music.name}</h1>
-              <p>{movie?.Music.country}dan</p>
-            </div>
-          </div>
+          
         </div>
 
         {reviewForm && (

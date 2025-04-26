@@ -9,37 +9,44 @@ interface IQuestions {
 
 const questions: IQuestions[] = [
   {
-    question: "What is StreamVibe?",
+    question: "Kino saytida qanday filmlarni tomosha qilish mumkin?",
     answer:
-      "StreamVibe is a streaming service that allows you to watch movies and shows on demand.",
+      "Saytimizda turli janrlardagi filmlar, seriallar va hujjatli filmlarni yuqori sifatda tomosha qilishingiz mumkin.",
   },
   {
-    question: "How much does StreamVibe cost?",
-    answer: "",
+    question: "Saytdan foydalanish bepulmi?",
+    answer:
+      "Ha, saytimizdan foydalanish mutlaqo bepul. Siz ro‘yxatdan o‘tmasdan ham filmlarni tomosha qilishingiz mumkin.",
   },
   {
-    question: "What content is available on StreamVibe?",
-    answer: "",
+    question: "Filmlarni ko'rish uchun ro'yxatdan o'tish shartmi?",
+    answer:
+      "Ro'yxatdan o'tish shart emas, lekin ro'yxatdan o'tgan foydalanuvchilarga izoh qoldirish va filmga baho berish imkoniyati mavjud.",
   },
   {
-    question: "How can I watch StreamVibe?",
-    answer: "",
+    question: "Qanday qilib filmni qidirishim mumkin?",
+    answer:
+      "Saytning yuqori qismidagi qidiruv maydoni orqali film nomi yoki janrini yozib topishingiz mumkin.",
   },
   {
-    question: "How do I sign up for StreamVibe?",
-    answer: "",
+    question: "Agar film ochilmasa, nima qilishim kerak?",
+    answer:
+      "Agar film ochilmasa, sahifani yangilang yoki qo'llab-quvvatlash bo'limimizga murojaat qiling.",
   },
   {
-    question: "What is the StreamVibe free trial?",
-    answer: "",
+    question: "Saytdagi filmlar qaysi tillarda mavjud?",
+    answer:
+      "Aksariyat filmlar o'zbek tilida, ba'zilari rus yoki ingliz tilida subtitrlar bilan taqdim etiladi.",
   },
   {
-    question: "How do I contact StreamVibe customer support?",
-    answer: "",
+    question: "Saytga yangi filmlar qanchalik tez-tez qo‘shiladi?",
+    answer:
+      "Har hafta saytga yangi filmlar va seriallar qo‘shib boriladi.",
   },
   {
-    question: "What are the StreamVibe payment methods?",
-    answer: "",
+    question: "Qo'llab-quvvatlash xizmati bilan qanday bog'lansam bo'ladi?",
+    answer:
+      "Qo'llab-quvvatlash uchun saytimizdagi 'Bog'lanish' sahifasidan foydalanishingiz yoki 'support' sahifasiga o'tishingiz mumkin.",
   },
 ];
 
@@ -53,27 +60,23 @@ export default function Questions() {
 
   return (
     <div className="header">
-
-      {
-        askQuestion && (
-            <AskQuestion setAskQuestion={setAskQuestion}/> 
-        )
-      }
-
+      {askQuestion && (
+        <AskQuestion setAskQuestion={setAskQuestion}/> 
+      )}
 
       <div className="flex items-center justify-between gap-10 max-lg:flex-col max-lg:items-start">
         <div>
-          <h1 className="text-3xl font-bold">Frequently Asked Questions</h1>
+          <h1 className="text-3xl font-bold">Ko'p so'raladigan savollar</h1>
           <p className="text-[#999999] navbar">
-            Got questions? We've got answers! Check out our FAQ section to find
-            answers to the most common questions about StreamVibe.
+            Savollaringiz bormi? Bizda javoblar bor! Eng ko'p beriladigan
+            savollarni va ularning javoblarini shu yerdan topishingiz mumkin.
           </p>
         </div>
         <button
           className="button bg-[#e90000] rounded cursor-pointer"
           onClick={() => setAskQuestion(!askQuestion)}
         >
-          Ask a Question
+          Savol berish
         </button>
       </div>
 

@@ -3,6 +3,7 @@ import { useSwipeable } from "react-swipeable";
 
 import Star from "../assets/icons/star.png";
 import HalfStar from "../assets/icons/halfstar.png";
+import GapStar from "../assets/icons/gapstar.png"
 import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
 import { IReview } from "../types/Review";
@@ -48,7 +49,7 @@ const Review = ({ reviews }: Props) => {
             </p>
           </div>
           <div className="flex items-center bg-[#262626] rounded-full icon gap-2 text-white text-sm">
-            {[...Array(4)].map((_, i) => (
+            {[...Array(currentReview.rating)].map((_, i) => (
               <img
                 key={i}
                 src={Star}
@@ -56,11 +57,15 @@ const Review = ({ reviews }: Props) => {
                 className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain"
               />
             ))}
-            <img
-              src={HalfStar}
-              alt="half-star"
-              className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain"
-            />
+            {[...Array(5 - currentReview.rating)].map((_, i) => (
+              <img
+                key={i}
+                src={GapStar}
+                alt="star"
+                className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain"
+              />
+            ))}
+            
             <span>{currentReview.rating}</span>
           </div>
         </div>

@@ -28,12 +28,9 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 // ✅ Kinolarni olish va filterlash
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { limit = 10, genre, type, name } = req.query;
+        const { limit = 10, type, name } = req.query;
         const parsedLimit = parseInt(limit);
         let query = {};
-        if (genre) {
-            query.genre = genre;
-        }
         if (name) {
             query.name = { $regex: name, $options: "i" };
         }
@@ -47,6 +44,29 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (error) {
         console.error("Kinolarni olishda xatolik:", error);
         res.status(500).json({ message: "Kinolarni olishda xatolik yuz berdi" });
+    }
+}));
+// ✅ Genres, Country va Year bo‘yicha kinolarni olish
+router.get("/categories", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { genre, country, year, limit = 10 } = req.query;
+        const parsedLimit = parseInt(limit);
+        let query = {};
+        if (genre) {
+            query.Genres = { $in: [genre] };
+        }
+        if (country) {
+            query.country = country;
+        }
+        if (year) {
+            query.created_time = { $regex: `^${year}`, $options: "i" };
+        }
+        const movies = yield Movie_1.default.find(query).limit(parsedLimit);
+        res.status(200).json(movies);
+    }
+    catch (error) {
+        console.error("Genres, Country va Year bo‘yicha kinolarni olishda xatolik:", error);
+        res.status(500).json({ message: "Genres, Country va Year bo‘yicha kinolarni olishda xatolik yuz berdi" });
     }
 }));
 // READ single movie

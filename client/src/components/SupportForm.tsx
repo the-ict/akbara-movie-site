@@ -31,15 +31,15 @@ export default function SupportForm() {
   return (
     <div className="too flex justify-between w-full gap-10 max-lg:flex-col">
       <div className="flex-4 flex flex-col gap-5">
-        <h1 className="text-6xl font-bold max-lg:text-3xl">
-          Welcome to our support page!
+        <h1 className="text-4xl font-bold max-lg:text-3xl">
+          Ro'yhatdan o'tish sahifamizga xush kelibsiz!
         </h1>
         <p className="text-[18px] text-[#999999]">
-          We're here to help you with any problems you may be having with our
-          product. Agar sizda{" "}
+          Sitetimiz bilan bog'liq har qanday muammolaringizda sizga yordam
+          berishga tayyormiz. Agar sizda{" "}
           {authState === "REGISTER" && (
             <span>
-              hisob bo'lsa
+              hisob mavjud bo'lsa
               <button
                 className="border-b border-red-400 px-2 font-bold cursor-pointer"
                 style={{
@@ -47,7 +47,7 @@ export default function SupportForm() {
                 }}
                 onClick={() => setAuthState("LOGIN")}
               >
-                Kiring!
+              Kiring!
               </button>
             </span>
           )}
@@ -61,7 +61,7 @@ export default function SupportForm() {
                 }}
                 onClick={() => setAuthState("REGISTER")}
               >
-                Ro'yhatdan o'ting
+                Ro'yxatdan o'ting!
               </button>
             </span>
           )}
@@ -69,9 +69,7 @@ export default function SupportForm() {
         <img src={SupportBack} alt="support" />
       </div>
       {authState === "REGISTER" && <Register />}
-
       {authState === "LOGIN" && <Login />}
-
       {authState === "UPDATE" && <Update />}
     </div>
   );
@@ -105,7 +103,7 @@ const Register = () => {
     e.preventDefault();
 
     if (confirmPass !== form.password) {
-      alert("Parol va Tasdiq uchun kiritilga parol teng emas!");
+      alert("Parol va tasdiqlovchi parol bir xil emas!");
       return;
     }
 
@@ -115,11 +113,11 @@ const Register = () => {
         form
       );
       dispatch(loginSuccess(response.data.user));
-      alert("Sizning malumotlaringiz muvaffaqiyatli saqlandi!");
+      alert("Ma'lumotlaringiz muvaffaqiyatli saqlandi!");
       window.location.reload();
     } catch (error) {
       dispatch(loginFailure());
-      alert("There was an error sending your message.");
+      alert("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
       console.log(error);
     }
   };
@@ -132,7 +130,7 @@ const Register = () => {
           value={form.name}
           name="name"
           onChange={handleInputChange}
-          placeholder="Enter First Name"
+          placeholder="Ismingizni kiriting"
           className="cart w-full bg-[#262626] rounded"
         />
       </div>
@@ -140,7 +138,7 @@ const Register = () => {
         <label>Familiya</label>
         <input
           type="text"
-          placeholder="Enter Last Name"
+          placeholder="Familiyangizni kiriting"
           value={form.lastname}
           name="lastname"
           onChange={handleInputChange}
@@ -153,7 +151,7 @@ const Register = () => {
           <p>+998</p>
           <input
             type="text"
-            placeholder="Enter Your Phone"
+            placeholder="Telefon raqamingizni kiriting"
             value={form.phone}
             onChange={handleInputChange}
             name="phone"
@@ -165,7 +163,7 @@ const Register = () => {
         <label>Email</label>
         <input
           type="email"
-          placeholder="Enter Your Email"
+          placeholder="Email manzilingizni kiriting"
           className="cart w-full bg-[#262626] rounded"
           value={form.email}
           name="email"
@@ -176,7 +174,7 @@ const Register = () => {
         <label>Parol</label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Parol kiriting"
           className="cart w-full bg-[#262626] rounded"
           value={form.password}
           name="password"
@@ -185,10 +183,10 @@ const Register = () => {
       </div>
 
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
-        <label>Parolni tasdiqlang!</label>
+        <label>Parolni tasdiqlang</label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Parolni qayta kiriting"
           className="cart w-full bg-[#262626] rounded"
           value={confirmPass}
           name="password"
@@ -199,13 +197,13 @@ const Register = () => {
       </div>
 
       <div className="w-[100%] flex flex-col gap-5 font-bold">
-        <label>Message</label>
+        <label>Xabar</label>
         <textarea
           value={message}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             setMessage(e.target.value);
           }}
-          placeholder="Enter Your Message"
+          placeholder="Xabaringizni kiriting"
           className="cart w-full h-[200px] bg-[#262626] rounded"
         />
       </div>
@@ -215,7 +213,7 @@ const Register = () => {
           className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
           onClick={handleSubmit}
         >
-          Ro'yhatdan o'tish
+          Ro'yxatdan o'tish
         </button>
       </div>
     </div>
@@ -253,11 +251,11 @@ const Login = () => {
         form
       );
       dispatch(loginSuccess(response.data.user));
-      alert("Your message has been sent successfully.");
+      alert("Siz tizimga muvaffaqiyatli kirdingiz!");
       window.location.reload();
     } catch (error) {
       dispatch(loginFailure());
-      alert("There was an error sending your message.");
+      alert("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
       console.log(error);
     }
   };
@@ -267,7 +265,7 @@ const Login = () => {
         <label>Email</label>
         <input
           type="email"
-          placeholder="Enter Your Email"
+          placeholder="Email manzilingizni kiriting"
           className="cart w-full bg-[#262626] rounded"
           value={form.email}
           name="email"
@@ -278,7 +276,7 @@ const Login = () => {
         <label>Parol</label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Parolingizni kiriting"
           value={form.password}
           name="password"
           onChange={handleInputChange}
@@ -287,13 +285,13 @@ const Login = () => {
       </div>
 
       <div className="w-[100%] flex flex-col gap-5 font-bold">
-        <label>Message</label>
+        <label>Xabar</label>
         <textarea
           value={message}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             setMessage(e.target.value);
           }}
-          placeholder="Enter Your Message"
+          placeholder="Xabaringizni kiriting"
           className="cart w-full h-[200px] bg-[#262626] rounded"
         />
       </div>
@@ -336,17 +334,20 @@ const Update = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(form);
-    if(confirmPass == form.password) {
-      alert("Yangi parol eskisi bilan birxil bo'lmasligi lozim.")
+    if (confirmPass === form.password) {
+      alert("Yangi parol eski parol bilan bir xil bo'lmasligi kerak!");
+      return;
     }
 
     try {
-      await axios.put(`http://localhost:5000/api/user/${store.user.user._id}`, form);
-      alert("Sizning malumotlaringiz muvaffaqiyatli saqlandi!");
+      await axios.put(
+        `http://localhost:5000/api/user/${store.user.user._id}`,
+        form
+      );
+      alert("Ma'lumotlaringiz muvaffaqiyatli yangilandi!");
       window.location.reload();
     } catch (error) {
-      alert("There was an error sending your message.");
+      alert("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
       console.log(error);
     }
   };
@@ -402,7 +403,7 @@ const Update = () => {
         <label>Eski parol</label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Eski parolni kiriting"
           className="cart w-full bg-[#262626] rounded"
           value={form.password}
           name="password"
@@ -413,7 +414,7 @@ const Update = () => {
         <label>Yangi parol</label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Yangi parolni kiriting"
           className="cart w-full bg-[#262626] rounded"
           value={confirmPass}
           name="password"
@@ -428,7 +429,7 @@ const Update = () => {
           className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
           onClick={handleSubmit}
         >
-          O'zgartirish
+          Ma'lumotlarni yangilash
         </button>
         <button
           className="button rounded cursor-pointer max-lg:w-full underline"

@@ -23,6 +23,7 @@ interface IReview {
   country: string;
   rating: number;
   message: string;
+  user_id: string
 }
 
 interface IMovie extends mongoose.Document {
@@ -39,31 +40,15 @@ interface IMovie extends mongoose.Document {
   video_link: string;
   likes: string[];
   reviews: IReview[];
+  country: string
 }
-
-const RatingSchema = new mongoose.Schema<IRating>({
-  link: { type: String, required: true },
-  by_title: { type: String, required: true },
-  rating: { type: Number, required: true },
-});
-
-const DirectorSchema = new mongoose.Schema<IDirector>({
-  name: { type: String, required: true },
-  country: { type: String, required: true },
-  about_link: { type: String, required: true },
-});
-
-const MusicSchema = new mongoose.Schema<IMusic>({
-  name: { type: String, required: true },
-  country: { type: String, required: true },
-  about_link: { type: String, required: true },
-});
 
 const ReviewSchema = new mongoose.Schema<IReview>({
   name: { type: String, required: true },
   country: { type: String, required: true },
   rating: { type: Number, required: true },
   message: { type: String, required: true },
+  user_id: {type: String, required: true}
 }, { _id: false }); // optional: _id qo‘shilmasin desangiz
 
 
@@ -73,10 +58,8 @@ const MovieSchema: mongoose.Schema<IMovie> = new mongoose.Schema(
     description: { type: String, required: true },
     created_time: { type: String, required: true },
     language: [{ type: String, required: true }],
-    ratings: [RatingSchema],
+    country: {type: String, required: true},
     Genres: [{ type: String, required: true }],
-    Director: { type: DirectorSchema, required: true},
-    Music: { type: MusicSchema, required: true},
     likes: [{ type: String, required: true }],
     reviews: { type: [ReviewSchema], default: [] },
     thumbnail: { type: String, required: true },

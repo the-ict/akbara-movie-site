@@ -16,14 +16,10 @@ router.post("/", async (req: Request, res: Response) => {
 // ✅ Kinolarni olish va filterlash
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const { limit = 10, genre, type, name } = req.query;
+    const { limit = 10, type, name } = req.query;
 
     const parsedLimit = parseInt(limit as string);
     let query: any = {};
-
-    if (genre) {
-      query.genre = genre;
-    }
 
     if (name) {
       query.name = { $regex: name, $options: "i" };
@@ -42,6 +38,36 @@ router.get("/", async (req: Request, res: Response) => {
     res.status(500).json({ message: "Kinolarni olishda xatolik yuz berdi" });
   }
 });
+
+// ✅ Genres, Country va Year bo‘yicha kinolarni olish
+router.get("/categories", async (req: Request, res: Response) => {
+  try {
+    const { genre, country, year, limit = 10 } = req.query;
+
+    const parsedLimit = parseInt(limit as string);
+    let query: any = {};
+
+    if (genre) {
+      query.Genres = { $in: [genre] };
+    }
+
+    if (country) {
+      query.country = country;
+    }
+
+    if (year) {
+      query.created_time = { $regex: `^${year}`, $options: "i" };
+    }
+
+    const movies = await Movie.find(query).limit(parsedLimit);
+
+    res.status(200).json(movies);
+  } catch (error) {
+    console.error("Genres, Country va Year bo‘yicha kinolarni olishda xatolik:", error);
+    res.status(500).json({ message: "Genres, Country va Year bo‘yicha kinolarni olishda xatolik yuz berdi" });
+  }
+});
+
 
 // READ single movie
 router.get("/:id", async (req: Request, res: Response) => {
@@ -124,36 +150,34 @@ router.put("/unlike/:id", async (req: Request, res: Response) => {
   }
 });
 
-
 router.put("/review/:id", async (req: Request, res: Response) => {
   const reviewData = req.body;
 
   try {
-      const movie = await Movie.findById(req.params.id);
-      if (!movie) {
-          res.status(404).json({ message: "Movie topilmadi" });
-          return
-      }
+    const movie = await Movie.findById(req.params.id);
+    if (!movie) {
+      res.status(404).json({ message: "Movie topilmadi" });
+      return;
+    }
 
-      const alreadyReviewed = movie.reviews.some(
-          (r: any) => r.name === reviewData.name
-      );
-      if (alreadyReviewed) {
-          res.status(400).json({ message: "Siz allaqachon review bergansiz" });
-          return
-      }
+    const alreadyReviewed = movie.reviews.some(
+      (r: any) => r.name === reviewData.name
+    );
+    if (alreadyReviewed) {
+      res.status(400).json({ message: "Siz allaqachon review bergansiz" });
+      return;
+    }
 
-      // faqat reviewsni yangilaymiz
-      await Movie.updateOne(
-          { _id: req.params.id },
-          { $push: { reviews: reviewData } }
-      );
+    // faqat reviewsni yangilaymiz
+    await Movie.updateOne(
+      { _id: req.params.id },
+      { $push: { reviews: reviewData } }
+    );
 
-      res.status(200).json({ message: "Review qo‘shildi" });
+    res.status(200).json({ message: "Review qo‘shildi" });
   } catch (err) {
-      res.status(500).json({ message: "Xatolik", error: err });
+    res.status(500).json({ message: "Xatolik", error: err });
   }
 });
-
 
 export default router;
