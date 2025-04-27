@@ -27,6 +27,44 @@
 .loader:after {
   animation-delay: -0.5s;
 }
+
+
+/* rulesPage.css */
+.rules-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.rules-card {
+  background-color: #1a1a1a;
+  border-radius: 1rem;
+  padding: 5rem 10rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rules-heading {
+  font-size: 2rem; /* text-4xl */
+  font-weight: 700; /* font-bold */
+  color: #ef4444; /* text-red-main */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.rules-text {
+  font-size: 1.125rem; /* text-lg */
+  margin-bottom: 1rem;
+}
+
+.rules-text span {
+  font-weight: 600; /* font-semibold */
+  color: #ef4444; /* text-red-main */
+}
+
+
 @keyframes l22-0 {
   100% {
     transform: rotate(1turn);

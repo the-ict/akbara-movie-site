@@ -10,6 +10,7 @@ import { store } from "./redux/store";
 import "./index.css";
 import Search from "./pages/Search";
 import AddMovie from "./pages/AddMovie";
+import RulesPage from "./pages/Rules";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
               <Route path="/support" element={<Support />} />
               <Route path="/search" element={<Search />} />
               <Route path="/add" element={<AddMovie />} />
+              <Route path="/rules" element={<RulesPage />} />
             </Routes>
           </div>
 
