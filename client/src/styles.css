@@ -261,6 +261,10 @@
   }
 }
 
+.player {
+  padding: 10px;
+}
+
 
 @keyframes popUp {
   0% {

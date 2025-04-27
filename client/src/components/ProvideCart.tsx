@@ -41,7 +41,7 @@ export default function ProvideCart() {
         yubormaysiz.
       </p>
 
-      <div className="header flex items-center gap-10 max-lg:flex-col">
+      <div className="header flex items-center gap-10 max-sm:flex-col">
         {proveCarts.map((item, _) => (
           <div
             key={_}

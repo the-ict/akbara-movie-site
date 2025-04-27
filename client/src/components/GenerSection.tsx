@@ -33,18 +33,6 @@ interface Props {
   description?: string;
 }
 
-interface IGenres {
-  name: string;
-  imgSrc: string;
-}
-
-const genres: IGenres[] = [
-  { name: "Amerika", imgSrc: Dramma },
-  { name: "Hindiston", imgSrc: Comedy },
-  { name: "Korea", imgSrc: Horror },
-  { name: "Xitoy", imgSrc: Adventure },
-];
-
 export default function GenerSection({ title, description }: Props) {
   const [movies, setMovies] = useState<IMovie[]>();
   useEffect(() => {
@@ -67,17 +55,21 @@ export default function GenerSection({ title, description }: Props) {
       </div>
 
       {/* category items */}
-      <div className="header w-full flex justify-between">
+      <div className="header w-full flex justify-between max-sm:flex-col">
         {movies &&
           movies.map((item, _) => (
             <div
               className="bg-[#1A1A1A] cart border-[1px] border-transparent overflow-hidden w-[300px] max-sm:w-[180px] cursor-pointer transition-transform hover:scale-105 animate-border-glow"
               key={_}
               onClick={() => {
-                window.location.replace(`/single-media/${item._id}`)
+                window.location.replace(`/single-media/${item._id}`);
               }}
             >
-              <img src={item.cart_img} className="w-full h-[300px] object-contain" alt="genre image" />
+              <img
+                src={item.cart_img}
+                className="w-full h-[300px] object-contain"
+                alt="genre image"
+              />
               <div className="flex items-center navbar justify-center gap-2 line-clamp-1 text-[20px] font-bold p-2">
                 <p>{item.country}</p>
               </div>

@@ -4,9 +4,6 @@ import "../styles.css";
 import "react-multi-carousel/lib/styles.css";
 
 import Play from "../assets/icons/play.png";
-import Add from "../assets/icons/add.png";
-import Like from "../assets/icons/like.png";
-import Sound from "../assets/icons/sound.png";
 import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
 import { useEffect, useRef, useState } from "react";
@@ -27,7 +24,7 @@ const responsive = {
     items: 1,
   },
   mobile: {
-    breakpoint: { max: 500, min: 0 },
+    breakpoint: { max: 640, min: 0 },
     items: 1,
   },
 };
@@ -48,7 +45,7 @@ export default function Header() {
     const getLatest = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/movie/?limit=5`
+          `http://localhost:5000/api/movie/?limit=5&type=latest`
         );
         if (response.data) {
           setMovies(response.data);

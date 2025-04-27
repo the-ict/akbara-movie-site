@@ -6,6 +6,7 @@ interface User {
   email: string;
   phone: number;
   password: string;
+  _id: string;
 }
 
 export interface UserState {

@@ -15,7 +15,7 @@ export default function Footer() {
             <li className="footer-item">Qo'llab quvatlash</li>
           </ul>
           <ul className="max-lg:w-[45%]">
-            <li className="footer-item">Bo'g'lanish</li>
+            <li className="footer-item">Bog'lanish</li>
           </ul>
           <ul className="max-lg:w-[45%]">
             <li className="footer-item">Sayt qoidalari</li>

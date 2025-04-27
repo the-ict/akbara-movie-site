@@ -233,7 +233,9 @@ export default function SingleMedia() {
             <FaRegFlag />
             <span>Davlati</span>
           </label>
-          <span className="bg-[#141414] info-lang-cart w-max">{movie && movie?.country}</span>
+          <span className="bg-[#141414] info-lang-cart w-max" onClick={() => {
+            window.location.replace(`/search?country=${movie?.country}`)
+          }}>{movie && movie?.country}</span>
           
 
           <label>

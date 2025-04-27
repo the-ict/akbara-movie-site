@@ -9,6 +9,7 @@ import X from "../assets/icons/xred.png";
 
 import "../styles.css";
 import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 export default function Navbar() {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -23,7 +24,7 @@ export default function Navbar() {
   const genreRef = useRef<HTMLDivElement | null>(null);
   const countryRef = useRef<HTMLDivElement | null>(null);
 
-  const store = useSelector((store) => store);
+  const store = useSelector((store: RootState) => store.user);
 
   // Close menus on outside click
   useEffect(() => {
@@ -59,9 +60,7 @@ export default function Navbar() {
   return (
     <div className="flex items-center justify-between navbar-padding relative">
       <a href="/">
-        <span className="text-2xl font-bold">
-          ATV<span className="text-green-600">.</span>uz
-        </span>
+        <img src={Logo} alt="" className="w-[80px] h-[80px]" />
       </a>
 
       <ul className="flex items-center gap-5 bg-[#0F0F0F] navigation rounded max-lg:hidden">
@@ -139,17 +138,33 @@ export default function Navbar() {
               {hiddenCountry && (
                 <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
                   <div className="flex flex-wrap gap-3 min-w-[300px]">
-                    {["Uzbekistan", "Aqsh", "Arab", "Tojik", "Hind"].map(
-                      (item, _) => (
-                        <Link
-                          key={_}
-                          className="hover:underline"
-                          to={`/search?country=${item}`}
-                        >
-                          {item}
-                        </Link>
-                      )
-                    )}
+                    {[
+                      "Aqsh",
+                      "Arabiston",
+                      "Hindiston",
+                      "Xitoy",
+                      "Yaponiya",
+                      "Janubiy Koreya",
+                      "Fransiya",
+                      "Buyuk Britaniya",
+                      "Germaniya",
+                      "Italiya",
+                      "Ispaniya",
+                      "Kanada",
+                      "Braziliya",
+                      "Meksika",
+                      "Avstraliya",
+                      "Turkiya",
+                      "Indoneziya",
+                    ].map((item, _) => (
+                      <Link
+                        key={_}
+                        className="hover:underline"
+                        to={`/search?country=${item}`}
+                      >
+                        {item}
+                      </Link>
+                    ))}
                   </div>
                 </div>
               )}
@@ -198,7 +213,7 @@ export default function Navbar() {
           className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
           to={`/support`}
         >
-          {store?.user.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
+          {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
         </Link>
       </ul>
 
@@ -252,7 +267,7 @@ export default function Navbar() {
               Bosh sahifani
             </Link>
             <Link className="cursor-pointer hover:underline " to={`/support`}>
-              {store?.user.user._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
+              {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
             </Link>
           </ul>
           <div className="flex items-center gap-2">
