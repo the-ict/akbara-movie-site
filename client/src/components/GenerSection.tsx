@@ -55,11 +55,11 @@ export default function GenerSection({ title, description }: Props) {
       </div>
 
       {/* category items */}
-      <div className="header w-full flex justify-between max-sm:flex-col">
+      <div className="header w-full flex justify-between max-sm:flex-wrap max-sm:gap-5">
         {movies &&
           movies.map((item, _) => (
             <div
-              className="bg-[#1A1A1A] cart border-[1px] border-transparent overflow-hidden w-[300px] max-sm:w-[180px] cursor-pointer transition-transform hover:scale-105 animate-border-glow"
+              className="bg-[#1A1A1A] cart border-[1px] max-sm:w-[47%] border-transparent overflow-hidden w-[300px] cursor-pointer transition-transform hover:scale-105 animate-border-glow"
               key={_}
               onClick={() => {
                 window.location.replace(`/single-media/${item._id}`);

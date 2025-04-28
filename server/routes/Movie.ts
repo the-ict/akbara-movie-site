@@ -16,7 +16,7 @@ router.post("/", async (req: Request, res: Response) => {
 // ✅ Kinolarni olish va filterlash
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const { limit = 10, type, name } = req.query;
+    const { limit, type, name } = req.query;
 
     const parsedLimit = parseInt(limit as string);
     let query: any = {};
@@ -152,7 +152,6 @@ router.put("/unlike/:id", async (req: Request, res: Response) => {
 
 router.put("/review/:id", async (req: Request, res: Response) => {
   const reviewData = req.body;
-
   try {
     const movie = await Movie.findById(req.params.id);
     if (!movie) {

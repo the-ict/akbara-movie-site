@@ -86,6 +86,10 @@
   padding: 30px;
 }
 
+.sm-padding {
+  padding: 10px;
+}
+
 .arrow-padding {
   padding: 20px;
 }
@@ -231,6 +235,16 @@
   padding: 15px;
 }
 
+.navbar-back {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  transition: all 300ms ease-in-out;
+}
+
 /* Hover menularini ko'rsatishda silliq o'tish */
 .group:hover .menu-content {
   visibility: visible;
@@ -250,7 +264,6 @@
   animation-delay: unset;
 }
 
-
 @keyframes searchAnimation {
   0% {
     width: 0%;
@@ -265,6 +278,9 @@
   padding: 10px;
 }
 
+.some-padding {
+  padding: 0px 10px;
+}
 
 @keyframes popUp {
   0% {
@@ -291,4 +307,28 @@
 
 .animate-border-glow {
   animation: border-glow 2s infinite;
+}
+
+@keyframes border-gree-grow {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #08a312;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.animate-border-gree-grow {
+  animation: border-gree-grow 2s infinite;
+}
+
+/* responsive design */
+
+@media (max-width: 600px) {
+  .navbar-padding {
+    padding: 0px;
+  }
 }

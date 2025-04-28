@@ -29,14 +29,14 @@ import WriteReview from "../components/WriteReview";
 import PlayVideo from "../components/PlayVideo";
 import { useSelector } from "react-redux";
 import { FaRegFlag } from "react-icons/fa";
-
+import { RootState } from "../redux/store";
 
 export default function SingleMedia() {
   const [movie, setMovie] = useState<IMovie>();
   const [reviewForm, setReviewForm] = useState<boolean>(false);
   const [video, setVideo] = useState<boolean>(false);
 
-  const store = useSelector((store) => store);
+  const store = useSelector((store: RootState) => store.user);
 
   console.log(store);
 
@@ -59,17 +59,18 @@ export default function SingleMedia() {
   }, []);
 
   async function handleLike() {
-    if (store?.user?.user?._id) {
-      if (movie?.likes.includes(store?.user?.user?._id)) {
+    if (store?.user?._id) {
+      if (movie?.likes.includes(store?.user?._id)) {
         try {
           await axios.put(
             `http://localhost:5000/api/movie/unlike/${movie?._id}`,
             {
-              userId: store?.user?.user?._id,
+              userId: store?.user?._id,
             }
           );
           window.location.reload();
         } catch (error) {
+          console.log(error)
           alert("There is an error, please try later.");
         }
         return;
@@ -79,7 +80,7 @@ export default function SingleMedia() {
         const result = await axios.put(
           `http://localhost:5000/api/movie/like/${movie?._id}`,
           {
-            userId: store?.user?.user?._id,
+            userId: store?.user?._id,
           }
         );
         window.location.reload();
@@ -94,8 +95,6 @@ export default function SingleMedia() {
   }
   return (
     <div>
-      <Navbar />
-
       {video && (
         <PlayVideo url={String(movie?.video_link)} setVideo={setVideo} />
       )}
@@ -137,7 +136,7 @@ export default function SingleMedia() {
                   />
                 </button> */}
                 <button className="cursor-pointer bg-[#0F0F0F] button">
-                  {movie?.likes.includes(store?.user?.user?._id) ? (
+                  {movie?.likes.includes(String(store.user?._id)) ? (
                     <AiFillLike
                       onClick={handleLike}
                       className="w-[20px] h-[20px] object-contain"
@@ -184,7 +183,7 @@ export default function SingleMedia() {
               <button
                 className="flex items-center gap-5 button bg-[#141414] cursor-pointer rounded"
                 onClick={() => {
-                  if (store?.user.user._id) {
+                  if (store.user?._id) {
                     setReviewForm(true);
                   } else {
                     alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!");
@@ -233,10 +232,14 @@ export default function SingleMedia() {
             <FaRegFlag />
             <span>Davlati</span>
           </label>
-          <span className="bg-[#141414] info-lang-cart w-max" onClick={() => {
-            window.location.replace(`/search?country=${movie?.country}`)
-          }}>{movie && movie?.country}</span>
-          
+          <span
+            className="bg-[#141414] info-lang-cart w-max"
+            onClick={() => {
+              window.location.replace(`/search?country=${movie?.country}`);
+            }}
+          >
+            {movie && movie?.country}
+          </span>
 
           <label>
             <img src={Genres} alt="" />
@@ -257,7 +260,6 @@ export default function SingleMedia() {
                 );
               })}
           </div>
-          
         </div>
 
         {reviewForm && (
@@ -271,7 +273,7 @@ export default function SingleMedia() {
             <h1 className="text-[#999999]">Reviews</h1>
             <button
               onClick={() => {
-                if (store?.user.user._id) {
+                if (store.user?._id) {
                   setReviewForm(true);
                 } else {
                   alert("Izoh qo'shish uchun birinchi ro'yhatdan o'ting!");

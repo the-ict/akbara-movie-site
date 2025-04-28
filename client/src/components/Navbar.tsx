@@ -18,6 +18,7 @@ export default function Navbar() {
   const [hiddenYear, setHiddenYear] = useState<boolean>(false);
   const [hiddenGenre, setHiddenGenre] = useState<boolean>(false);
   const [hiddenCountry, setHiddenCountry] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   const categoryRef = useRef<HTMLDivElement | null>(null);
   const yearRef = useRef<HTMLDivElement | null>(null);
@@ -57,226 +58,188 @@ export default function Navbar() {
     };
   }, []);
 
+  window.onscroll = () => {
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
+
   return (
-    <div className="flex items-center justify-between navbar-padding relative">
-      <a href="/">
-        <img src={Logo} alt="" className="w-[80px] h-[80px]" />
-      </a>
-
-      <ul className="flex items-center gap-5 bg-[#0F0F0F] navigation rounded max-lg:hidden">
-        <Link
-          className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
-          to={`/`}
-        >
-          Bosh sahifa
-        </Link>
-
-        {/* Kategoriyalar */}
-        <div
-          ref={categoryRef}
-          className="flex items-center relative gap-2 cursor-pointer hover:bg-[#1A1A1A] navigation-item"
-        >
-          <p
-            className="cursor-pointer relative rounded"
-            onClick={() => setCategoryHiddenMenu(!categoryHiddenMenu)}
+    <div className={`w-full flex justify-center ${isScrolled && "navbar-back"}`}>
+      <div
+        className={`flex items-center xl:w-[1300px] w-[90%] navbar-margin justify-between relative`}
+      >
+        <a href="/">
+          <img src={Logo} alt="" className="w-[70px] h-[70px]" />
+        </a>
+        <ul className="flex items-center gap-5 bg-[#0F0F0F] navigation rounded max-lg:hidden">
+          <Link
+            className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
+            to={`/`}
           >
-            Kategoriyalar
-          </p>
-          <FaArrowAltCircleDown />
-          {categoryHiddenMenu && (
-            <div className="absolute flex flex-col gap-2 top-10 z-10 bg-[#1A1A1A] navbar-padding">
-              <p
-                className="font-bold hover:underline"
-                onClick={() => {
-                  setHiddenYear(!hiddenYear);
-                  setHiddenCountry(false);
-                  setHiddenGenre(false);
-                }}
-              >
-                Yil bo'yicha
-              </p>
-              <p
-                className="font-bold hover:underline"
-                onClick={() => {
-                  setHiddenYear(false);
-                  setHiddenCountry(!hiddenCountry);
-                  setHiddenGenre(false);
-                }}
-              >
-                Davlat bo'yicha
-              </p>
-              <p
-                className="font-bold hover:underline"
-                onClick={() => {
-                  setHiddenYear(false);
-                  setHiddenCountry(false);
-                  setHiddenGenre(!hiddenGenre);
-                }}
-              >
-                Janrlar bo'yicha
-              </p>
-              {/* Year hidden menu */}
-              {hiddenYear && (
-                <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
-                  <div className="flex flex-wrap gap-5 min-w-[300px]">
-                    {[
-                      2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
-                      2020, 2021, 2022, 2023, 2024, 2025,
-                    ].map((item, _) => (
-                      <Link
-                        key={_}
-                        className="hover:underline"
-                        to={`/search?year=${item}`}
-                      >
-                        {item}
-                      </Link>
-                    ))}
+            Bosh sahifa
+          </Link>
+          <Link
+            className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
+            to={`/shows`}
+          >
+            Kinolar
+          </Link>
+
+          {/* Kategoriyalar */}
+          <div
+            ref={categoryRef}
+            className="flex items-center relative gap-2 cursor-pointer hover:bg-[#1A1A1A] navigation-item"
+          >
+            <p
+              className="cursor-pointer relative rounded"
+              onClick={() => setCategoryHiddenMenu(!categoryHiddenMenu)}
+            >
+              Kategoriyalar
+            </p>
+            <FaArrowAltCircleDown />
+            {categoryHiddenMenu && (
+              <div className="absolute flex flex-col gap-2 top-10 z-10 bg-[#1A1A1A] navbar-padding">
+                <p
+                  className="font-bold hover:underline"
+                  onClick={() => {
+                    setHiddenYear(!hiddenYear);
+                    setHiddenCountry(false);
+                    setHiddenGenre(false);
+                  }}
+                >
+                  Yil bo'yicha
+                </p>
+                <p
+                  className="font-bold hover:underline"
+                  onClick={() => {
+                    setHiddenYear(false);
+                    setHiddenCountry(!hiddenCountry);
+                    setHiddenGenre(false);
+                  }}
+                >
+                  Davlat bo'yicha
+                </p>
+                <p
+                  className="font-bold hover:underline"
+                  onClick={() => {
+                    setHiddenYear(false);
+                    setHiddenCountry(false);
+                    setHiddenGenre(!hiddenGenre);
+                  }}
+                >
+                  Janrlar bo'yicha
+                </p>
+                {/* Year hidden menu */}
+                {hiddenYear && (
+                  <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
+                    <div className="flex flex-wrap gap-5 min-w-[300px]">
+                      {[
+                        2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019,
+                        2020, 2021, 2022, 2023, 2024, 2025,
+                      ].map((item, _) => (
+                        <Link
+                          key={_}
+                          className="hover:underline"
+                          to={`/search?year=${item}`}
+                        >
+                          {item}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-              {/* Country hidden menu */}
-              {hiddenCountry && (
-                <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
-                  <div className="flex flex-wrap gap-3 min-w-[300px]">
-                    {[
-                      "Aqsh",
-                      "Arabiston",
-                      "Hindiston",
-                      "Xitoy",
-                      "Yaponiya",
-                      "Janubiy Koreya",
-                      "Fransiya",
-                      "Buyuk Britaniya",
-                      "Germaniya",
-                      "Italiya",
-                      "Ispaniya",
-                      "Kanada",
-                      "Braziliya",
-                      "Meksika",
-                      "Avstraliya",
-                      "Turkiya",
-                      "Indoneziya",
-                    ].map((item, _) => (
-                      <Link
-                        key={_}
-                        className="hover:underline"
-                        to={`/search?country=${item}`}
-                      >
-                        {item}
-                      </Link>
-                    ))}
+                )}
+                {/* Country hidden menu */}
+                {hiddenCountry && (
+                  <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
+                    <div className="flex flex-wrap gap-3 min-w-[300px]">
+                      {[
+                        "Aqsh",
+                        "Arabiston",
+                        "Hindiston",
+                        "Xitoy",
+                        "Yaponiya",
+                        "Janubiy Koreya",
+                        "Fransiya",
+                        "Buyuk Britaniya",
+                        "Germaniya",
+                        "Italiya",
+                        "Ispaniya",
+                        "Kanada",
+                        "Braziliya",
+                        "Meksika",
+                        "Avstraliya",
+                        "Turkiya",
+                        "Indoneziya",
+                      ].map((item, _) => (
+                        <Link
+                          key={_}
+                          className="hover:underline"
+                          to={`/search?country=${item}`}
+                        >
+                          {item}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-              {/* Genre hidden menu */}
-              {hiddenGenre && (
-                <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
-                  <div className="flex flex-wrap gap-5 min-w-[300px]">
-                    {[
-                      "Drama",
-                      "Komediya",
-                      "Triller",
-                      "Dahshat",
-                      "Fantastika",
-                      "Fantaziya",
-                      "Jangari",
-                      "Sarguzasht",
-                      "Detektiv",
-                      "Romantik",
-                      "Tarixiy",
-                      "Melodrama",
-                      "Urush",
-                      "Vestern",
-                      "Noir",
-                      "Kriminal",
-                      "Musobaqali",
-                      "Oilaviy",
-                      "Musiqiy",
-                      "Psixologik drama",
-                    ].map((item, _) => (
-                      <Link
-                        key={_}
-                        to={`/search?genre=${item}`}
-                        className="hover:underline"
-                      >
-                        {item}
-                      </Link>
-                    ))}
+                )}
+                {/* Genre hidden menu */}
+                {hiddenGenre && (
+                  <div className="absolute animationPopup left-[calc(100%+10px)] z-10 bg-[#1A1A1A] navbar-padding">
+                    <div className="flex flex-wrap gap-5 min-w-[300px]">
+                      {[
+                        "Drama",
+                        "Komediya",
+                        "Triller",
+                        "Dahshat",
+                        "Fantastika",
+                        "Fantaziya",
+                        "Jangari",
+                        "Sarguzasht",
+                        "Detektiv",
+                        "Romantik",
+                        "Tarixiy",
+                        "Melodrama",
+                        "Urush",
+                        "Vestern",
+                        "Noir",
+                        "Kriminal",
+                        "Musobaqali",
+                        "Oilaviy",
+                        "Musiqiy",
+                        "Psixologik drama",
+                      ].map((item, _) => (
+                        <Link
+                          key={_}
+                          to={`/search?genre=${item}`}
+                          className="hover:underline"
+                        >
+                          {item}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+                )}
+              </div>
+            )}
+          </div>
 
-        <Link
-          className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
-          to={`/support`}
-        >
-          {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
-        </Link>
-      </ul>
+          <Link
+            className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
+            to={`/support`}
+          >
+            {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
+          </Link>
+        </ul>
 
-      {/* Search input */}
-      <div className="flex items-center gap-7 max-lg:hidden">
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Searching...."
-            className="search"
-          />
-          <img
-            src={Search}
-            onClick={() =>
-              window.location.replace(`/search?name=${searchInput}`)
-            }
-            alt="search icon"
-            className="w-[30px] h-[30px] object-contain cursor-pointer"
-          />
-        </div>
-      </div>
-
-      {/* Hamburger menu (mobile) */}
-      <img
-        src={Menu}
-        alt=""
-        onClick={() => setHiddenMenu(true)}
-        className="navigation rounded w-[50px] h-[50px] cursor-pointer lg:hidden"
-      />
-
-      {/* Hidden mobile menu */}
-      {hiddenMenu && (
-        <div className="navbar-hidden-menu fixed top-0 z-10 h-screen max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col gap-10 justify-center text-white">
-          <img
-            src={X}
-            className="absolute w-[30px] h-[30px] cursor-pointer top-2 right-2 max-sm:right-5"
-            alt="close"
-            onClick={() => setHiddenMenu(false)}
-          />
-          <a href="/">
-            <img
-              src={Logo}
-              alt="logo"
-              className="w-[200px] max-lg:w-[150px] h-full object-contain cursor-pointer"
-            />
-          </a>
-          <ul className="flex items-center gap-10 navigation flex-col justify-between">
-            <Link className="cursor-pointer hover:underline " to={`/`}>
-              Bosh sahifani
-            </Link>
-            <Link className="cursor-pointer hover:underline " to={`/support`}>
-              {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
-            </Link>
-          </ul>
+        {/* Search input */}
+        <div className="flex items-center gap-7 max-lg:hidden">
           <div className="flex items-center gap-2">
             <input
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Searching...."
-              className="flex-1 search"
+              className="search"
             />
             <img
               src={Search}
@@ -288,7 +251,62 @@ export default function Navbar() {
             />
           </div>
         </div>
-      )}
+
+        {/* Hamburger menu (mobile) */}
+        <img
+          src={Menu}
+          alt=""
+          onClick={() => setHiddenMenu(true)}
+          className="navigation rounded w-[50px] h-[50px] cursor-pointer lg:hidden"
+        />
+
+        {/* Hidden mobile menu */}
+        {hiddenMenu && (
+          <div className="navbar-hidden-menu left-0 fixed top-0 z-10 h-screen max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col gap-10 justify-center text-white items-center backdrop-blur-[5px]">
+            <img
+              src={X}
+              className="absolute w-[30px] h-[30px] cursor-pointer top-2 right-2 max-sm:right-5"
+              alt="close"
+              onClick={() => setHiddenMenu(false)}
+            />
+            <a href="/">
+              <img
+                src={Logo}
+                alt="logo"
+                className="w-[200px] max-lg:w-[150px] h-full object-contain cursor-pointer"
+              />
+            </a>
+            <ul className="flex items-center gap-10 navigation sm-padding flex-col justify-between w-full">
+              <Link className="cursor-pointer hover:underline " to={`/`}>
+                Bosh sahifani
+              </Link>
+              <Link className="cursor-pointer hover:underline " to={`/`}>
+                Kinolar
+              </Link>
+              <Link className="cursor-pointer hover:underline " to={`/support`}>
+                {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
+              </Link>
+            </ul>
+            <div className="flex items-center gap-2 w-full">
+              <input
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Searching...."
+                className="flex-1 search"
+              />
+              <img
+                src={Search}
+                onClick={() =>
+                  window.location.replace(`/search?name=${searchInput}`)
+                }
+                alt="search icon"
+                className="w-[30px] h-[30px] object-contain cursor-pointer"
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

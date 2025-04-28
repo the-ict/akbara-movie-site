@@ -5,7 +5,6 @@ import Questions from '../components/Questions'
 export default function Support() {
   return (
     <div>
-      <Navbar />
       <SupportForm />
       <Questions />
       {/* <Marketing /> */}

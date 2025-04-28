@@ -34,7 +34,7 @@ export default function ProvideCart() {
       <h1 className="text-3xl text-white font-bold">
         Sizga turli qurilmalarda kino tomosha qilish imkoniyatini taqdim etamiz.
       </h1>
-      <p className="navbar text-[#999999] w-[60%] max-lg:w-[100%]">
+      <p className="navbar">
         Saytimiz orqali sevimli filmlar va seriallarni istalgan vaqtda, istalgan
         joyda tomosha qilishingiz mumkin. Platformamiz ko‘plab qurilmalar bilan
         moslashgan bo‘lib, siz hech qachon sevimli lahzalaringizni o‘tkazib
@@ -45,7 +45,7 @@ export default function ProvideCart() {
         {proveCarts.map((item, _) => (
           <div
             key={_}
-            className="w-[500px] max-lg:w-screen prove-cart bg-[#0F0F0F] roudned bg-gradient-to-tr from-black to-[#e50000]/10 "
+            className="prove-cart bg-[#0F0F0F] roudned bg-gradient-to-tr from-black to-[#e50000]/10 "
           >
             <div className="flex items-center gap-5">
               <img

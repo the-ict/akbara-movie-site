@@ -58,7 +58,7 @@ export default function Header() {
     getLatest();
   }, []);
   return (
-    <div className="header w-full">
+    <div className="header max-sm:w-[90vw]">
       <Carousel
         responsive={responsive}
         infinite

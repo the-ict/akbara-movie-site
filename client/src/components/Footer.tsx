@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin footer">
-      <div className="2xl:w-[1597px] footer max-lg:w-screen arrow-padding w-[1200px]">
+      <div className="xl:w-[1300px] footer max-lg:w-screen arrow-padding">
         <div className="flex max-sm:flex-wrap justify-between items-center footer-nav flex-wrap gap-5">
           <ul className="max-lg:w-[45%]">
             <li className="footer-item">Reklama</li>
@@ -18,7 +18,7 @@ export default function Footer() {
             <a
               className="footer-item font-bold hover:underline"
               target="_blank"
-              href="https://t.me/akbaratv"
+              href="https://t.me/akbaratv_admin"
             >
               Bog'lanish
             </a>

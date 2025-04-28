@@ -7,6 +7,7 @@ import { getRatingValue } from "../functions/rating";
 import axios from "axios";
 
 import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 type Props = {
   setReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +23,7 @@ interface IReview {
 export default function ({ setReviewForm,movie_id }: Props) {
   const [starred, setStarred] = useState<number>(0);
 
-  const store = useSelector((store) => store);
+  const store = useSelector((store:RootState) => store.user);
 
   const [form, setForm] = useState<IReview>({
     country: "Uzbekistan",
@@ -46,14 +47,14 @@ export default function ({ setReviewForm,movie_id }: Props) {
 
     if (starred === 0) return;
 
-    if (!store?.user?.user?._id) {
+    if (!store?.user?._id) {
       alert("Izoh yozishdan oldin ro'yhatdan o'ting");
       return;
     }
 
     setForm((prev) => ({
       ...prev,
-      name: store?.user?.user?.name,
+      name: String(store.user?.name),
     }));
 
     try {

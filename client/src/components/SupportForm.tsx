@@ -8,6 +8,7 @@ import {
 } from "../redux/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { RootState } from "../redux/store";
 
 interface ISupport {
   name: string;
@@ -20,9 +21,9 @@ interface ISupport {
 type TAuthState = "LOGIN" | "REGISTER" | "UPDATE";
 
 export default function SupportForm() {
-  const store = useSelector((state) => state);
+  const store = useSelector((state: RootState) => state.user);
 
-  const isUser = store.user.user ? true : false;
+  const isUser = store.user?._id ? true : false;
 
   const [authState, setAuthState] = useState<TAuthState>(
     isUser ? "UPDATE" : "REGISTER"
@@ -36,10 +37,10 @@ export default function SupportForm() {
         </h1>
         <p className="text-[18px] text-[#999999]">
           Sitetimiz bilan bog'liq har qanday muammolaringizda sizga yordam
-          berishga tayyormiz. Agar sizda{" "}
+          berishga tayyormiz. {" "}
           {authState === "REGISTER" && (
             <span>
-              hisob mavjud bo'lsa
+              Agar sizda hisob mavjud bo'lsa
               <button
                 className="border-b border-red-400 px-2 font-bold cursor-pointer"
                 style={{
@@ -47,7 +48,7 @@ export default function SupportForm() {
                 }}
                 onClick={() => setAuthState("LOGIN")}
               >
-              Kiring!
+                Agar sizda Kiring!
               </button>
             </span>
           )}
@@ -319,7 +320,7 @@ const Update = () => {
 
   const [confirmPass, setConfirmPass] = useState<string>("");
 
-  const store = useSelector((store) => store);
+  const store = useSelector((store: RootState) => store.user);
   const dispatch = useDispatch();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -341,7 +342,7 @@ const Update = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/user/${store.user.user._id}`,
+        `http://localhost:5000/api/user/${store.user?._id}`,
         form
       );
       alert("Ma'lumotlaringiz muvaffaqiyatli yangilandi!");
@@ -360,7 +361,7 @@ const Update = () => {
           value={form.name}
           name="name"
           onChange={handleInputChange}
-          placeholder={store.user.user.name}
+          placeholder={store.user?.name}
           className="cart w-full bg-[#262626] rounded"
         />
       </div>
@@ -368,7 +369,7 @@ const Update = () => {
         <label>Familiya</label>
         <input
           type="text"
-          placeholder={store.user.user.lastname}
+          placeholder={store.user?.lastname}
           value={form.lastname}
           name="lastname"
           onChange={handleInputChange}
@@ -381,7 +382,7 @@ const Update = () => {
           <p>+998</p>
           <input
             type="message"
-            placeholder={store.user.user.phone}
+            placeholder={String(store.user?.phone)}
             onChange={handleInputChange}
             name="phone"
             className="flex-1 h-full outline-none border-none"
@@ -392,7 +393,7 @@ const Update = () => {
         <label>Email</label>
         <input
           type="email"
-          placeholder={store.user.user.email}
+          placeholder={store.user?.email}
           className="cart w-full bg-[#262626] rounded"
           value={form.email}
           name="email"

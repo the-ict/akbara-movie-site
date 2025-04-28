@@ -28,7 +28,7 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 // ✅ Kinolarni olish va filterlash
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { limit = 10, type, name } = req.query;
+        const { limit, type, name } = req.query;
         const parsedLimit = parseInt(limit);
         let query = {};
         if (name) {
