@@ -23,7 +23,7 @@ export default function ({ url, setVideo }: Props) {
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white"></div>
         </div>
       )}
-      <div className="w-[60%] h-[60%] player animate-border-glow aspect-video border-2 border-red-500">
+      <div className="w-[60%] h-[60%] max-sm:w-[90%] max-sm:h-[20%] player animate-border-glow aspect-video border-2 border-red-500">
         <Plyr
           source={{
             type: "video",

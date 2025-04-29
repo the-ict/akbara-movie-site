@@ -104,18 +104,18 @@ export default function SingleMedia() {
         <img
           src={movie?.thumbnail}
           alt="movie cover"
-          className="w-full h-[calc(100vh-25vh)] object-cover"
+          className="w-full h-[calc(100vh-25vh)] max-sm:object-contain max-sm:h-max object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
         {/* Title and Play/Action Buttons */}
-        <div className="absolute bottom-20 w-full flex items-center justify-center">
+        <div className="absolute bottom-20 max-sm:-bottom-10 w-full flex items-center justify-center">
           <div className="w-[70%] text-center">
-            <h3 className="text-3xl font-bold max-lg:text-2xl">
+            <h3 className="text-3xl font-bold max-lg:text-2xl max-sm:text-[16px]">
               {movie?.name}
             </h3>
 
-            <div className="flex items-center gap-5 header justify-center navbar max-lg:flex-col">
+            <div className="flex items-center gap-5 header justify-center navbar max-lg:flex-col max-sm:flex-row">
               <button
                 onClick={() => setVideo(true)}
                 className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] play-button rounded"
@@ -125,7 +125,7 @@ export default function SingleMedia() {
                   alt="play icon"
                   className="w-[20px] h-[20px] object-contain"
                 />
-                <span>Hoziroq ko'rish</span>
+                <span className="text-[14px]">Hoziroq ko'rish</span>
               </button>
               <div className="flex items-center gap-4">
                 {/* <button className="cursor-pointer bg-[#0F0F0F] button">
@@ -168,7 +168,7 @@ export default function SingleMedia() {
       </div>
 
       {/* Media Information Section */}
-      <div className="flex gap-5 justify-between max-lg:flex-col">
+      <div className="flex gap-5 justify-between max-lg:flex-col too">
         {/* Left Section: Description & Reviews */}
         <div className="flex-7 flex flex-col gap-5">
           <div className="single-cart bg-[#262626] rounded">

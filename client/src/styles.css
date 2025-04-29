@@ -329,6 +329,8 @@
 
 @media (max-width: 600px) {
   .navbar-padding {
-    padding: 0px;
+    padding: 15px;
   }
+  
+  
 }

@@ -64,7 +64,9 @@ export default function Navbar() {
   };
 
   return (
-    <div className={`w-full flex justify-center ${isScrolled && "navbar-back"}`}>
+    <div
+      className={`w-full flex justify-center ${isScrolled && "navbar-back"}`}
+    >
       <div
         className={`flex items-center xl:w-[1300px] w-[90%] navbar-margin justify-between relative`}
       >
