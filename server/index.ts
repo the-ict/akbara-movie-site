@@ -24,7 +24,6 @@ const connect = async () => {
   }
 };
 
-
 app.use(express.json()); 
 app.use(cors())
 
