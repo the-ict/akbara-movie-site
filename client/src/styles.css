@@ -235,6 +235,10 @@
   padding: 15px;
 }
 
+.pagination-item {
+  padding: 10px;
+}
+
 .navbar-back {
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -262,6 +266,10 @@
   animation-name: popUp;
   animation-duration: 300ms;
   animation-delay: unset;
+}
+
+.margin-right {
+  margin-right: 5px;
 }
 
 @keyframes searchAnimation {
@@ -331,6 +339,4 @@
   .navbar-padding {
     padding: 15px;
   }
-  
-  
 }

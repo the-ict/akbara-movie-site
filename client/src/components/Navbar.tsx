@@ -10,6 +10,8 @@ import X from "../assets/icons/xred.png";
 import "../styles.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import SearchScene from "./SearchScene";
+import { BsArrowDown } from "react-icons/bs";
 
 export default function Navbar() {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -19,6 +21,10 @@ export default function Navbar() {
   const [hiddenGenre, setHiddenGenre] = useState<boolean>(false);
   const [hiddenCountry, setHiddenCountry] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [genresMobile, setGenresMobile] = useState<boolean>(false);
+  const [yearMobile, setYearMobile] = useState<boolean>(false);
+  const [countryMobile, setCountryMobile] = useState<boolean>(false);
+  const [isSearch, setIsSearch] = useState<boolean>(false);
 
   const categoryRef = useRef<HTMLDivElement | null>(null);
   const yearRef = useRef<HTMLDivElement | null>(null);
@@ -224,7 +230,6 @@ export default function Navbar() {
               </div>
             )}
           </div>
-
           <Link
             className="cursor-pointer navigation-item rounded hover:bg-[#1A1A1A]"
             to={`/support`}
@@ -235,7 +240,10 @@ export default function Navbar() {
 
         {/* Search input */}
         <div className="flex items-center gap-7 max-lg:hidden">
-          <div className="flex items-center gap-2">
+          <form className="flex items-center gap-2" onSubmit={(e) => {
+            e.preventDefault()
+            window.location.replace(`/search?name=${searchInput}`)
+          }}>
             <input
               type="text"
               value={searchInput}
@@ -251,20 +259,31 @@ export default function Navbar() {
               alt="search icon"
               className="w-[30px] h-[30px] object-contain cursor-pointer"
             />
-          </div>
+          </form>
         </div>
 
-        {/* Hamburger menu (mobile) */}
-        <img
-          src={Menu}
-          alt=""
-          onClick={() => setHiddenMenu(true)}
-          className="navigation rounded w-[50px] h-[50px] cursor-pointer lg:hidden"
-        />
+        {/* menu (mobile) */}
+
+        {isSearch && <SearchScene setIsSearch={setIsSearch} />}
+
+        <div className="flex items-center sm:hidden gap-5">
+          <img
+            src={Search}
+            onClick={() => setIsSearch(true)}
+            alt="search icon"
+            className="w-[30px] h-[30px] object-contain cursor-pointer"
+          />
+          <img
+            src={Menu}
+            alt=""
+            onClick={() => setHiddenMenu(true)}
+            className="navigation rounded w-[50px] h-[50px] cursor-pointer lg:hidden"
+          />
+        </div>
 
         {/* Hidden mobile menu */}
         {hiddenMenu && (
-          <div className="navbar-hidden-menu left-0 fixed top-0 z-10 h-screen max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col gap-10 justify-center text-white items-center backdrop-blur-[5px]">
+          <div className="navbar-hidden-menu overflow-y-auto animationPopup left-0 fixed top-0 z-10 min-h-screen max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col text-white items-center backdrop-blur-[5px]">
             <img
               src={X}
               className="absolute w-[30px] h-[30px] cursor-pointer top-2 right-2 max-sm:right-5"
@@ -278,34 +297,52 @@ export default function Navbar() {
                 className="w-[200px] max-lg:w-[150px] h-full object-contain cursor-pointer"
               />
             </a>
-            <ul className="flex items-center gap-10 navigation sm-padding flex-col justify-between w-full">
-              <Link className="cursor-pointer hover:underline " to={`/`}>
+            <ul className="flex overflow-scrool items-center gap-10 sm-padding flex-col justify-between w-full">
+              <Link
+                className="cursor-pointer hover:underline  player bg-green-500 w-full text-center text-black font-bold"
+                to={`/`}
+              >
                 Bosh sahifani
               </Link>
-              <Link className="cursor-pointer hover:underline " to={`/`}>
+              <Link
+                className="cursor-pointer hover:underline player bg-green-500 w-full text-center text-black font-bold "
+                to={`/`}
+              >
                 Kinolar
               </Link>
-              <Link className="cursor-pointer hover:underline " to={`/support`}>
+              <div
+                className="flex justify-center items-center player bg-green-500 w-full text-center text-black font-bold"
+                onClick={() => setGenresMobile(!genresMobile)}
+              >
+                <span>Janrlar</span>
+                <BsArrowDown />
+              </div>
+              {genresMobile && <span>Janrlar</span>}
+
+              <div
+                className="flex justify-center items-center player bg-green-500 w-full text-center text-black font-bold"
+                onClick={() => setYearMobile(!yearMobile)}
+              >
+                <span>Yillar</span>
+                <BsArrowDown />
+              </div>
+              {yearMobile && <span>Yillar</span>}
+              <div
+                className="flex justify-center items-center player bg-green-500 w-full text-center text-black font-bold"
+                onClick={() => setCountryMobile(!countryMobile)}
+              >
+                <span>Malakatlar</span>
+                <BsArrowDown />
+              </div>
+              {countryMobile && <span>Country</span>}
+
+              <Link
+                className="cursor-pointer hover:underline bg-green-500 w-full text-center text-black font-bold player"
+                to={`/support`}
+              >
                 {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
               </Link>
             </ul>
-            <div className="flex items-center gap-2 w-full">
-              <input
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Searching...."
-                className="flex-1 search"
-              />
-              <img
-                src={Search}
-                onClick={() =>
-                  window.location.replace(`/search?name=${searchInput}`)
-                }
-                alt="search icon"
-                className="w-[30px] h-[30px] object-contain cursor-pointer"
-              />
-            </div>
           </div>
         )}
       </div>

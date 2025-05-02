@@ -50,7 +50,7 @@ export default function () {
           {movies?.length}: Kino topildi...
         </h1>
       )}
-      <div className="header min-h-[60vh] flex gap-[2rem] max-sm:gap-1 flex-wrap">
+      <div className="flex flex-wrap min-h-[80vh] header gap-10">
         {Array.isArray(movies) &&
           movies.map((item) => <MovieCart key={item._id} movie={item} />)}
       </div>

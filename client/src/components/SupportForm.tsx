@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SupportBack from "../assets/images/supportback.png";
+import { FaEdit, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
 import {
   loginStart,
   loginFailure,
@@ -9,6 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { RootState } from "../redux/store";
+import { IoMdClose } from "react-icons/io";
 
 interface ISupport {
   name: string;
@@ -37,18 +40,18 @@ export default function SupportForm() {
         </h1>
         <p className="text-[18px] text-[#999999]">
           Sitetimiz bilan bog'liq har qanday muammolaringizda sizga yordam
-          berishga tayyormiz. {" "}
+          berishga tayyormiz.{" "}
           {authState === "REGISTER" && (
             <span>
               Agar sizda hisob mavjud bo'lsa
               <button
-                className="border-b border-red-400 px-2 font-bold cursor-pointer"
+                className="text-red-500 px-2 font-bold cursor-pointer animate-pulse"
                 style={{
                   marginLeft: 10,
                 }}
                 onClick={() => setAuthState("LOGIN")}
               >
-                Agar sizda Kiring!
+                Kiring!
               </button>
             </span>
           )}
@@ -56,7 +59,7 @@ export default function SupportForm() {
             <span>
               hisob bo'lmasa
               <button
-                className="border-b border-red-400 px-2 font-bold cursor-pointer"
+                className="text-red-500 px-2 font-bold cursor-pointer animate-pulse"
                 style={{
                   marginLeft: 10,
                 }}
@@ -87,6 +90,8 @@ const Register = () => {
   });
 
   const [confirmPass, setConfirmPass] = useState<string>("");
+  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
+  const [isFormFull, setIsFormFull] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -98,6 +103,20 @@ const Register = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (
+      form.email &&
+      form.password &&
+      form.name &&
+      form.lastname &&
+      form.phone
+    ) {
+      setIsFormFull(true);
+    } else {
+      setIsFormFull(false);
+    }
+  }, [form]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     dispatch(loginStart());
@@ -173,14 +192,33 @@ const Register = () => {
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Parol</label>
-        <input
-          type="password"
-          placeholder="Parol kiriting"
-          className="cart w-full bg-[#262626] rounded"
-          value={form.password}
-          name="password"
-          onChange={handleInputChange}
-        />
+        <div className="bg-[#262626] flex items-center rounded">
+          <input
+            type={isEyeOpen ? "password" : "text"}
+            placeholder="Parol kiriting"
+            className="cart w-full bg-[#262626] rounded outline-none"
+            value={form.password}
+            name="password"
+            onChange={handleInputChange}
+          />
+          {isEyeOpen ? (
+            <FaRegEyeSlash
+              size={20}
+              className="cursor-pointer margin-right"
+              onClick={() => {
+                setIsEyeOpen(false);
+              }}
+            />
+          ) : (
+            <FaRegEye
+              size={20}
+              onClick={() => {
+                setIsEyeOpen(true);
+              }}
+              className="cursor-pointer margin-right"
+            />
+          )}
+        </div>
       </div>
 
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
@@ -209,14 +247,16 @@ const Register = () => {
         />
       </div>
 
-      <div className="w-[100%] flex items-center justify-between font-bold max-lg:flex-col max-lg:items-start max-lg:gap-5">
-        <button
-          className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
-          onClick={handleSubmit}
-        >
-          Ro'yxatdan o'tish
-        </button>
-      </div>
+      {isFormFull && (
+        <div className="w-[100%] flex items-center justify-between font-bold max-lg:flex-col max-lg:items-start max-lg:gap-5">
+          <button
+            className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
+            onClick={handleSubmit}
+          >
+            Ro'yxatdan o'tish
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -230,6 +270,8 @@ const Login = () => {
     phone: 0,
     password: "",
   });
+  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
+  const [isFormFull, setIsFormFull] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -241,6 +283,14 @@ const Login = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (form.email && form.password) {
+      setIsFormFull(true);
+    } else {
+      setIsFormFull(false);
+    }
+  }, [form]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     dispatch(loginStart());
@@ -260,6 +310,7 @@ const Login = () => {
       console.log(error);
     }
   };
+
   return (
     <div className="flex-6 bg-[#0f0f0f] flex gap-3 flex-wrap flex-col single-cart-review">
       <div className="max-lg:w-[100%] flex flex-col gap-5 font-bold">
@@ -275,14 +326,33 @@ const Login = () => {
       </div>
       <div className="max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Parol</label>
-        <input
-          type="password"
-          placeholder="Parolingizni kiriting"
-          value={form.password}
-          name="password"
-          onChange={handleInputChange}
-          className="cart w-full bg-[#262626] rounded"
-        />
+        <div className="bg-[#262626] flex items-center rounded">
+          <input
+            type={isEyeOpen ? "password" : "text"}
+            placeholder="Parol kiriting"
+            className="cart w-full bg-[#262626] rounded outline-none"
+            value={form.password}
+            name="password"
+            onChange={handleInputChange}
+          />
+          {isEyeOpen ? (
+            <FaRegEyeSlash
+              size={20}
+              className="cursor-pointer margin-right"
+              onClick={() => {
+                setIsEyeOpen(false);
+              }}
+            />
+          ) : (
+            <FaRegEye
+              size={20}
+              onClick={() => {
+                setIsEyeOpen(true);
+              }}
+              className="cursor-pointer margin-right"
+            />
+          )}
+        </div>
       </div>
 
       <div className="w-[100%] flex flex-col gap-5 font-bold">
@@ -297,14 +367,16 @@ const Login = () => {
         />
       </div>
 
-      <div className="w-[100%] flex items-center justify-between font-bold max-lg:flex-col max-lg:items-start max-lg:gap-5">
-        <button
-          className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
-          onClick={handleSubmit}
-        >
-          Kirish
-        </button>
-      </div>
+      {isFormFull && (
+        <div className="w-[100%] flex items-center justify-between font-bold max-lg:flex-col max-lg:items-start max-lg:gap-5">
+          <button
+            className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
+            onClick={handleSubmit}
+          >
+            Kirish
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -317,6 +389,8 @@ const Update = () => {
     phone: 0,
     password: "",
   });
+  const [isUpdateActive, setIsUpdateActive] = useState<boolean>(false);
+  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
 
   const [confirmPass, setConfirmPass] = useState<string>("");
 
@@ -353,7 +427,22 @@ const Update = () => {
     }
   };
   return (
-    <div className="flex-6 bg-[#0f0f0f] flex gap-3 justify-between flex-wrap single-cart-review">
+    <div className="flex-6 relative bg-[#0f0f0f] flex gap-3 justify-between flex-wrap single-cart-review">
+      {/* Edit comment */}
+      {!isUpdateActive ? (
+        <FaEdit
+          className="absolute top-5 right-5 cursor-pointer"
+          onClick={() => setIsUpdateActive(true)}
+          size={20}
+        />
+      ) : (
+        <IoMdClose
+          size={20}
+          className="absolute top-5 right-5 cursor-pointer"
+          onClick={() => setIsUpdateActive(false)}
+        />
+      )}
+
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Ism</label>
         <input
@@ -362,7 +451,10 @@ const Update = () => {
           name="name"
           onChange={handleInputChange}
           placeholder={store.user?.name}
-          className="cart w-full bg-[#262626] rounded"
+          className={`cart w-full bg-[#262626] rounded ${
+            !isUpdateActive && "hover:cursor-not-allowed"
+          }`}
+          disabled={!isUpdateActive}
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
@@ -373,7 +465,10 @@ const Update = () => {
           value={form.lastname}
           name="lastname"
           onChange={handleInputChange}
-          className="cart w-full bg-[#262626] rounded"
+          className={`cart w-full ${
+            !isUpdateActive && "hover:cursor-not-allowed"
+          } bg-[#262626] rounded`}
+          disabled={!isUpdateActive}
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
@@ -385,7 +480,10 @@ const Update = () => {
             placeholder={String(store.user?.phone)}
             onChange={handleInputChange}
             name="phone"
-            className="flex-1 h-full outline-none border-none"
+            className={`flex-1 h-full ${
+              !isUpdateActive && "hover:cursor-not-allowed"
+            } outline-none border-none`}
+            disabled={!isUpdateActive}
           />
         </div>
       </div>
@@ -394,44 +492,74 @@ const Update = () => {
         <input
           type="email"
           placeholder={store.user?.email}
-          className="cart w-full bg-[#262626] rounded"
+          className={`cart w-full ${
+            !isUpdateActive && "hover:cursor-not-allowed"
+          } bg-[#262626] rounded`}
           value={form.email}
           name="email"
           onChange={handleInputChange}
+          disabled={!isUpdateActive}
         />
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Eski parol</label>
-        <input
-          type="password"
-          placeholder="Eski parolni kiriting"
-          className="cart w-full bg-[#262626] rounded"
-          value={form.password}
-          name="password"
-          onChange={handleInputChange}
-        />
+        <div className="bg-[#262626] flex items-center rounded">
+          <input
+            type={isEyeOpen ? "password" : "text"}
+            placeholder="Parol kiriting"
+            className={`cart w-full bg-[#262626] rounded outline-none ${
+              !isUpdateActive && "hover:cursor-not-allowed"
+            }`}
+            value={form.password}
+            name="password"
+            onChange={handleInputChange}
+          />
+          {isUpdateActive &&
+            (isEyeOpen ? (
+              <FaRegEyeSlash
+                size={20}
+                className="cursor-pointer margin-right"
+                onClick={() => {
+                  setIsEyeOpen(false);
+                }}
+              />
+            ) : (
+              <FaRegEye
+                size={20}
+                onClick={() => {
+                  setIsEyeOpen(true);
+                }}
+                className="cursor-pointer margin-right"
+              />
+            ))}
+        </div>
       </div>
       <div className="w-[45%] max-lg:w-[100%] flex flex-col gap-5 font-bold">
         <label>Yangi parol</label>
         <input
           type="password"
           placeholder="Yangi parolni kiriting"
-          className="cart w-full bg-[#262626] rounded"
+          className={`cart w-full ${
+            !isUpdateActive && "hover:cursor-not-allowed"
+          } bg-[#262626] rounded`}
           value={confirmPass}
           name="password"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setConfirmPass(e.target.value)
           }
+          disabled={!isUpdateActive}
         />
       </div>
 
       <div className="w-[100%] flex items-center justify-between font-bold max-lg:flex-col max-lg:items-start max-lg:gap-5">
-        <button
-          className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
-          onClick={handleSubmit}
-        >
-          Ma'lumotlarni yangilash
-        </button>
+        {isUpdateActive && (
+          <button
+            className="bg-[#e90000] button rounded cursor-pointer max-lg:w-full"
+            onClick={handleSubmit}
+          >
+            Saqlash
+          </button>
+        )}
         <button
           className="button rounded cursor-pointer max-lg:w-full underline"
           onClick={() => {

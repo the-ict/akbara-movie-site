@@ -8,7 +8,7 @@ type Props = {
 export default function ({ movie }: Props) {
   return (
     <Link to={`/single-media/${movie._id}`}>
-      <div className="movie-item group transition-transform relative rounded w-[285px] max-sm:w-[44%] max-sm:flex-row max-sm:flex-wrap flex flex-col justify-between gap-3 cursor-pointer h-[400px] bg-[#1A1A1A]">
+      <div className="movie-item group max-sm:w-full transition-transform relative rounded w-[285px] max-sm:flex-row max-sm:flex-wrap flex flex-col justify-between gap-3 cursor-pointer h-[400px] bg-[#1A1A1A]">
         <img
           src={movie.cart_img}
           alt="Horror movie item"
