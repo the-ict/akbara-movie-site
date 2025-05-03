@@ -9,7 +9,7 @@ interface Props {
 export default function ({ setIsSearch }: Props) {
   const [searchInput, setSearchInput] = useState<string>("");
   return (
-    <div className="flex h-screen w-screen left-0 top-0 justify-center items-center fixed bg-black/70">
+    <div className="flex h-screen w-screen left-0 top-0 justify-center items-center fixed bg-black/90 z-40">
       <img
         onClick={() => setIsSearch(false)}
         src={X}
@@ -22,7 +22,7 @@ export default function ({ setIsSearch }: Props) {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Qidirish...."
-          className="flex-1 search"
+          className="flex-1 search bg-transparent"
         />
         <img
           src={Search}

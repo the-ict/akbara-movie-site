@@ -249,7 +249,7 @@ export default function Navbar() {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="Searching...."
-              className="search"
+              className="search bg-transparent"
             />
             <img
               src={Search}
