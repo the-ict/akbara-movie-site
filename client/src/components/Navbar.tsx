@@ -240,10 +240,13 @@ export default function Navbar() {
 
         {/* Search input */}
         <div className="flex items-center gap-7 max-lg:hidden">
-          <form className="flex items-center gap-2" onSubmit={(e) => {
-            e.preventDefault()
-            window.location.replace(`/search?name=${searchInput}`)
-          }}>
+          <form
+            className="flex items-center gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              window.location.replace(`/search?name=${searchInput}`);
+            }}
+          >
             <input
               type="text"
               value={searchInput}
@@ -283,7 +286,7 @@ export default function Navbar() {
 
         {/* Hidden mobile menu */}
         {hiddenMenu && (
-          <div className="navbar-hidden-menu overflow-y-auto animationPopup left-0 fixed top-0 z-10 min-h-screen max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col text-white items-center backdrop-blur-[5px]">
+          <div className="navbar-hidden-menu max-h-screen overflow-y-auto animationPopup left-0 fixed top-0 z-10 max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col text-white items-center backdrop-blur-[5px]">
             <img
               src={X}
               className="absolute w-[30px] h-[30px] cursor-pointer top-2 right-2 max-sm:right-5"
@@ -299,45 +302,135 @@ export default function Navbar() {
             </a>
             <ul className="flex overflow-scrool items-center gap-10 sm-padding flex-col justify-between w-full">
               <Link
-                className="cursor-pointer hover:underline  player bg-green-500 w-full text-center text-black font-bold"
+                className="cursor-pointer hover:underline  player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold"
                 to={`/`}
               >
                 Bosh sahifani
               </Link>
               <Link
-                className="cursor-pointer hover:underline player bg-green-500 w-full text-center text-black font-bold "
+                className="cursor-pointer hover:underline player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold "
                 to={`/`}
               >
                 Kinolar
               </Link>
               <div
-                className="flex justify-center items-center player bg-green-500 w-full text-center text-black font-bold"
-                onClick={() => setGenresMobile(!genresMobile)}
+                className="flex justify-center items-center player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold"
+                onClick={() => {
+                  setGenresMobile(!genresMobile);
+                  setYearMobile(false);
+                  setCountryMobile(false);
+                }}
               >
                 <span>Janrlar</span>
                 <BsArrowDown />
               </div>
-              {genresMobile && <span>Janrlar</span>}
+              {genresMobile && (
+                <div className="flex flex-col gap-5">
+                  {[
+                    "Drama",
+                    "Komediya",
+                    "Triller",
+                    "Dahshat",
+                    "Fantastika",
+                    "Fantaziya",
+                    "Jangari",
+                    "Sarguzasht",
+                    "Detektiv",
+                    "Romantik",
+                    "Tarixiy",
+                    "Melodrama",
+                    "Urush",
+                    "Vestern",
+                    "Noir",
+                    "Kriminal",
+                    "Musobaqali",
+                    "Oilaviy",
+                    "Musiqiy",
+                    "Psixologik drama",
+                  ].map((item, _) => (
+                    <Link
+                      key={_}
+                      to={`/search?genre=${item}`}
+                      className="hover:underline"
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
 
               <div
-                className="flex justify-center items-center player bg-green-500 w-full text-center text-black font-bold"
-                onClick={() => setYearMobile(!yearMobile)}
+                className="flex justify-center items-center player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold"
+                onClick={() => {
+                  setYearMobile(!yearMobile);
+                  setCountryMobile(false);
+                  setGenresMobile(false);
+                }}
               >
                 <span>Yillar</span>
                 <BsArrowDown />
               </div>
-              {yearMobile && <span>Yillar</span>}
+              {yearMobile && (
+                <div className="flex flex-col">
+                  {[
+                    2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,
+                    2021, 2022, 2023, 2024, 2025,
+                  ].map((item, _) => (
+                    <Link
+                      key={_}
+                      className="hover:underline"
+                      to={`/search?year=${item}`}
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
               <div
-                className="flex justify-center items-center player bg-green-500 w-full text-center text-black font-bold"
-                onClick={() => setCountryMobile(!countryMobile)}
+                className="flex justify-center items-center player bg-red-500/80 rounded-2xl text-white  w-full text-center text-black font-bold"
+                onClick={() => {
+                  setCountryMobile(!countryMobile);
+                  setYearMobile(false);
+                  setGenresMobile(false);
+                }}
               >
                 <span>Malakatlar</span>
                 <BsArrowDown />
               </div>
-              {countryMobile && <span>Country</span>}
+              {countryMobile && (
+                <div className="flex flex-col">
+                  {[
+                    "Aqsh",
+                    "Arabiston",
+                    "Hindiston",
+                    "Xitoy",
+                    "Yaponiya",
+                    "Janubiy Koreya",
+                    "Fransiya",
+                    "Buyuk Britaniya",
+                    "Germaniya",
+                    "Italiya",
+                    "Ispaniya",
+                    "Kanada",
+                    "Braziliya",
+                    "Meksika",
+                    "Avstraliya",
+                    "Turkiya",
+                    "Indoneziya",
+                  ].map((item, _) => (
+                    <Link
+                      key={_}
+                      className="hover:underline"
+                      to={`/search?country=${item}`}
+                    >
+                      {item}
+                    </Link>
+                  ))}
+                </div>
+              )}
 
               <Link
-                className="cursor-pointer hover:underline bg-green-500 w-full text-center text-black font-bold player"
+                className="cursor-pointer hover:underline bg-red-500/80 rounded-2xl text-white  w-full text-center text-black font-bold player"
                 to={`/support`}
               >
                 {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
