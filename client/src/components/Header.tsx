@@ -97,13 +97,13 @@ export default function Header() {
               <img
                 src={item?.thumbnail}
                 alt="comment of movie1"
-                className="w-full h-[calc(100vh-25vh)] object-cover"
+                className="w-full h-[70vh] max-sm:h-[200px] object-contain"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
               {/* container titles */}
-              <div className="absolute bottom-20 flex items-center justify-center w-full">
+              <div className="absolute bottom-20 flex items-center justify-center w-full max-sm:bottom-5">
                 <div className="w-[70%] text-center">
-                  <h3 className="text-3xl font-bold max-lg:text-2xl line-clamp-1">
+                  <h3 className="text-3xl font-bold max-lg:text-2xl line-clamp-1 max-sm:text-[14px]">
                     {item?.name}
                   </h3>
                   <p className="text-[#999999] max-lg:hidden line-clamp-2">
@@ -115,7 +115,7 @@ export default function Header() {
                       onClick={() =>
                         window.location.replace(`/single-media/${item._id}`)
                       }
-                      className="flex items-center gap-2 font-bold cursor-pointer bg-[#E50000] max-lg:w-[60%] max-lg:justify-center play-button rounded"
+                      className="flex items-center gap-2 font-bold cursor-pointer max-sm:text-[14px] max-sm:px-1 bg-red-600 max-sm:bg-red-600/80 max-lg:w-[60%] max-lg:justify-center play-button rounded"
                     >
                       <img
                         src={Play}

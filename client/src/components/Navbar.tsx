@@ -286,7 +286,7 @@ export default function Navbar() {
 
         {/* Hidden mobile menu */}
         {hiddenMenu && (
-          <div className="navbar-hidden-menu max-h-screen overflow-y-auto animationPopup left-0 fixed top-0 z-10 max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col text-white items-center backdrop-blur-[5px]">
+          <div className="navbar-hidden-menu max-h-screen h-screen overflow-y-auto animationPopup left-0 fixed top-0 z-10 max-sm:w-full max-lg:w-[calc(100vw-60vw)] bg-black/80 flex flex-col text-white items-center backdrop-blur-[5px]">
             <img
               src={X}
               className="absolute w-[30px] h-[30px] cursor-pointer top-2 right-2 max-sm:right-5"
@@ -302,19 +302,19 @@ export default function Navbar() {
             </a>
             <ul className="flex overflow-scrool items-center gap-10 sm-padding flex-col justify-between w-full">
               <Link
-                className="cursor-pointer hover:underline  player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold"
+                className="cursor-pointer hover:underline  player bg-red-500/60 rounded-2xl text-white  w-full text-center font-bold"
                 to={`/`}
               >
                 Bosh sahifani
               </Link>
               <Link
-                className="cursor-pointer hover:underline player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold "
+                className="cursor-pointer hover:underline player bg-red-500/60 rounded-2xl text-white  w-full text-center font-bold "
                 to={`/`}
               >
                 Kinolar
               </Link>
               <div
-                className="flex justify-center items-center player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold"
+                className="flex justify-center items-center player bg-red-500/60 rounded-2xl text-white  w-full text-center font-bold"
                 onClick={() => {
                   setGenresMobile(!genresMobile);
                   setYearMobile(false);
@@ -325,7 +325,7 @@ export default function Navbar() {
                 <BsArrowDown />
               </div>
               {genresMobile && (
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-5 w-full">
                   {[
                     "Drama",
                     "Komediya",
@@ -351,7 +351,11 @@ export default function Navbar() {
                     <Link
                       key={_}
                       to={`/search?genre=${item}`}
-                      className="hover:underline"
+                      className="hover:underline text-center mt-3 px-2 py-1 bg-rose-500/60"
+                      onClick={() => {
+                        setHiddenMenu(false);
+                        setGenresMobile(false);
+                      }}
                     >
                       {item}
                     </Link>
@@ -360,7 +364,7 @@ export default function Navbar() {
               )}
 
               <div
-                className="flex justify-center items-center player bg-red-500/80 rounded-2xl text-white  w-full text-center font-bold"
+                className="flex justify-center items-center player bg-red-500/60 rounded-2xl text-white  w-full text-center font-bold"
                 onClick={() => {
                   setYearMobile(!yearMobile);
                   setCountryMobile(false);
@@ -371,14 +375,18 @@ export default function Navbar() {
                 <BsArrowDown />
               </div>
               {yearMobile && (
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   {[
                     2010, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020,
                     2021, 2022, 2023, 2024, 2025,
                   ].map((item, _) => (
                     <Link
                       key={_}
-                      className="hover:underline"
+                      className="hover:underline text-center mt-3 px-2 py-1 bg-rose-500/60"
+                      onClick={() => {
+                        setHiddenMenu(false);
+                        setYearMobile(false);
+                      }}
                       to={`/search?year=${item}`}
                     >
                       {item}
@@ -387,7 +395,7 @@ export default function Navbar() {
                 </div>
               )}
               <div
-                className="flex justify-center items-center player bg-red-500/80 rounded-2xl text-white  w-full text-center text-black font-bold"
+                className="flex justify-center items-center player bg-red-500/60 rounded-2xl text-white  w-full text-center text-black font-bold"
                 onClick={() => {
                   setCountryMobile(!countryMobile);
                   setYearMobile(false);
@@ -398,7 +406,7 @@ export default function Navbar() {
                 <BsArrowDown />
               </div>
               {countryMobile && (
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                   {[
                     "Aqsh",
                     "Arabiston",
@@ -420,7 +428,11 @@ export default function Navbar() {
                   ].map((item, _) => (
                     <Link
                       key={_}
-                      className="hover:underline"
+                      className="hover:underline text-center mt-3 px-2 py-1 bg-rose-500/60"
+                      onClick={() => {
+                        setHiddenMenu(false);
+                        setCountryMobile(false);
+                      }}
                       to={`/search?country=${item}`}
                     >
                       {item}
@@ -430,7 +442,7 @@ export default function Navbar() {
               )}
 
               <Link
-                className="cursor-pointer hover:underline bg-red-500/80 rounded-2xl text-white  w-full text-center text-black font-bold player"
+                className="cursor-pointer hover:underline bg-red-500/60 rounded-2xl text-white  w-full text-center text-black font-bold player"
                 to={`/support`}
               >
                 {store?.user?._id ? "Hisobingiz" : "Ro'yhatdan o'tish"}
