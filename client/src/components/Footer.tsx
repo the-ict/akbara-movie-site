@@ -6,17 +6,17 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin footer">
-      <div className="xl:w-[1300px] footer max-lg:w-screen arrow-padding">
-        <div className="flex max-sm:flex-wrap justify-between items-center footer-nav flex-wrap gap-5">
-          <ul className="max-lg:w-[45%]">
+      <div className="xl:w-[1300px] footer arrow-padding">
+        <div className="flex max-sm:flex-wrap justify-between items-center footer-nav flex-wrap">
+          <ul className="max-lg:w-[30%] text-[12px]">
             <li className="footer-item">Reklama</li>
           </ul>
-          <ul className="max-lg:w-[45%]">
+          <ul className="max-lg:w-[30%] text-[12px]">
             <li className="footer-item">Qo'llab quvatlash</li>
           </ul>
-          <ul className="max-lg:w-[45%]">
+          <ul className="max-lg:w-[30%] text-sm">
             <a
-              className="footer-item font-bold hover:underline"
+              className="footer-item font-bold hover:underline text-sm"
               target="_blank"
               href="https://t.me/akbaratv_admin"
             >
@@ -25,7 +25,7 @@ export default function Footer() {
           </ul>
           <ul className="max-lg:w-[45%]">
             <a
-              className="footer-item font-bold hover:underline"
+              className="footer-item font-bold hover:underline text-[12px]"
               target="_blank"
               href="/rules"
             >

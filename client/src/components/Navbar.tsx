@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/images/LOGO1.png";
 import Search from "../assets/icons/search.png";
 import Menu from "../assets/icons/menu.png";
 import X from "../assets/icons/xred.png";
@@ -77,7 +77,7 @@ export default function Navbar() {
         className={`flex items-center xl:w-[1300px] w-[90%] navbar-margin justify-between relative`}
       >
         <a href="/">
-          <img src={Logo} alt="" className="w-[70px] h-[70px]" />
+          <img src={Logo} alt="" className="w-[110px] h-[60px] py-3 object-contain"  />
         </a>
         <ul className="flex items-center gap-5 bg-[#0F0F0F] navigation rounded max-lg:hidden">
           <Link
@@ -280,7 +280,7 @@ export default function Navbar() {
             src={Menu}
             alt=""
             onClick={() => setHiddenMenu(true)}
-            className="navigation rounded w-[50px] h-[50px] cursor-pointer lg:hidden"
+            className="navigation rounded w-[40px] h-[40px] cursor-pointer lg:hidden"
           />
         </div>
 
@@ -305,11 +305,14 @@ export default function Navbar() {
                 className="cursor-pointer hover:underline  player bg-red-500/60 rounded-2xl text-white  w-full text-center font-bold"
                 to={`/`}
               >
-                Bosh sahifani
+                Bosh sahifa
               </Link>
               <Link
                 className="cursor-pointer hover:underline player bg-red-500/60 rounded-2xl text-white  w-full text-center font-bold "
-                to={`/`}
+                to={`/shows`}
+                onClick={() => {
+                  setHiddenMenu(false)
+                }}
               >
                 Kinolar
               </Link>

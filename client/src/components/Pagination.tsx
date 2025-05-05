@@ -23,7 +23,7 @@ const Pagination: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex header justify-center my-4 gap-2">
+    <div className="flex header justify-center my-4 gap-3 items-center">
       <button
         className="cursor-pointer pagination-item bg-gray-700 text-white rounded disabled:opacity-50"
         disabled={currentPage === 1}
@@ -37,8 +37,8 @@ const Pagination: React.FC<Props> = ({
           onClick={() => goToPage(page)}
           className={`pagination-item rounded cursor-pointer ${
             currentPage === page
-              ? "bg-green-600"
-              : "bg-gray-300 text-black cursor-pointer"
+              ? "bg-red-600 w-10 h-10"
+              : "bg-gray-300 text-black cursor-pointer w-10 h-10"
           }`}
         >
           {page}

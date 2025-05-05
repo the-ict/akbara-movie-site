@@ -339,4 +339,8 @@
   .navbar-padding {
     padding: 15px;
   }
+
+  .cart {
+    padding: 10px;
+  }
 }

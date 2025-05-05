@@ -67,7 +67,7 @@ export default function GenerSection({ title, description }: Props) {
             >
               <img
                 src={item.cart_img}
-                className="w-full h-[300px] object-contain"
+                className="w-full h-[300px] max-sm:h-[200px] object-contain"
                 alt="genre image"
               />
               <div className="flex items-center navbar justify-center gap-2 line-clamp-1 text-[20px] font-bold p-2">

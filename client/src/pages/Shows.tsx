@@ -41,10 +41,10 @@ export default function Shows() {
             >
               <img
                 src={item.cart_img}
-                className="w-full h-[300px] object-contain"
+                className="w-full h-[300px] max-sm:h-[200px] object-contain"
                 alt="genre image"
               />
-              <div className="flex items-center navbar justify-center gap-2 line-clamp-1 text-[20px] font-bold p-2">
+              <div className="flex max-sm:text-sm items-center navbar justify-center gap-2 line-clamp-1 text-[20px] font-bold p-2">
                 <p>{item.name}</p>
               </div>
             </div>
