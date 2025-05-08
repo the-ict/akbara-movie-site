@@ -40,8 +40,7 @@ const questions: IQuestions[] = [
   },
   {
     question: "Saytga yangi filmlar qanchalik tez-tez qo‘shiladi?",
-    answer:
-      "Har hafta saytga yangi filmlar va seriallar qo‘shib boriladi.",
+    answer: "Har hafta saytga yangi filmlar va seriallar qo‘shib boriladi.",
   },
   {
     question: "Qo'llab-quvvatlash xizmati bilan qanday bog'lansam bo'ladi?",
@@ -60,9 +59,7 @@ export default function Questions() {
 
   return (
     <div className="header">
-      {askQuestion && (
-        <AskQuestion setAskQuestion={setAskQuestion}/> 
-      )}
+      {askQuestion && <AskQuestion setAskQuestion={setAskQuestion} />}
 
       <div className="flex items-center justify-between gap-10 max-lg:flex-col max-lg:items-start">
         <div>
@@ -80,7 +77,7 @@ export default function Questions() {
         </button>
       </div>
 
-      <div className="flex flex-wrap header max-lg:flex-col">
+      <div className="flex flex-wrap header max-lg:flex-col w-full">
         {questions.map((item, index) => {
           return (
             <Question

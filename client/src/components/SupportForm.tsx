@@ -175,7 +175,7 @@ const Register = () => {
             value={form.phone}
             onChange={handleInputChange}
             name="phone"
-            className="flex-1 h-full outline-none border-none"
+            className="flex-1 h-full outline-none border-none bg-transparent"
           />
         </div>
       </div>
@@ -482,7 +482,7 @@ const Update = () => {
             name="phone"
             className={`flex-1 h-full ${
               !isUpdateActive && "hover:cursor-not-allowed"
-            } outline-none border-none`}
+            } outline-none border-none bg-transparent`}
             disabled={!isUpdateActive}
           />
         </div>

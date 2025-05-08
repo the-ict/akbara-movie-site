@@ -1,18 +1,8 @@
-import Navbar from "../components/Navbar";
-
 import Play from "../assets/icons/play.png";
-import Add from "../assets/icons/add.png";
-import Like from "../assets/icons/like.png";
-import Sound from "../assets/icons/sound.png";
 import Date from "../assets/icons/date.png";
 import Language from "../assets/icons/language.png";
-import Rating from "../assets/icons/ratings.png";
-import Star from "../assets/icons/star.png";
-import HalfStar from "../assets/icons/halfstar.png";
 import Genres from "../assets/icons/genres.png";
-import AuthorProfile from "../assets/icons/authorprofile.png";
 import Plus from "../assets/icons/plus.png";
-import Liked from "../assets/icons/liked.png";
 import { AiFillLike } from "react-icons/ai";
 
 import { AiOutlineLike } from "react-icons/ai";
@@ -24,19 +14,21 @@ import Review from "../components/Review";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { IMovie } from "../types/Movie";
-import { getRatingValue } from "../functions/rating";
 import WriteReview from "../components/WriteReview";
 import PlayVideo from "../components/PlayVideo";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaRegFlag } from "react-icons/fa";
 import { RootState } from "../redux/store";
+import { gettingMovie, like, unlike } from "../redux/MovieSlice";
 
 export default function SingleMedia() {
-  const [movie, setMovie] = useState<IMovie>();
   const [reviewForm, setReviewForm] = useState<boolean>(false);
   const [video, setVideo] = useState<boolean>(false);
 
   const store = useSelector((store: RootState) => store.user);
+  const movie = useSelector((store: RootState) => store.movie);
+
+  const dispatch = useDispatch();
 
   console.log(store);
 
@@ -48,8 +40,10 @@ export default function SingleMedia() {
         const response = await axios.get(
           `http://localhost:5000/api/movie/${params.id}`
         );
+
+        dispatch(gettingMovie(response.data));
+        console.log(movie, "from state 2");
         console.log(response.data);
-        setMovie(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -68,10 +62,12 @@ export default function SingleMedia() {
               userId: store?.user?._id,
             }
           );
-          window.location.reload();
+          dispatch(unlike(store.user._id));
+
+          // window.location.reload();
         } catch (error) {
-          console.log(error)
           alert("There is an error, please try later.");
+          console.log("un.like errror", error);
         }
         return;
       }
@@ -83,10 +79,13 @@ export default function SingleMedia() {
             userId: store?.user?._id,
           }
         );
-        window.location.reload();
+        dispatch(like(store.user._id));
+
+        // window.location.reload();
         console.log(result.data);
       } catch (error) {
         alert("There is an error, please try later.");
+        console.log("like errror", error);
       }
     } else {
       alert("Siz like bosish uchun ro'yhatdan o'tishingiz kerak!");
@@ -168,9 +167,9 @@ export default function SingleMedia() {
       </div>
 
       {/* Media Information Section */}
-      <div className="flex gap-5 justify-between max-lg:flex-col too">
+      <div className="flex gap-5 justify-between max-lg:flex-col too w-full">
         {/* Left Section: Description & Reviews */}
-        <div className="flex-7 flex flex-col gap-5">
+        <div className="w-[70%] flex flex-col gap-5 max-sm:w-full">
           <div className="single-cart bg-[#262626] rounded">
             <p className="text-[#999999]">Malumot</p>
             <p className="navbar">{movie?.description}</p>
@@ -214,7 +213,7 @@ export default function SingleMedia() {
         </div>
 
         {/* Right Section: Media Details */}
-        <div className="flex-3 info flex flex-col gap-5 bg-[#262626] rounded single-cart-review">
+        <div className="w-[30%] max-sm:w-full info flex flex-col gap-5 bg-[#262626] rounded single-cart-review">
           <label>
             <img src={Date} alt="date" />
             <span>Kino chiqgan vaqt</span>

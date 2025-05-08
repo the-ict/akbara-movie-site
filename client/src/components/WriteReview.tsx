@@ -11,19 +11,19 @@ import { RootState } from "../redux/store";
 
 type Props = {
   setReviewForm: React.Dispatch<React.SetStateAction<boolean>>;
-  movie_id: string
+  movie_id: string;
 };
 
 interface IReview {
   country: "Uzbekistan";
   message: string;
-  name: string
+  name: string;
 }
 
-export default function ({ setReviewForm,movie_id }: Props) {
+export default function ({ setReviewForm, movie_id }: Props) {
   const [starred, setStarred] = useState<number>(0);
 
-  const store = useSelector((store:RootState) => store.user);
+  const store = useSelector((store: RootState) => store.user);
 
   const [form, setForm] = useState<IReview>({
     country: "Uzbekistan",
@@ -58,21 +58,26 @@ export default function ({ setReviewForm,movie_id }: Props) {
     }));
 
     try {
+      console.log(
+        {
+          ...form,
+          rating: starred,
+        },
+        "this is from review"
+      );
 
-      console.log({
-        ...form,
-        rating: starred
-      }, "this is from review")
+      const result = await axios.put(
+        `http://localhost:5000/api/movie/review/${movie_id}`,
+        {
+          ...form,
+          rating: starred,
+        }
+      );
 
-      const result = await axios.put(`http://localhost:5000/api/movie/review/${movie_id}`, {
-        ...form,
-        rating: starred,
-      });
+      console.log(result);
 
-      console.log(result)
-
-      if(result.data){
-        window.location.reload()
+      if (result.data) {
+        window.location.reload();
       }
     } catch (error) {
       alert("There is something wrong!");
@@ -107,7 +112,7 @@ export default function ({ setReviewForm,movie_id }: Props) {
                   className="w-[30px] h-[30px] object-contain cursor-pointer"
                 />
               ))
-            : getRatingValue(starred).map((item,_) => (
+            : getRatingValue(starred).map((item, _) => (
                 <img
                   src={Star}
                   key={_}

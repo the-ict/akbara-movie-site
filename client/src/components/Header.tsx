@@ -74,7 +74,7 @@ export default function Header() {
                 <img
                   src={ArrowLeft}
                   alt="arrowleft icon"
-                  className="w-[50px] h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
+                  className="w-[50px] z-10 h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
                   onClick={goToPrevious}
                 />
                 <div className="flex items-center gap-2">
@@ -89,7 +89,7 @@ export default function Header() {
                 <img
                   src={ArrowRight}
                   alt="arrowright icon"
-                  className="w-[50px] h-[50px] object-contain icon cursor-pointer bg-[#1F1F1F]"
+                  className="w-[50px] h-[50px] z-10 object-contain icon cursor-pointer bg-[#1F1F1F]"
                   onClick={goToNext}
                 />
               </div>
@@ -97,7 +97,7 @@ export default function Header() {
               <img
                 src={item?.thumbnail}
                 alt="comment of movie1"
-                className="w-full h-[70vh] max-sm:h-[200px] object-contain"
+                className="w-full h-[70vh] max-sm:h-[200px] object-cover max-sm:object-contain"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
               {/* container titles */}

@@ -3,7 +3,7 @@ import { useSwipeable } from "react-swipeable";
 
 import Star from "../assets/icons/star.png";
 import HalfStar from "../assets/icons/halfstar.png";
-import GapStar from "../assets/icons/gapstar.png"
+import GapStar from "../assets/icons/gapstar.png";
 import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
 import { IReview } from "../types/Review";
@@ -15,7 +15,6 @@ interface Props {
 const Review = ({ reviews }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  console.log(reviews, "from review");
 
   const handleSwipe = useSwipeable({
     onSwipedLeft: () => next(),
@@ -65,7 +64,7 @@ const Review = ({ reviews }: Props) => {
                 className="w-4 h-4 max-lg:w-3 max-lg:h-3 object-contain"
               />
             ))}
-            
+
             <span>{currentReview.rating}</span>
           </div>
         </div>

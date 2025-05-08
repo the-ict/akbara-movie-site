@@ -8,15 +8,15 @@ export default function Footer() {
     <div className="bg-[#0F0F0F] w-full flex flex-col items-center xlmargin footer">
       <div className="xl:w-[1300px] footer arrow-padding">
         <div className="flex max-sm:flex-wrap justify-between items-center footer-nav flex-wrap">
-          <ul className="max-lg:w-[30%] text-[12px]">
+          <ul className="max-lg:w-[30%] max-sm:text-[12px]">
             <li className="footer-item">Reklama</li>
           </ul>
-          <ul className="max-lg:w-[30%] text-[12px]">
+          <ul className="max-lg:w-[30%] max-sm:text-[12px]">
             <li className="footer-item">Qo'llab quvatlash</li>
           </ul>
           <ul className="max-lg:w-[30%] text-sm">
             <a
-              className="footer-item font-bold hover:underline text-sm"
+              className="footer-item font-bold hover:underline max-sm:text-[12px]"
               target="_blank"
               href="https://t.me/akbaratv_admin"
             >
@@ -25,7 +25,7 @@ export default function Footer() {
           </ul>
           <ul className="max-lg:w-[45%]">
             <a
-              className="footer-item font-bold hover:underline text-[12px]"
+              className="footer-item font-bold hover:underline max-sm:text-[12px]"
               target="_blank"
               href="/rules"
             >
@@ -35,7 +35,7 @@ export default function Footer() {
           <div className="max-lg:w-[45%]">
             <div className="flex items-center gap-5">
               <Link to={"https://t.me/akbaratv"} target="_blank">
-                <FaTelegram className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[30px] max-sm:h-[30px]" />
+                <FaTelegram className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[40px] max-sm:h-[40px]" />
               </Link>
               <Link
                 to={
@@ -43,10 +43,10 @@ export default function Footer() {
                 }
                 target="_blank"
               >
-                <FaInstagramSquare className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[30px] max-sm:h-[30px]" />
+                <FaInstagramSquare className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[40px] max-sm:h-[40px]" />
               </Link>
               <Link to={"/support"} target="_blank">
-                <AiFillTikTok className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[30px] max-sm:h-[30px]" />
+                <AiFillTikTok className="w-[50px] h-[50px] object-contain icon bg-[#1a1a1a] rounded hover:bg-[#000] max-sm:w-[40px] max-sm:h-[40px]" />
               </Link>
             </div>
           </div>
