@@ -63,11 +63,16 @@ router.get("/categories", async (req: Request, res: Response) => {
 
     res.status(200).json(movies);
   } catch (error) {
-    console.error("Genres, Country va Year bo‘yicha kinolarni olishda xatolik:", error);
-    res.status(500).json({ message: "Genres, Country va Year bo‘yicha kinolarni olishda xatolik yuz berdi" });
+    console.error(
+      "Genres, Country va Year bo‘yicha kinolarni olishda xatolik:",
+      error
+    );
+    res.status(500).json({
+      message:
+        "Genres, Country va Year bo‘yicha kinolarni olishda xatolik yuz berdi",
+    });
   }
 });
-
 
 // READ single movie
 router.get("/:id", async (req: Request, res: Response) => {
@@ -111,14 +116,17 @@ router.put("/like/:id", async (req: Request, res: Response) => {
 
   try {
     const movie = await Movie.findById(req.params.id);
+    console.log(movie, "movie topildi like");
     if (!movie) {
       res.status(404).json({ message: "Movie topilmadi" });
       return;
     }
 
     if (!movie.likes.includes(userId)) {
+      console.log(movie, "like bosilmoqchi like");
       movie.likes.push(userId);
       await movie.save();
+      console.log(movie, "yangilangan movie");
       res.status(200).json({ message: "Like qo‘shildi" });
     } else {
       res.status(400).json({ message: "Siz allaqachon like bosgansiz" });

@@ -23,7 +23,6 @@ interface IReview {
   country: string;
   rating: number;
   message: string;
-  user_id: string
 }
 
 interface IMovie extends mongoose.Document {
@@ -40,17 +39,18 @@ interface IMovie extends mongoose.Document {
   video_link: string;
   likes: string[];
   reviews: IReview[];
-  country: string
+  country: string;
 }
 
-const ReviewSchema = new mongoose.Schema<IReview>({
-  name: { type: String, required: true },
-  country: { type: String, required: true },
-  rating: { type: Number, required: true },
-  message: { type: String, required: true },
-  user_id: {type: String, required: true}
-}, { _id: false }); // optional: _id qo‘shilmasin desangiz
-
+const ReviewSchema = new mongoose.Schema<IReview>(
+  {
+    name: { type: String, required: true },
+    country: { type: String, required: true },
+    rating: { type: Number, required: true },
+    message: { type: String, required: true },
+  },
+  { _id: false }
+); // optional: _id qo‘shilmasin desangiz
 
 const MovieSchema: mongoose.Schema<IMovie> = new mongoose.Schema(
   {
@@ -58,7 +58,7 @@ const MovieSchema: mongoose.Schema<IMovie> = new mongoose.Schema(
     description: { type: String, required: true },
     created_time: { type: String, required: true },
     language: [{ type: String, required: true }],
-    country: {type: String, required: true},
+    country: { type: String, required: true },
     Genres: [{ type: String, required: true }],
     likes: [{ type: String, required: true }],
     reviews: { type: [ReviewSchema], default: [] },

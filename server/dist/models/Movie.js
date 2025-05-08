@@ -9,7 +9,6 @@ const ReviewSchema = new mongoose_1.default.Schema({
     country: { type: String, required: true },
     rating: { type: Number, required: true },
     message: { type: String, required: true },
-    user_id: { type: String, required: true }
 }, { _id: false }); // optional: _id qo‘shilmasin desangiz
 const MovieSchema = new mongoose_1.default.Schema({
     name: { type: String, required: true },
