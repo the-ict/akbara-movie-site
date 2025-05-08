@@ -7,6 +7,7 @@ import GapStar from "../assets/icons/gapstar.png";
 import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
 import { IReview } from "../types/Review";
+import { BiTrash } from "react-icons/bi";
 
 interface Props {
   reviews: IReview[];
@@ -14,7 +15,6 @@ interface Props {
 
 const Review = ({ reviews }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
 
   const handleSwipe = useSwipeable({
     onSwipedLeft: () => next(),
@@ -31,6 +31,11 @@ const Review = ({ reviews }: Props) => {
   };
 
   const currentReview = reviews[currentIndex];
+
+  async function handleDelete() {
+    try {
+    } catch (error) {}
+  }
 
   return (
     <div className="w-full flex flex-col items-center ">
@@ -68,7 +73,16 @@ const Review = ({ reviews }: Props) => {
             <span>{currentReview.rating}</span>
           </div>
         </div>
-        <p className="text-[#999999] text-sm navbar">{currentReview.message}</p>
+        <div className="flex items-center gap-5">
+          <p className="text-[#999999] flex-1 text-sm navbar">
+            {currentReview.message}
+          </p>
+          <BiTrash
+            size={20}
+            className="cursor-pointer"
+            onClick={handleDelete}
+          />
+        </div>
       </div>
 
       <div className="flex items-center header gap-5">

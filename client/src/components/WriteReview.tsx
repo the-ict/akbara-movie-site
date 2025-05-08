@@ -54,7 +54,6 @@ export default function ({ setReviewForm, movie_id }: Props) {
 
     setForm((prev) => ({
       ...prev,
-      name: String(store.user?.name),
     }));
 
     try {
@@ -71,10 +70,9 @@ export default function ({ setReviewForm, movie_id }: Props) {
         {
           ...form,
           rating: starred,
+          name: String(store.user.name),
         }
       );
-
-      console.log(result);
 
       if (result.data) {
         window.location.reload();
@@ -98,7 +96,7 @@ export default function ({ setReviewForm, movie_id }: Props) {
           type="text"
           name="message"
           onChange={handleChangeForm}
-          className="border-[1px] border-white outline-none ask-input rounded"
+          className="border-[1px] border-white outline-none ask-input rounded bg-transparent"
         />
         <label>Reyting</label>
         <div className="flex items-center gap-[1rem]">

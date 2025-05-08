@@ -175,4 +175,23 @@ router.put("/review/:id", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ message: "Xatolik", error: err });
     }
 }));
+router.delete("/review/:movieId/:reviewId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { movieId, reviewId } = req.params;
+    try {
+        const movie = yield Movie_1.default.findById(movieId);
+        if (!movie) {
+            res.status(404).json({ message: "Movie topilmadi" });
+        }
+        const reviewExists = movie === null || movie === void 0 ? void 0 : movie.reviews.some((review) => review._id.toString() === reviewId);
+        if (!reviewExists) {
+            res.status(404).json({ message: "Review topilmadi" });
+        }
+        // Reviewni olib tashlaymiz
+        yield Movie_1.default.updateOne({ _id: movieId }, { $pull: { reviews: { _id: reviewId } } });
+        res.status(200).json({ message: "Review o‘chirildi" });
+    }
+    catch (err) {
+        res.status(500).json({ message: "Xatolik", error: err });
+    }
+}));
 exports.default = router;

@@ -187,4 +187,35 @@ router.put("/review/:id", async (req: Request, res: Response) => {
   }
 });
 
+router.delete(
+  "/review/:movieId/:reviewId",
+  async (req: Request, res: Response) => {
+    const { movieId, reviewId } = req.params;
+
+    try {
+      const movie = await Movie.findById(movieId);
+      if (!movie) {
+        res.status(404).json({ message: "Movie topilmadi" });
+      }
+
+      const reviewExists = movie?.reviews.some(
+        (review: any) => review._id.toString() === reviewId
+      );
+      if (!reviewExists) {
+        res.status(404).json({ message: "Review topilmadi" });
+      }
+
+      // Reviewni olib tashlaymiz
+      await Movie.updateOne(
+        { _id: movieId },
+        { $pull: { reviews: { _id: reviewId } } }
+      );
+
+      res.status(200).json({ message: "Review o‘chirildi" });
+    } catch (err) {
+      res.status(500).json({ message: "Xatolik", error: err });
+    }
+  }
+);
+
 export default router;

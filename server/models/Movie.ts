@@ -42,15 +42,12 @@ interface IMovie extends mongoose.Document {
   country: string;
 }
 
-const ReviewSchema = new mongoose.Schema<IReview>(
-  {
-    name: { type: String, required: true },
-    country: { type: String, required: true },
-    rating: { type: Number, required: true },
-    message: { type: String, required: true },
-  },
-  { _id: false }
-); // optional: _id qo‘shilmasin desangiz
+const ReviewSchema = new mongoose.Schema<IReview>({
+  name: { type: String, required: true },
+  country: { type: String, required: true },
+  rating: { type: Number, required: true },
+  message: { type: String, required: true },
+});
 
 const MovieSchema: mongoose.Schema<IMovie> = new mongoose.Schema(
   {

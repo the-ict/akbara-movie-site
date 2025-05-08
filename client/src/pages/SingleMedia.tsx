@@ -269,7 +269,7 @@ export default function SingleMedia() {
         )}
         <div className="arrow-padding bg-[#262626] lg:hidden">
           <div className="flex items-center justify-between">
-            <h1 className="text-[#999999]">Reviews</h1>
+            <h1 className="text-[#999999]">Izohlar</h1>
             <button
               onClick={() => {
                 if (store.user?._id) {
@@ -286,7 +286,7 @@ export default function SingleMedia() {
                 alt="plus"
                 className="w-[30px] h-[30px] object-contain"
               />
-              <span>Add Your Review</span>
+              <span>Izoh qo'shish</span>
             </button>
           </div>
 
