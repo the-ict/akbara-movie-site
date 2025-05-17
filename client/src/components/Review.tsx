@@ -8,6 +8,9 @@ import ArrowLeft from "../assets/icons/arrowleft.png";
 import ArrowRight from "../assets/icons/arrowright.png";
 import { IReview } from "../types/Review";
 import { BiTrash } from "react-icons/bi";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 interface Props {
   reviews: IReview[];
@@ -15,6 +18,8 @@ interface Props {
 
 const Review = ({ reviews }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const movie = useSelector((store: RootState) => store.movie);
 
   const handleSwipe = useSwipeable({
     onSwipedLeft: () => next(),
@@ -34,7 +39,17 @@ const Review = ({ reviews }: Props) => {
 
   async function handleDelete() {
     try {
-    } catch (error) {}
+      const result = await axios.delete(
+        `http://localhost:5000/api/movie/review/${movie._id}/${currentReview._id}`
+      );
+
+      if (result.data) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Review deletion error!");
+    }
   }
 
   return (
